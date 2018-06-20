@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">订单管理</a>
+        <a>
+          <cite>订单列表</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+
+          <div class="layui-input-inline">
+            <select name="pay_type">
+              <option value="">支付方式</option>
+              <option value="2">支付宝</option>
+              <option value="1">微信</option>
+              <option value="3">网银转账</option>
+            </select>
+          </div>
+          <input type="text" name="order_id"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  lay-submit="" id="sreach" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
+      <xblock>
+        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')"><i class="layui-icon"></i>代下单</button>
+      </xblock>
+      <table id="user_list" class="layui-table" lay-data="{ url:'/admin/order/getOrderList?pay_status=1', page:true, id:'order_list'}" lay-filter="orderList">
+        <thead>
+        <tr>
+          <th lay-data="{type:'checkbox'}"></th>
+          <th lay-data="{field:'orderId', align:'center',width:120,unresize: true}">订单编号</th>
+          <th lay-data="{field:'contact',templet:'#contact',width:180}">联系人</th>
+          <th lay-data="{field:'orderPrice', width:100,align:'center'}">订单金额</th>
+          <th lay-data="{field:'orderPrice', width:100,align:'center'}">应付金额</th>
+          <th lay-data="{field:'status',templet:'#status',width:120,align:'center'}">订单状态</th>
+          <th lay-data="{field:'payType',width:120,templet:'#pay_type',align:'center'}">支付方式</th>
+          <th lay-data="{field:'payStatus',width:100,templet:'#pay_status',align:'center'}">支付状态</th>
+          <th lay-data="{templet:'#salesman',align:'center',width:180}">销售人员</th>
+          <th lay-data="{field:'addtime',width:180,align:'center'}">下单时间</th>
+          <th lay-data="{width:120, align:'center', toolbar: '#barDemo'}">操作</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <script type="text/html" id="status">
+      {{#  if(d.status === 1){ }}
+      未支付
+      {{#  }else if(d.status === 1){ }}
+      已支付
+      {{#  }else if(d.status === 2){ }}
+      未确认
+      {{#  }else if(d.status === 3){ }}
+      已确认
+      {{#  }else if(d.status === 4){ }}
+      已出行
+      {{#  }else if(d.status === 5){ }}
+      已返程
+      {{#  }else if(d.status === 6){ }}
+      已完成
+      {{#  }}}
+    </script>
+    <script type="text/html" id="pay_type">
+      {{#  if(d.payType === 1){ }}
+      微信支付
+      {{#  }else if(d.payType === 2){ }}
+      支付宝
+      {{#  }else if(d.payType === 3){ }}
+      网银转账
+      {{#  }}}
+    </script>
+    <script type="text/html" id="pay_status">
+      {{#  if(d.payStatus === 0){ }}
+      未支付
+      {{#  }else if(d.payStatus === 1){ }}
+      已支付
+      {{#  }}}
+    </script>
+    <script type="text/html" id="contact">
+      {{d.contact}}:{{d.contactMobile}}
+    </script>
+    <script type="text/html" id="salesman">
+      {{d.salesman}}:{{d.salesmanMobile}}
+    </script>
+    <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+      <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </script>
+    <script>
+        layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], function () {
+            $ = layui.jquery;
+            var form = layui.form
+                , layer = layui.layer
+                , element = layui.element
+                , laydate = layui.laydate
+                , table = layui.table
+                , upload = layui.upload
+
+            form.on('submit(sreach)', function(data){
+                //执行重载
+                table.reload('order_list', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        status: data.field.status,
+                        pay_type: data.field.pay_type,
+                        pay_status: data.field.pay_status,
+                        order_id: data.field.order_id,
+                    }
+                });
+                return false;
+            });
+
+
+        })
+
+
+    </script>
+  </body>
+
+</html>

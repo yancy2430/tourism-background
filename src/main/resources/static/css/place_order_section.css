@@ -1,0 +1,157 @@
+.order_info p {
+    padding: 5px 0px;
+    background: #F1F2F4;
+}
+
+.order_info p:first-child {
+    padding: 10px 10px 10px 10px;
+    font-size: 13px;
+    background: #ffffff;
+}
+
+.order_info p:first-child {
+    padding: 10px 10px 0px 10px;
+}
+
+.order_info .product_info {
+    padding: 10px 10px 10px 10px !important;
+}
+
+.order_info p span {
+    padding: 10px;
+    font-size: 13px;
+}
+
+.card_list {
+    margin: 10px;
+}
+
+.card_list .carditem {
+    background: #ffffff;
+    border-radius: 5px;
+    position: relative;
+}
+
+.card_list .carditem h4 {
+    font-weight: 500;
+    position: relative;
+    padding: 6px 10px;
+}
+
+.card_list .carditem h4 span {
+    font-weight: 500;
+    padding: 6px;
+    font-size: 12px;
+    color: #0E90D2;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.card_list .carditem h4:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #E5E5E5;
+    color: #E5E5E5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.form-common {
+    margin: 0px !important;
+}
+
+.form-common .label-left input {
+    font-size: 14px;
+    padding: 0;
+    border: none;
+    width: 100%;
+}
+
+.form-common .label-right {
+    padding-left: 12px;
+}
+
+.form-common .label-right input {
+    font-size: 14px;
+    padding: 0px;
+    border: none;
+    width: 100%;
+    padding-left: 12px;
+}
+
+.form-common .label-left input {
+    position: relative;
+}
+
+.carditem .input-left {
+    width: 30%;
+
+}
+
+.carditem .input-left input {
+    width: 100%;
+    border: none;
+    text-align: center;
+}
+
+.carditem .input-right input {
+    width: 100%;
+    border: none;
+}
+
+.carditem .weui-flex__item .placeholder {
+
+}
+
+.carditem .weui-flex {
+    position: relative;
+}
+
+.carditem .weui-flex:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #E5E5E5;
+    color: #E5E5E5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.carditem > p {
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #444;
+}
+
+.carditem {
+    margin-bottom: 10px;
+}
+
+.carditem .placeholder {
+    text-align: center;
+    line-height: 2.3em;
+    text-align: center;
+    color: #000;
+}
+.carditem .input-right input {
+    width: 100%;
+    border: none;
+    display: inline-block;
+    height: 35px;
+    -webkit-appearance: none;
+    padding: 0 8px;
+    border-radius: 4px;
+    outline: none;
+}

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.OrderPayBaseMapper">
+
+
+    <insert id="insertOrderPay"  useGeneratedKeys="true" keyProperty="payId">
+        INSERT INTO `tb_order_pay`
+        (
+        <trim suffixOverrides=",">
+                    <if test="payId!=null">
+                        `pay_id`,
+                    </if>
+                    <if test="orderId!=null">
+                        `order_id`,
+                    </if>
+                    <if test="success!=null">
+                        `success`,
+                    </if>
+                    <if test="payType!=null">
+                        `pay_type`,
+                    </if>
+                    <if test="productId!=null">
+                        `product_id`,
+                    </if>
+                    <if test="userId!=null">
+                        `user_id`,
+                    </if>
+                    <if test="remark!=null">
+                        `remark`,
+                    </if>
+                    <if test="payNo!=null">
+                        `pay_no`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="payId!=null">
+                    #{payId},
+                </if>
+                <if test="orderId!=null">
+                    #{orderId},
+                </if>
+                <if test="success!=null">
+                    #{success},
+                </if>
+                <if test="payType!=null">
+                    #{payType},
+                </if>
+                <if test="productId!=null">
+                    #{productId},
+                </if>
+                <if test="userId!=null">
+                    #{userId},
+                </if>
+                <if test="remark!=null">
+                    #{remark},
+                </if>
+                <if test="payNo!=null">
+                    #{payNo},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateOrderPay">
+        UPDATE `tb_order_pay`
+        SET
+        <trim suffixOverrides=",">
+            <if test="orderId != null">
+                `order_id` = #{orderId},
+            </if>
+            <if test="success != null">
+                `success` = #{success},
+            </if>
+            <if test="payType != null">
+                `pay_type` = #{payType},
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId},
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId},
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark},
+            </if>
+            <if test="payNo != null and payNo!=''">
+                `pay_no` = #{payNo},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `pay_id` = #{payId} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.OrderPay" id="OrderPayMap">
+        <result property="payId" column="pay_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="success" column="success"/>
+        <result property="payType" column="pay_type"/>
+        <result property="productId" column="product_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="remark" column="remark"/>
+        <result property="payNo" column="pay_no"/>
+    </resultMap>
+
+
+    <select id="queryOrderPay" resultMap="OrderPayMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_pay`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="payId != null">
+                `pay_id` = #{payId} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="success != null">
+                `success` = #{success} and
+            </if>
+            <if test="payType != null">
+                `pay_type` = #{payType} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="payNo != null and payNo!=''">
+                `pay_no` = #{payNo} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderPay$QueryBuilder) == true">
+                <if test="payIdList != null">
+                    `pay_id` in
+                    <foreach collection="payIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="payIdSt !=null">
+                    `pay_id` >= #{payIdSt} and
+                </if>
+                <if test="payIdEd!=null">
+                    `pay_id` &lt;= #{payIdEd} and
+                </if>
+                <if test="orderIdList != null">
+                    `order_id` in
+                    <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                <if test="successList != null">
+                    `success` in
+                    <foreach collection="successList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="successSt !=null">
+                    `success` >= #{successSt} and
+                </if>
+                <if test="successEd!=null">
+                    `success` &lt;= #{successEd} and
+                </if>
+                <if test="payTypeList != null">
+                    `pay_type` in
+                    <foreach collection="payTypeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="payTypeSt !=null">
+                    `pay_type` >= #{payTypeSt} and
+                </if>
+                <if test="payTypeEd!=null">
+                    `pay_type` &lt;= #{payTypeEd} and
+                </if>
+                <if test="productIdList != null">
+                    `product_id` in
+                    <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                <if test="userIdList != null">
+                    `user_id` in
+                    <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                <if test="remarkList != null">
+                    `remark` in
+                    <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="payNoList != null">
+                    `pay_no` in
+                    <foreach collection="payNoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPayNo!=null and fuzzyPayNo.size()>0">
+                    (
+                    <foreach collection="fuzzyPayNo"  separator="or" item="item">
+                        `Pay_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayNo!=null and rightFuzzyPayNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayNo"  separator="or" item="item">
+                        `Pay_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryOrderPayLimit1" resultMap="OrderPayMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_pay`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="payId != null">
+                `pay_id` = #{payId} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="success != null">
+                `success` = #{success} and
+            </if>
+            <if test="payType != null">
+                `pay_type` = #{payType} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="payNo != null and payNo!=''">
+                `pay_no` = #{payNo} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderPay$QueryBuilder) == true">
+                    <if test="payIdList != null">
+                        `pay_id` in
+                        <foreach collection="payIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="payIdSt !=null">
+                    `pay_id` >= #{payIdSt} and
+                </if>
+                <if test="payIdEd!=null">
+                    `pay_id` &lt;= #{payIdEd} and
+                </if>
+                    <if test="orderIdList != null">
+                        `order_id` in
+                        <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                    <if test="successList != null">
+                        `success` in
+                        <foreach collection="successList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="successSt !=null">
+                    `success` >= #{successSt} and
+                </if>
+                <if test="successEd!=null">
+                    `success` &lt;= #{successEd} and
+                </if>
+                    <if test="payTypeList != null">
+                        `pay_type` in
+                        <foreach collection="payTypeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="payTypeSt !=null">
+                    `pay_type` >= #{payTypeSt} and
+                </if>
+                <if test="payTypeEd!=null">
+                    `pay_type` &lt;= #{payTypeEd} and
+                </if>
+                    <if test="productIdList != null">
+                        `product_id` in
+                        <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                    <if test="userIdList != null">
+                        `user_id` in
+                        <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                    <if test="remarkList != null">
+                        `remark` in
+                        <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="payNoList != null">
+                        `pay_no` in
+                        <foreach collection="payNoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPayNo!=null and fuzzyPayNo.size()>0">
+                    (
+                    <foreach collection="fuzzyPayNo"  separator="or" item="item">
+                        `Pay_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPayNo!=null and rightFuzzyPayNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPayNo"  separator="or" item="item">
+                        `Pay_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `pay_id`,
+        `order_id`,
+        `success`+0 as `success`,
+        `pay_type`,
+        `product_id`,
+        `user_id`,
+        `remark`,
+        `pay_no`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderPay$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.payId==true">
+                        `pay_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.orderId==true">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.success==true">
+                        `success`+0 as `success`,
+                    </if>
+                    <if test="fetchFields.fetchFields.payType==true">
+                        `pay_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.productId==true">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userId==true">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.remark==true">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.fetchFields.payNo==true">
+                        `pay_no`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.payId==null">
+                        `pay_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.orderId==null">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.success==null">
+                        `success`+0 as `success`,
+                    </if>
+                    <if test="fetchFields.excludeFields.payType==null">
+                        `pay_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.productId==null">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userId==null">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.remark==null">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.excludeFields.payNo==null">
+                        `pay_no`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.OrderPay$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

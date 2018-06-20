@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.ProductCateBaseMapper">
+
+
+    <insert id="insertProductCate"  useGeneratedKeys="true" keyProperty="cateId">
+        INSERT INTO `tb_product_cate`
+        (
+        <trim suffixOverrides=",">
+                    <if test="cateId!=null">
+                        `cate_id`,
+                    </if>
+                    <if test="cateUpid!=null">
+                        `cate_upid`,
+                    </if>
+                    <if test="cateName!=null">
+                        `cate_name`,
+                    </if>
+                    <if test="sort!=null">
+                        `sort`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="cateId!=null">
+                    #{cateId},
+                </if>
+                <if test="cateUpid!=null">
+                    #{cateUpid},
+                </if>
+                <if test="cateName!=null">
+                    #{cateName},
+                </if>
+                <if test="sort!=null">
+                    #{sort},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateProductCate">
+        UPDATE `tb_product_cate`
+        SET
+        <trim suffixOverrides=",">
+            <if test="cateUpid != null">
+                `cate_upid` = #{cateUpid},
+            </if>
+            <if test="cateName != null and cateName!=''">
+                `cate_name` = #{cateName},
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `cate_id` = #{cateId} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.ProductCate" id="ProductCateMap">
+        <result property="cateId" column="cate_id"/>
+        <result property="cateUpid" column="cate_upid"/>
+        <result property="cateName" column="cate_name"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+
+    <select id="queryProductCate" resultMap="ProductCateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_product_cate`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="cateId != null">
+                `cate_id` = #{cateId} and
+            </if>
+            <if test="cateUpid != null">
+                `cate_upid` = #{cateUpid} and
+            </if>
+            <if test="cateName != null and cateName!=''">
+                `cate_name` = #{cateName} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductCate$QueryBuilder) == true">
+                <if test="cateIdList != null">
+                    `cate_id` in
+                    <foreach collection="cateIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="cateIdSt !=null">
+                    `cate_id` >= #{cateIdSt} and
+                </if>
+                <if test="cateIdEd!=null">
+                    `cate_id` &lt;= #{cateIdEd} and
+                </if>
+                <if test="cateUpidList != null">
+                    `cate_upid` in
+                    <foreach collection="cateUpidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="cateUpidSt !=null">
+                    `cate_upid` >= #{cateUpidSt} and
+                </if>
+                <if test="cateUpidEd!=null">
+                    `cate_upid` &lt;= #{cateUpidEd} and
+                </if>
+                <if test="cateNameList != null">
+                    `cate_name` in
+                    <foreach collection="cateNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCateName!=null and fuzzyCateName.size()>0">
+                    (
+                    <foreach collection="fuzzyCateName"  separator="or" item="item">
+                        `Cate_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCateName!=null and rightFuzzyCateName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCateName"  separator="or" item="item">
+                        `Cate_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="sortList != null">
+                    `sort` in
+                    <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryProductCateLimit1" resultMap="ProductCateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_product_cate`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="cateId != null">
+                `cate_id` = #{cateId} and
+            </if>
+            <if test="cateUpid != null">
+                `cate_upid` = #{cateUpid} and
+            </if>
+            <if test="cateName != null and cateName!=''">
+                `cate_name` = #{cateName} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductCate$QueryBuilder) == true">
+                    <if test="cateIdList != null">
+                        `cate_id` in
+                        <foreach collection="cateIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="cateIdSt !=null">
+                    `cate_id` >= #{cateIdSt} and
+                </if>
+                <if test="cateIdEd!=null">
+                    `cate_id` &lt;= #{cateIdEd} and
+                </if>
+                    <if test="cateUpidList != null">
+                        `cate_upid` in
+                        <foreach collection="cateUpidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="cateUpidSt !=null">
+                    `cate_upid` >= #{cateUpidSt} and
+                </if>
+                <if test="cateUpidEd!=null">
+                    `cate_upid` &lt;= #{cateUpidEd} and
+                </if>
+                    <if test="cateNameList != null">
+                        `cate_name` in
+                        <foreach collection="cateNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCateName!=null and fuzzyCateName.size()>0">
+                    (
+                    <foreach collection="fuzzyCateName"  separator="or" item="item">
+                        `Cate_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCateName!=null and rightFuzzyCateName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCateName"  separator="or" item="item">
+                        `Cate_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="sortList != null">
+                        `sort` in
+                        <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `cate_id`,
+        `cate_upid`,
+        `cate_name`,
+        `sort`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductCate$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.cateId==true">
+                        `cate_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.cateUpid==true">
+                        `cate_upid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.cateName==true">
+                        `cate_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sort==true">
+                        `sort`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.cateId==null">
+                        `cate_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.cateUpid==null">
+                        `cate_upid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.cateName==null">
+                        `cate_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sort==null">
+                        `sort`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.ProductCate$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

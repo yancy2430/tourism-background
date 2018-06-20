@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section class="article" id="productlist_section" data-role="section" data-transition="empty">
+    <header>
+        <div class="titlebar">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <h1></h1>
+            <a data-toggle="back" href="#"><i class="iconfont iconline-scale"></i></a>
+        </div>
+    </header>
+    <ul class="my_filter_controller">
+        <li data-role="tab" data-toggle="view" href="#fujin" class=""><span>出游类型</span><i>|</i></li>
+        <li data-role="tab" data-toggle="view" href="#meishi" class=""><span>出游天数</span><i>|</i></li>
+        <li data-role="tab" data-toggle="view" href="#paixu" class=""><span>智能排序</span><i>|</i></li>
+        <li data-role="tab" data-toggle="view" href="#shaixuan" class=""><span>筛选</span></li>
+    </ul>
+    <div class="my_filter_conatiner">
+        <div id="fujin" class="my_filter_component" data-role="view">
+            <div class="my_filter_component_content">
+                <ul class="my_filter_c1">
+                    <li class="" data-toggle="view" href="#fujin1" data-role="tab">附近</li>
+                    <li data-toggle="view" href="#fujin2" data-role="tab">热门商区</li>
+                    <li data-toggle="view" href="#fujin3" data-role="tab" class="active">秦淮区</li>
+                    <li>鼓楼区</li>
+                    <li>江宁区</li>
+                    <li>建邺区</li>
+                    <li>玄武区</li>
+                    <li>栖霞区</li>
+                    <li>浦口区</li>
+                    <li>雨花台区</li>
+                    <li>下关区</li>
+                    <li>六合区</li>
+                    <li>溧水区</li>
+                    <li>高淳区</li>
+                </ul>
+                <ul id="fujin1" data-role="view" class="my_filter_c2">
+                    <li>附近（智能范围）</li>
+                    <li>500m</li>
+                    <li>1000m</li>
+                    <li>2000m</li>
+                    <li>3000m</li>
+                </ul>
+                <ul id="fujin2" data-role="view" class="my_filter_c2">
+                    <li>全部商区</li>
+                    <li>新街口地区</li>
+                    <li>湖南路</li>
+                    <li>东山镇</li>
+                    <li>江宁万达</li>
+                    <li>建邺万达</li>
+                    <li>珠江路沿线</li>
+                    <li>开发区</li>
+                    <li>胜太路</li>
+                    <li>莫愁湖/水西门</li>
+                    <li>同曦/瑞都商业圈</li>
+                </ul>
+                <ul id="fujin3" data-role="view" class="my_filter_c2 active">
+                    <li>全部秦淮区</li>
+                    <li>新街口地区</li>
+                    <li>夫子庙地区</li>
+                    <li>常府街/长白街</li>
+                    <li>升州路、集庆路</li>
+                    <li>瑞金路沿线</li>
+                    <li>苜蓿园</li>
+                    <li>秦虹村/中华门</li>
+                </ul>
+            </div>
+        </div>
+        <div id="meishi" class="my_filter_component" data-role="view">
+            <div class="my_filter_component_content">
+                <div style="text-align:center;padding:20px 0px;">在这里自定义你的内容吧</div>
+            </div>
+        </div>
+        <div id="paixu" class="my_filter_component" data-role="view">
+            <div class="my_filter_component_content">
+                <div style="text-align:center;padding:20px 0px;">在这里自定义你的内容吧</div>
+            </div>
+        </div>
+        <div id="shaixuan" class="my_filter_component" data-role="view">
+            <div class="my_filter_component_content">
+                <div style="text-align:center;padding:20px 0px;">在这里自定义你的内容吧</div>
+            </div>
+        </div>
+    </div>
+    <article data-role="article" id="controller_article" class="active" style="top:88px;bottom:0px;">
+        <div class="scroller">
+            <ul class="list" id="list">
+            </ul>
+        </div>
+    </article>
+
+</section>
+<script id="template" type="text/html">
+    <% for(i=0;i < data.length;i++){ %>
+    <li href="product_details_section.html?product_id=<%=data[i].productId%>" data-toggle="html" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb"
+                 src="http://admin.icsw.cn:8080<%= data[i].images[0] %>" alt="">
+        </div>
+        <div class="weui-media-box__bd">
+            <h4 class="weui-media-box__title"><%=data[i].productName%></h4>
+            <p class="weui-media-box__desc tag">
+                <span><%=data[i].productTag[0]%></span><span><%=data[i].productTag[1]%></span><span><%=data[i].productTag[2]%></span><span><%=data[i].productTag[3]%></span>
+            </p>
+            <p class="weui-media-box__desc"><span class="score"><%=data[i].comments%>分</span><span class="num"><%=data[i].buyfew%>人出游</span><span
+                    class="price">￥441起</span></p>
+        </div>
+    </li>
+    <% } %>
+</script>
+<th:block th:include="footer"></th:block>

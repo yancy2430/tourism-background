@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.ProductDateBaseMapper">
+
+
+    <insert id="insertProductDate" >
+        INSERT INTO `tb_product_date`
+        (
+        <trim suffixOverrides=",">
+                    <if test="productId!=null">
+                        `product_id`,
+                    </if>
+                    <if test="adultPrice!=null">
+                        `adult_price`,
+                    </if>
+                    <if test="childrenPrice!=null">
+                        `children_price`,
+                    </if>
+                    <if test="housingPrice!=null">
+                        `housing_price`,
+                    </if>
+                    <if test="teamtime!=null">
+                        `teamtime`,
+                    </if>
+                    <if test="isshow!=null">
+                        `isshow`,
+                    </if>
+                    <if test="packageName!=null">
+                        `package_name`,
+                    </if>
+                    <if test="packageNo!=null">
+                        `package_no`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="productId!=null">
+                    #{productId},
+                </if>
+                <if test="adultPrice!=null">
+                    #{adultPrice},
+                </if>
+                <if test="childrenPrice!=null">
+                    #{childrenPrice},
+                </if>
+                <if test="housingPrice!=null">
+                    #{housingPrice},
+                </if>
+                <if test="teamtime!=null">
+                    #{teamtime},
+                </if>
+                <if test="isshow!=null">
+                    #{isshow},
+                </if>
+                <if test="packageName!=null">
+                    #{packageName},
+                </if>
+                <if test="packageNo!=null">
+                    #{packageNo},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateProductDate">
+        UPDATE `tb_product_date`
+        SET
+        <trim suffixOverrides=",">
+            <if test="productId != null">
+                `product_id` = #{productId},
+            </if>
+            <if test="adultPrice != null">
+                `adult_price` = #{adultPrice},
+            </if>
+            <if test="childrenPrice != null">
+                `children_price` = #{childrenPrice},
+            </if>
+            <if test="housingPrice != null">
+                `housing_price` = #{housingPrice},
+            </if>
+            <if test="teamtime != null and teamtime!=''">
+                `teamtime` = #{teamtime},
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow},
+            </if>
+            <if test="packageName != null and packageName!=''">
+                `package_name` = #{packageName},
+            </if>
+            <if test="packageNo != null and packageNo!=''">
+                `package_no` = #{packageNo},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.ProductDate" id="ProductDateMap">
+        <result property="productId" column="product_id"/>
+        <result property="adultPrice" column="adult_price"/>
+        <result property="childrenPrice" column="children_price"/>
+        <result property="housingPrice" column="housing_price"/>
+        <result property="teamtime" column="teamtime"/>
+        <result property="isshow" column="isshow"/>
+        <result property="packageName" column="package_name"/>
+        <result property="packageNo" column="package_no"/>
+    </resultMap>
+
+
+    <select id="queryProductDate" resultMap="ProductDateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_product_date`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="adultPrice != null">
+                `adult_price` = #{adultPrice} and
+            </if>
+            <if test="childrenPrice != null">
+                `children_price` = #{childrenPrice} and
+            </if>
+            <if test="housingPrice != null">
+                `housing_price` = #{housingPrice} and
+            </if>
+            <if test="teamtime != null and teamtime!=''">
+                `teamtime` = #{teamtime} and
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow} and
+            </if>
+            <if test="packageName != null and packageName!=''">
+                `package_name` = #{packageName} and
+            </if>
+            <if test="packageNo != null and packageNo!=''">
+                `package_no` = #{packageNo} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductDate$QueryBuilder) == true">
+                <if test="productIdList != null">
+                    `product_id` in
+                    <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                <if test="adultPriceList != null">
+                    `adult_price` in
+                    <foreach collection="adultPriceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="adultPriceSt !=null">
+                    `adult_price` >= #{adultPriceSt} and
+                </if>
+                <if test="adultPriceEd!=null">
+                    `adult_price` &lt;= #{adultPriceEd} and
+                </if>
+                <if test="childrenPriceList != null">
+                    `children_price` in
+                    <foreach collection="childrenPriceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="childrenPriceSt !=null">
+                    `children_price` >= #{childrenPriceSt} and
+                </if>
+                <if test="childrenPriceEd!=null">
+                    `children_price` &lt;= #{childrenPriceEd} and
+                </if>
+                <if test="housingPriceList != null">
+                    `housing_price` in
+                    <foreach collection="housingPriceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="housingPriceSt !=null">
+                    `housing_price` >= #{housingPriceSt} and
+                </if>
+                <if test="housingPriceEd!=null">
+                    `housing_price` &lt;= #{housingPriceEd} and
+                </if>
+                <if test="teamtimeList != null">
+                    `teamtime` in
+                    <foreach collection="teamtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTeamtime!=null and fuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="fuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTeamtime!=null and rightFuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="isshowList != null">
+                    `isshow` in
+                    <foreach collection="isshowList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="isshowSt !=null">
+                    `isshow` >= #{isshowSt} and
+                </if>
+                <if test="isshowEd!=null">
+                    `isshow` &lt;= #{isshowEd} and
+                </if>
+                <if test="packageNameList != null">
+                    `package_name` in
+                    <foreach collection="packageNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPackageName!=null and fuzzyPackageName.size()>0">
+                    (
+                    <foreach collection="fuzzyPackageName"  separator="or" item="item">
+                        `Package_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPackageName!=null and rightFuzzyPackageName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPackageName"  separator="or" item="item">
+                        `Package_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="packageNoList != null">
+                    `package_no` in
+                    <foreach collection="packageNoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPackageNo!=null and fuzzyPackageNo.size()>0">
+                    (
+                    <foreach collection="fuzzyPackageNo"  separator="or" item="item">
+                        `Package_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPackageNo!=null and rightFuzzyPackageNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPackageNo"  separator="or" item="item">
+                        `Package_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryProductDateLimit1" resultMap="ProductDateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_product_date`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="adultPrice != null">
+                `adult_price` = #{adultPrice} and
+            </if>
+            <if test="childrenPrice != null">
+                `children_price` = #{childrenPrice} and
+            </if>
+            <if test="housingPrice != null">
+                `housing_price` = #{housingPrice} and
+            </if>
+            <if test="teamtime != null and teamtime!=''">
+                `teamtime` = #{teamtime} and
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow} and
+            </if>
+            <if test="packageName != null and packageName!=''">
+                `package_name` = #{packageName} and
+            </if>
+            <if test="packageNo != null and packageNo!=''">
+                `package_no` = #{packageNo} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductDate$QueryBuilder) == true">
+                    <if test="productIdList != null">
+                        `product_id` in
+                        <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                    <if test="adultPriceList != null">
+                        `adult_price` in
+                        <foreach collection="adultPriceList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="adultPriceSt !=null">
+                    `adult_price` >= #{adultPriceSt} and
+                </if>
+                <if test="adultPriceEd!=null">
+                    `adult_price` &lt;= #{adultPriceEd} and
+                </if>
+                    <if test="childrenPriceList != null">
+                        `children_price` in
+                        <foreach collection="childrenPriceList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="childrenPriceSt !=null">
+                    `children_price` >= #{childrenPriceSt} and
+                </if>
+                <if test="childrenPriceEd!=null">
+                    `children_price` &lt;= #{childrenPriceEd} and
+                </if>
+                    <if test="housingPriceList != null">
+                        `housing_price` in
+                        <foreach collection="housingPriceList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="housingPriceSt !=null">
+                    `housing_price` >= #{housingPriceSt} and
+                </if>
+                <if test="housingPriceEd!=null">
+                    `housing_price` &lt;= #{housingPriceEd} and
+                </if>
+                    <if test="teamtimeList != null">
+                        `teamtime` in
+                        <foreach collection="teamtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTeamtime!=null and fuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="fuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTeamtime!=null and rightFuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="isshowList != null">
+                        `isshow` in
+                        <foreach collection="isshowList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="isshowSt !=null">
+                    `isshow` >= #{isshowSt} and
+                </if>
+                <if test="isshowEd!=null">
+                    `isshow` &lt;= #{isshowEd} and
+                </if>
+                    <if test="packageNameList != null">
+                        `package_name` in
+                        <foreach collection="packageNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPackageName!=null and fuzzyPackageName.size()>0">
+                    (
+                    <foreach collection="fuzzyPackageName"  separator="or" item="item">
+                        `Package_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPackageName!=null and rightFuzzyPackageName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPackageName"  separator="or" item="item">
+                        `Package_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="packageNoList != null">
+                        `package_no` in
+                        <foreach collection="packageNoList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPackageNo!=null and fuzzyPackageNo.size()>0">
+                    (
+                    <foreach collection="fuzzyPackageNo"  separator="or" item="item">
+                        `Package_no` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPackageNo!=null and rightFuzzyPackageNo.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPackageNo"  separator="or" item="item">
+                        `Package_no` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `product_id`,
+        `adult_price`,
+        `children_price`,
+        `housing_price`,
+        `teamtime`,
+        `isshow`+0 as `isshow`,
+        `package_name`,
+        `package_no`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductDate$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.productId==true">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.adultPrice==true">
+                        `adult_price`,
+                    </if>
+                    <if test="fetchFields.fetchFields.childrenPrice==true">
+                        `children_price`,
+                    </if>
+                    <if test="fetchFields.fetchFields.housingPrice==true">
+                        `housing_price`,
+                    </if>
+                    <if test="fetchFields.fetchFields.teamtime==true">
+                        `teamtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.isshow==true">
+                        `isshow`+0 as `isshow`,
+                    </if>
+                    <if test="fetchFields.fetchFields.packageName==true">
+                        `package_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.packageNo==true">
+                        `package_no`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.productId==null">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.adultPrice==null">
+                        `adult_price`,
+                    </if>
+                    <if test="fetchFields.excludeFields.childrenPrice==null">
+                        `children_price`,
+                    </if>
+                    <if test="fetchFields.excludeFields.housingPrice==null">
+                        `housing_price`,
+                    </if>
+                    <if test="fetchFields.excludeFields.teamtime==null">
+                        `teamtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.isshow==null">
+                        `isshow`+0 as `isshow`,
+                    </if>
+                    <if test="fetchFields.excludeFields.packageName==null">
+                        `package_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.packageNo==null">
+                        `package_no`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.ProductDate$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

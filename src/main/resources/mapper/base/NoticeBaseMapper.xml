@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.NoticeBaseMapper">
+
+
+    <insert id="insertNotice"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tb_notice`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="userId!=null">
+                        `user_id`,
+                    </if>
+                    <if test="noticeType!=null">
+                        `notice_type`,
+                    </if>
+                    <if test="title!=null">
+                        `title`,
+                    </if>
+                    <if test="content!=null">
+                        `content`,
+                    </if>
+                    <if test="check!=null">
+                        `check`,
+                    </if>
+                    <if test="addtime!=null">
+                        `addtime`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="userId!=null">
+                    #{userId},
+                </if>
+                <if test="noticeType!=null">
+                    #{noticeType},
+                </if>
+                <if test="title!=null">
+                    #{title},
+                </if>
+                <if test="content!=null">
+                    #{content},
+                </if>
+                <if test="check!=null">
+                    #{check},
+                </if>
+                <if test="addtime!=null">
+                    #{addtime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateNotice">
+        UPDATE `tb_notice`
+        SET
+        <trim suffixOverrides=",">
+            <if test="userId != null">
+                `user_id` = #{userId},
+            </if>
+            <if test="noticeType != null">
+                `notice_type` = #{noticeType},
+            </if>
+            <if test="title != null and title!=''">
+                `title` = #{title},
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content},
+            </if>
+            <if test="check != null">
+                `check` = #{check},
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Notice" id="NoticeMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="noticeType" column="notice_type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="check" column="check"/>
+        <result property="addtime" column="addtime"/>
+    </resultMap>
+
+
+    <select id="queryNotice" resultMap="NoticeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_notice`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="noticeType != null">
+                `notice_type` = #{noticeType} and
+            </if>
+            <if test="title != null and title!=''">
+                `title` = #{title} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
+            </if>
+            <if test="check != null">
+                `check` = #{check} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Notice$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="userIdList != null">
+                    `user_id` in
+                    <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                <if test="noticeTypeList != null">
+                    `notice_type` in
+                    <foreach collection="noticeTypeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="noticeTypeSt !=null">
+                    `notice_type` >= #{noticeTypeSt} and
+                </if>
+                <if test="noticeTypeEd!=null">
+                    `notice_type` &lt;= #{noticeTypeEd} and
+                </if>
+                <if test="titleList != null">
+                    `title` in
+                    <foreach collection="titleList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTitle!=null and fuzzyTitle.size()>0">
+                    (
+                    <foreach collection="fuzzyTitle"  separator="or" item="item">
+                        `Title` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTitle!=null and rightFuzzyTitle.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTitle"  separator="or" item="item">
+                        `Title` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="contentList != null">
+                    `content` in
+                    <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="checkList != null">
+                    `check` in
+                    <foreach collection="checkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="checkSt !=null">
+                    `check` >= #{checkSt} and
+                </if>
+                <if test="checkEd!=null">
+                    `check` &lt;= #{checkEd} and
+                </if>
+                <if test="addtimeList != null">
+                    `addtime` in
+                    <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryNoticeLimit1" resultMap="NoticeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_notice`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="noticeType != null">
+                `notice_type` = #{noticeType} and
+            </if>
+            <if test="title != null and title!=''">
+                `title` = #{title} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
+            </if>
+            <if test="check != null">
+                `check` = #{check} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Notice$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="userIdList != null">
+                        `user_id` in
+                        <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                    <if test="noticeTypeList != null">
+                        `notice_type` in
+                        <foreach collection="noticeTypeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="noticeTypeSt !=null">
+                    `notice_type` >= #{noticeTypeSt} and
+                </if>
+                <if test="noticeTypeEd!=null">
+                    `notice_type` &lt;= #{noticeTypeEd} and
+                </if>
+                    <if test="titleList != null">
+                        `title` in
+                        <foreach collection="titleList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTitle!=null and fuzzyTitle.size()>0">
+                    (
+                    <foreach collection="fuzzyTitle"  separator="or" item="item">
+                        `Title` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTitle!=null and rightFuzzyTitle.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTitle"  separator="or" item="item">
+                        `Title` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="contentList != null">
+                        `content` in
+                        <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="checkList != null">
+                        `check` in
+                        <foreach collection="checkList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="checkSt !=null">
+                    `check` >= #{checkSt} and
+                </if>
+                <if test="checkEd!=null">
+                    `check` &lt;= #{checkEd} and
+                </if>
+                    <if test="addtimeList != null">
+                        `addtime` in
+                        <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `user_id`,
+        `notice_type`,
+        `title`,
+        `content`,
+        `check`+0 as `check`,
+        `addtime`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Notice$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userId==true">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.noticeType==true">
+                        `notice_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.title==true">
+                        `title`,
+                    </if>
+                    <if test="fetchFields.fetchFields.content==true">
+                        `content`,
+                    </if>
+                    <if test="fetchFields.fetchFields.check==true">
+                        `check`+0 as `check`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addtime==true">
+                        `addtime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userId==null">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.noticeType==null">
+                        `notice_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.title==null">
+                        `title`,
+                    </if>
+                    <if test="fetchFields.excludeFields.content==null">
+                        `content`,
+                    </if>
+                    <if test="fetchFields.excludeFields.check==null">
+                        `check`+0 as `check`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addtime==null">
+                        `addtime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Notice$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

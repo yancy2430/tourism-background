@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+
+<section data-cache="true" class="" id="custom_service_section" data-role="section" data-transition="empty">
+    <header>
+        <div class="titlebar">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <h1>定制行程</h1>
+        </div>
+    </header>
+    <article data-role="article" id="custom_service_section_article" class="active" style="top:44px;">
+        <div><img style="width: 100%;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528701305827&di=862415d6fea7ccec7ddb385fdac96b9d&imgtype=0&src=http%3A%2F%2Fwww.yongxintex.com%2FHtml%2Fimages%2Fb1.jpg"/></div>
+        <div class="head">
+            <h2>我要定制</h2>
+        </div>
+
+        <div class="content">
+            <div class="weui-cells__title">出游基本信息</div>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">出发地</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="select2">
+                            <option value="1">中国</option>
+                            <option value="2">美国</option>
+                            <option value="3">英国</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">出行日期</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">游玩天数</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">游玩城市</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input placeholder="多个城市用,隔开" class="weui-input" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells__title">出行人数及预算</div>
+            <div class="weui-cells">
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">成人</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">儿童</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input placeholder="多个城市用,隔开" class="weui-input" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">人均预算</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <div class="weui-slider-box">
+                                <div class="weui-slider">
+                                    <div id="sliderInner" class="weui-slider__inner">
+                                        <div id="sliderTrack" style="width: 50%;" class="weui-slider__track"></div>
+                                        <div id="sliderHandler" style="left: 50%;" class="weui-slider__handler"></div>
+                                    </div>
+                                </div>
+                                <div id="sliderValue" class="weui-slider-box__value">50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells__title">联系人信息</div>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">姓名</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">手机号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">特殊备注</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+</section>
+
+<th:block th:include="footer"></th:block>

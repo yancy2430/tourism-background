@@ -1,0 +1,107 @@
+.appimg {
+	width: 64px;
+	height: 64px;
+	background-size: 100% 100%;
+	position: relative;
+}
+
+button, input[type="button"], a.button {
+    color: #f8f8f8;
+    background-color: #39f;
+    border-color: #39f;
+    -webkit-tap-highlight-color: rgba(51, 153, 255, 0.1);
+}
+.demo-content{
+	width: auto;
+    height: auto;
+	margin: 10px;
+	text-align:center;
+}
+.demo-content span{
+	width: 50px;
+    height: 50px;
+    margin: 3px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    border-radius: 25px;
+}
+.icon {
+    width: 45px;
+    height: 45px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+.icon_titlebar{
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 688121 */
+    src: url('//at.alicdn.com/t/font_688121_65dzdum0u23xr.eot');
+    src: url('//at.alicdn.com/t/font_688121_65dzdum0u23xr.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_688121_65dzdum0u23xr.woff') format('woff'),
+    url('//at.alicdn.com/t/font_688121_65dzdum0u23xr.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_688121_65dzdum0u23xr.svg#iconfont') format('svg');
+}
+.iconfont_new{
+    font-family:"iconfont" !important;
+    font-size:20px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.titlebar .iconfont_new{
+    font-size: 24px;
+    font-style: normal!important;
+    padding: 4px!important;
+}
+
+.titlebar{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border-bottom: 1px solid rgba(231, 231, 231, 0.6);
+    background-image: none;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 44px;
+    padding-top: 0px;
+    line-height: 44px;
+}
+.titlebar a {
+    color: black;
+}
+.menubar {
+    background-color: rgb(255, 255, 255);
+    color: rgb(122, 126, 131);
+    box-shadow: 0 4px 16px 0 #ccc;
+}
+.menubar .menu{
+    color: rgb(122, 126, 131);
+}
+.menubar .menu:active, .menubar .menu.active{
+    color: rgb(51, 153, 255);
+ }
+.titlebar h1 {
+    color: black;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 17px;
+    font-weight: normal;
+    vertical-align: baseline;
+}
+.weui-search-bar {
+    background-color: rgb(255, 255, 255)!important;
+}

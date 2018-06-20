@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.ReviewBaseMapper">
+
+
+    <insert id="insertReview"  useGeneratedKeys="true" keyProperty="reviewId">
+        INSERT INTO `tb_review`
+        (
+        <trim suffixOverrides=",">
+                    <if test="reviewId!=null">
+                        `review_id`,
+                    </if>
+                    <if test="orderId!=null">
+                        `order_id`,
+                    </if>
+                    <if test="productId!=null">
+                        `product_id`,
+                    </if>
+                    <if test="content!=null">
+                        `content`,
+                    </if>
+                    <if test="score1!=null">
+                        `score_1`,
+                    </if>
+                    <if test="score2!=null">
+                        `score_2`,
+                    </if>
+                    <if test="score3!=null">
+                        `score_3`,
+                    </if>
+                    <if test="score4!=null">
+                        `score_4`,
+                    </if>
+                    <if test="score5!=null">
+                        `score_5`,
+                    </if>
+                    <if test="userId!=null">
+                        `user_id`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="reviewId!=null">
+                    #{reviewId},
+                </if>
+                <if test="orderId!=null">
+                    #{orderId},
+                </if>
+                <if test="productId!=null">
+                    #{productId},
+                </if>
+                <if test="content!=null">
+                    #{content},
+                </if>
+                <if test="score1!=null">
+                    #{score1},
+                </if>
+                <if test="score2!=null">
+                    #{score2},
+                </if>
+                <if test="score3!=null">
+                    #{score3},
+                </if>
+                <if test="score4!=null">
+                    #{score4},
+                </if>
+                <if test="score5!=null">
+                    #{score5},
+                </if>
+                <if test="userId!=null">
+                    #{userId},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateReview">
+        UPDATE `tb_review`
+        SET
+        <trim suffixOverrides=",">
+            <if test="orderId != null">
+                `order_id` = #{orderId},
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId},
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content},
+            </if>
+            <if test="score1 != null">
+                `score_1` = #{score1},
+            </if>
+            <if test="score2 != null">
+                `score_2` = #{score2},
+            </if>
+            <if test="score3 != null">
+                `score_3` = #{score3},
+            </if>
+            <if test="score4 != null">
+                `score_4` = #{score4},
+            </if>
+            <if test="score5 != null">
+                `score_5` = #{score5},
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `review_id` = #{reviewId} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Review" id="ReviewMap">
+        <result property="reviewId" column="review_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="content" column="content"/>
+        <result property="score1" column="score_1"/>
+        <result property="score2" column="score_2"/>
+        <result property="score3" column="score_3"/>
+        <result property="score4" column="score_4"/>
+        <result property="score5" column="score_5"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+
+    <select id="queryReview" resultMap="ReviewMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_review`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="reviewId != null">
+                `review_id` = #{reviewId} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
+            </if>
+            <if test="score1 != null">
+                `score_1` = #{score1} and
+            </if>
+            <if test="score2 != null">
+                `score_2` = #{score2} and
+            </if>
+            <if test="score3 != null">
+                `score_3` = #{score3} and
+            </if>
+            <if test="score4 != null">
+                `score_4` = #{score4} and
+            </if>
+            <if test="score5 != null">
+                `score_5` = #{score5} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Review$QueryBuilder) == true">
+                <if test="reviewIdList != null">
+                    `review_id` in
+                    <foreach collection="reviewIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="reviewIdSt !=null">
+                    `review_id` >= #{reviewIdSt} and
+                </if>
+                <if test="reviewIdEd!=null">
+                    `review_id` &lt;= #{reviewIdEd} and
+                </if>
+                <if test="orderIdList != null">
+                    `order_id` in
+                    <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                <if test="productIdList != null">
+                    `product_id` in
+                    <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                <if test="contentList != null">
+                    `content` in
+                    <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="score1List != null">
+                    `score_1` in
+                    <foreach collection="score1List" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="score1St !=null">
+                    `score_1` >= #{score1St} and
+                </if>
+                <if test="score1Ed!=null">
+                    `score_1` &lt;= #{score1Ed} and
+                </if>
+                <if test="score2List != null">
+                    `score_2` in
+                    <foreach collection="score2List" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="score2St !=null">
+                    `score_2` >= #{score2St} and
+                </if>
+                <if test="score2Ed!=null">
+                    `score_2` &lt;= #{score2Ed} and
+                </if>
+                <if test="score3List != null">
+                    `score_3` in
+                    <foreach collection="score3List" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="score3St !=null">
+                    `score_3` >= #{score3St} and
+                </if>
+                <if test="score3Ed!=null">
+                    `score_3` &lt;= #{score3Ed} and
+                </if>
+                <if test="score4List != null">
+                    `score_4` in
+                    <foreach collection="score4List" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="score4St !=null">
+                    `score_4` >= #{score4St} and
+                </if>
+                <if test="score4Ed!=null">
+                    `score_4` &lt;= #{score4Ed} and
+                </if>
+                <if test="score5List != null">
+                    `score_5` in
+                    <foreach collection="score5List" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="score5St !=null">
+                    `score_5` >= #{score5St} and
+                </if>
+                <if test="score5Ed!=null">
+                    `score_5` &lt;= #{score5Ed} and
+                </if>
+                <if test="userIdList != null">
+                    `user_id` in
+                    <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryReviewLimit1" resultMap="ReviewMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_review`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="reviewId != null">
+                `review_id` = #{reviewId} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
+            </if>
+            <if test="score1 != null">
+                `score_1` = #{score1} and
+            </if>
+            <if test="score2 != null">
+                `score_2` = #{score2} and
+            </if>
+            <if test="score3 != null">
+                `score_3` = #{score3} and
+            </if>
+            <if test="score4 != null">
+                `score_4` = #{score4} and
+            </if>
+            <if test="score5 != null">
+                `score_5` = #{score5} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Review$QueryBuilder) == true">
+                    <if test="reviewIdList != null">
+                        `review_id` in
+                        <foreach collection="reviewIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="reviewIdSt !=null">
+                    `review_id` >= #{reviewIdSt} and
+                </if>
+                <if test="reviewIdEd!=null">
+                    `review_id` &lt;= #{reviewIdEd} and
+                </if>
+                    <if test="orderIdList != null">
+                        `order_id` in
+                        <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                    <if test="productIdList != null">
+                        `product_id` in
+                        <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                    <if test="contentList != null">
+                        `content` in
+                        <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="score1List != null">
+                        `score_1` in
+                        <foreach collection="score1List" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="score1St !=null">
+                    `score_1` >= #{score1St} and
+                </if>
+                <if test="score1Ed!=null">
+                    `score_1` &lt;= #{score1Ed} and
+                </if>
+                    <if test="score2List != null">
+                        `score_2` in
+                        <foreach collection="score2List" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="score2St !=null">
+                    `score_2` >= #{score2St} and
+                </if>
+                <if test="score2Ed!=null">
+                    `score_2` &lt;= #{score2Ed} and
+                </if>
+                    <if test="score3List != null">
+                        `score_3` in
+                        <foreach collection="score3List" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="score3St !=null">
+                    `score_3` >= #{score3St} and
+                </if>
+                <if test="score3Ed!=null">
+                    `score_3` &lt;= #{score3Ed} and
+                </if>
+                    <if test="score4List != null">
+                        `score_4` in
+                        <foreach collection="score4List" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="score4St !=null">
+                    `score_4` >= #{score4St} and
+                </if>
+                <if test="score4Ed!=null">
+                    `score_4` &lt;= #{score4Ed} and
+                </if>
+                    <if test="score5List != null">
+                        `score_5` in
+                        <foreach collection="score5List" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="score5St !=null">
+                    `score_5` >= #{score5St} and
+                </if>
+                <if test="score5Ed!=null">
+                    `score_5` &lt;= #{score5Ed} and
+                </if>
+                    <if test="userIdList != null">
+                        `user_id` in
+                        <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `review_id`,
+        `order_id`,
+        `product_id`,
+        `content`,
+        `score_1`,
+        `score_2`,
+        `score_3`,
+        `score_4`,
+        `score_5`,
+        `user_id`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Review$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.reviewId==true">
+                        `review_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.orderId==true">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.productId==true">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.content==true">
+                        `content`,
+                    </if>
+                    <if test="fetchFields.fetchFields.score1==true">
+                        `score_1`,
+                    </if>
+                    <if test="fetchFields.fetchFields.score2==true">
+                        `score_2`,
+                    </if>
+                    <if test="fetchFields.fetchFields.score3==true">
+                        `score_3`,
+                    </if>
+                    <if test="fetchFields.fetchFields.score4==true">
+                        `score_4`,
+                    </if>
+                    <if test="fetchFields.fetchFields.score5==true">
+                        `score_5`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userId==true">
+                        `user_id`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.reviewId==null">
+                        `review_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.orderId==null">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.productId==null">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.content==null">
+                        `content`,
+                    </if>
+                    <if test="fetchFields.excludeFields.score1==null">
+                        `score_1`,
+                    </if>
+                    <if test="fetchFields.excludeFields.score2==null">
+                        `score_2`,
+                    </if>
+                    <if test="fetchFields.excludeFields.score3==null">
+                        `score_3`,
+                    </if>
+                    <if test="fetchFields.excludeFields.score4==null">
+                        `score_4`,
+                    </if>
+                    <if test="fetchFields.excludeFields.score5==null">
+                        `score_5`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userId==null">
+                        `user_id`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Review$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

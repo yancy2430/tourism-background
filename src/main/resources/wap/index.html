@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section id="index_section" data-role="section" class="active">
+    <article data-role="article" id="index_article" class="active" style="top:0px;bottom:54px;">
+        <div style="background-color: transparent;position: absolute;top:0;width: 100%;">
+            <!--<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>-->
+            <div style="margin: 0px 50px;background-color: transparent;" class="weui-search-bar" id="search"
+                 data-toggle="html" href="#search_section">
+                <form class="weui-search-bar__form" style="background-color: #ffffff00;">
+                    <div class="weui-search-bar__box">
+                        <i class="weui-icon-search"></i>
+                        <input type="search" class="weui-search-bar__input" placeholder="搜索" required="">
+                        <a href="javascript:" class="weui-icon-clear"></a>
+                    </div>
+                    <label class="weui-search-bar__label">
+                        <i class="weui-icon-search"></i>
+                        <span>搜索</span>
+                    </label>
+                </form>
+            </div>
+        </div>
+        <div id="slide" data-role="slider" class="full-width active" style="overflow: hidden; height:220px;">
+            <div class="scroller">
+                <th:block th:each="mylist,iterStat:${slides}">
+                    <div class="slide">
+                        <img th:data-source="${mylist.getImage()}"
+                             class="full-width"/>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+        <div class="grid" data-col="5" style="margin-top: 10px">
+            <th:block th:each="icons,iterStat:${homeIcons}">
+
+                <div class="grid-cell" data-toggle="html" href="#">
+                    <th:block th:if="${icons.getType() eq 'class'}">
+                        <div th:style="${'background-color:'+icons.getColor()}" class="grid-img">
+                            <span th:class="${'iconfont '+icons.getIcon()}"></span>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${icons.getType() eq 'url'}">
+                        <div class="grid-img">
+                            <img style="width: 100%;height: 100%" th:src="${icons.getIcon()}"/></div>
+
+                    </th:block>
+                    <label class="grid-label" th:text="${icons.getTitle()}">同业入口</label>
+                </div>
+            </th:block>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="travel">
+            <p class="tit">出行风向标</p>
+            <div class="grid_item" data-toggle="section" href="#">
+                <div class="toptit"><i class="i1"></i>暑假强推</div>
+                <div class="img">
+                    <img src="https://dimg04.c-ctrip.com/images/30060m000000dp1887234_C_500_280.jpg"/>
+                </div>
+            </div>
+            <div class="grid_item" data-toggle="section" href="#">
+                <div class="toptit"><i class="i2"></i>万达专线</div>
+                <div class="img">
+                    <img src="https://dimg09.c-ctrip.com/images/100a0q000000g8su630B3_C_500_280.png"/>
+                </div>
+            </div>
+            <div class="grid_item" data-toggle="section" href="#">
+                <div class="toptit"><i class="i3"></i>父母游</div>
+                <div class="img">
+                    <img src="https://dimg02.c-ctrip.com/images/10090k000000bfuck7FF8_C_500_280.jpg"/>
+                </div>
+            </div>
+            <div class="grid_item" data-toggle="section" href="#">
+                <div class="toptit"><i class="i4"></i>亲子游</div>
+                <div class="img">
+                    <img src="https://dimg03.c-ctrip.com/images/100f04000000093keA9E8_C_500_280.jpg"/>
+                </div>
+            </div>
+        </div>
+        <div class="divider mmlc">
+            美妙旅程始于<span>南京万达</span>
+        </div>
+
+        <ul class="xs_listitem">
+            <th:block th:each="product,iterStat:${products}">
+            <!--<li data-toggle="html" th:href="${'product_details_section.html?product_id='+product.getProductId()}">-->
+                <!--<div class="image" style="position: relative;height: 160px;overflow: hidden;">-->
+                    <!--<img th:src="${'http://admin.icsw.cn:8080'+product.getImage()}"/>-->
+                    <!--<div class="top_tag"><i class="iconline-flag"></i><span th:text="${product.getProductCateName()}"></span>-->
+                        <!--&lt;!&ndash;| <span>南京出发</span>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="right_bottom_tag"><span>51人出游</span>　<span>100%满意</span></div>-->
+                    <!--<div class="left_bottom_price"><p style="line-height: 28px;"  th:text="${'￥'+product.getPrice().split('-')[1]+'起'}"></p>　-->
+                        <!--<p class="ys" th:text="${'已省￥'+(product.getPrice().split('-')[0])+''}"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="info">-->
+                    <!--<h3 th:text="${product.getProductName()}">北京双高5日游</h3>-->
+                    <!--<p class="desc" th:text="${product.getSketch()}"></p>-->
+                    <!--<p class="tag">-->
+                        <!--<th:block th:each="tag,iterStat:${product.getProductTags()}">-->
+                            <!--<span th:text="${tag}"></span>-->
+                        <!--</th:block>-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="divider"></div>-->
+            <!--</li>-->
+            </th:block>
+        </ul>
+
+        <div class="divider"></div>
+    </article>
+
+    <article data-role="article" id="route_article" style="top:0px;bottom:54px;">
+
+        <div class="trip">
+            <ul>
+                <th:block th:each="order,iterStat:${orderlist}">
+                <li>
+                <div class="date" th:utext="${order.getTeamdate()+'<span>'+order.getWhatday()+'</span>'}"></div>
+                <div class="view">
+                <a class="weui-cell weui-cell_access top" href="javascript:;">
+                <div class="weui-cell__hd"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="
+                alt="" style="width:25px;height:25px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                <h3 th:text="${order.getOrderName()}"></h3>
+                </div>
+                <div class="weui-cell__ft">查看详情</div>
+                </a>
+                <div class="trip_info">
+                <div class="product">
+                <img src="https://dimg06.c-ctrip.com/images/100k0g0000007qkp5F0C3_C_360_202.jpg">
+                <div class="product_info">
+                <h4 th:text="${order.getProductName()}"></h4>
+                <p th:text='${"出游日期："+order.getTeamdate()}'></p>
+                <p th:text='${"出游人数："+order.getAdultNum()+"成人 "+order.getChildrenNum()+"儿童"}'></p>
+                </div>
+                <div style="clear: both"></div>
+                </div>
+                </div>
+                <div class="trip_bar">
+                <p th:text="${'集合点：'+order.getRallyingPoint()}"></p>
+                </div>
+                </div>
+                </li>
+                </th:block>
+            </ul>
+        </div>
+    </article>
+    <article data-role="article" id="me_article" style="top:0px;bottom:54px;">
+        <header>
+            <div class="titlebar">
+                <a href="#"><i class="iconfont_new">&#xe8c0;</i></a>
+                <h1></h1>
+                <a href="#"><i class="iconfont_new">&#xe872;</i></a>
+            </div>
+        </header>
+        <div class="member">
+            <div class="my_info">
+                <div class="avater">
+                    <img src="http://img5.imgtn.bdimg.com/it/u=2869031647,3499077470&fm=27&gp=0.jpg"/>
+                </div>
+                <div class="user_info">
+                    <h3>路过群众</h3>
+                    <p>2014-12-16加入</p>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="my_order">
+                <div  data-toggle="html" href="#user_order_section" class="weui-cells__title">我的订单<span>全部订单 ></span></div>
+                <div class="grid" data-col="4" style="margin-top: 10px">
+                    <a class="grid-cell" data-toggle="html" href="user_order_section.html?status=1">
+                        <div class="grid-img" style="background-color:#3498db;">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-qianbao"></use>
+                            </svg>
+                        </div>
+                        <label class="grid-label">待付款</label>
+                    </a>
+                    <div class="grid-cell" data-toggle="html" href="user_order_section.html?status=3">
+                        <div class="grid-img" style="background-color:#1abc9c;">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-qiandao"></use>
+                            </svg>
+                        </div>
+                        <label class="grid-label">待出行</label>
+                    </div>
+                    <div class="grid-cell" data-toggle="html" href="user_order_section.html?status=4">
+                        <div class="grid-img" style="background-color:#e74c3c;">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-yinhangqia"></use>
+                            </svg>
+                        </div>
+                        <label class="grid-label">已出行</label>
+                    </div>
+
+                    <div class="grid-cell" data-toggle="html" href="user_order_section.html?status=5">
+                        <div class="grid-img" style="background-color:#e74c3c;">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-shuqian"></use>
+                            </svg>
+                        </div>
+                        <label class="grid-label">退款/售后</label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="my_setting">
+                <div class="grid" data-col="4" style="margin-top: 10px">
+                    <a class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img">
+                            <i class="iconfont_new" style="color: #0E84E6;">&#xe63d;</i>
+                        </div>
+                        <label class="grid-label">钱包余额</label>
+                    </a>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img">
+                            <i class="iconfont_new" style="color: #C93B57;">&#xe63b;</i>
+                        </div>
+                        <label class="grid-label">浏览历史</label>
+                    </div>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img">
+                            <i class="iconfont_new" style="color: #FE8A2E;">&#xe62c;</i>
+                        </div>
+                        <label class="grid-label">优惠券</label>
+                    </div>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img" style="background-color:#e74c3c;">
+                            <i class="iconfont_new" style="color: #5CC9F5;">&#xe63e;</i>
+                        </div>
+                        <label class="grid-label">专属客服</label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid" data-col="4">
+                    <a class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img" style="background-color:#3498db;">
+                            <i class="iconfont_new" style="color: #20AB95;">&#xe634;</i>
+                        </div>
+                        <label class="grid-label">我要合作</label>
+                    </a>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img">
+                            <i class="iconfont_new" style="color: #FEBD3E;">&#xe62b;</i>
+                        </div>
+                        <label class="grid-label">同行入口</label>
+                    </div>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img" style="background-color:#1abc9c;">
+                            <i class="iconfont_new" style="color: #A0A8B2;">&#xe630;</i>
+                        </div>
+                        <label class="grid-label">意见反馈</label>
+                    </div>
+                    <div class="grid-cell" data-toggle="html" href="#user_order_section">
+                        <div class="grid-img" style="background-color:#e74c3c;">
+                            <i class="iconfont_new" style="color: #E86BC0;">&#xe639;</i>
+                        </div>
+                        <label class="grid-label">邀请有奖</label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="divider"></div>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <nav class="menubar">
+            <a class="menu active" data-toggle="article" data-role="tab" href="#index_article">
+                <span class="menu-icon iconfont iconline-bulb"></span>
+                <span class="menu-text">首页</span>
+            </a>
+            <a class="menu" data-toggle="article" data-role="tab" href="#route_article">
+                <span class="menu-icon iconfont iconline-map-location"></span>
+                <span class="menu-text">行程</span>
+            </a>
+            <a class="menu" data-toggle="article" data-role="tab" href="#me_article">
+                <span class="menu-icon iconfont iconline-user-man"></span>
+                <span class="menu-text">我的</span>
+            </a>
+        </nav>
+    </footer>
+</section>
+<th:block th:include="footer"></th:block>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+</head>
+
+<body>
+<style>
+    .layui-tab-title li {
+        float: left;
+    }
+
+    .layui-tab-title .add {
+        height: 28px;
+        line-height: 28px;
+        padding: 0 10px 0 10px;
+        margin-top: 7px;
+        margin-left: 20px;
+    }
+
+    .price_data td {
+        width: 50px;
+        height: 45px;
+    }
+
+    .layui-laydate-main {
+        width: 370px;
+    }
+
+    .laydate-day-mark::after {
+        display: none;
+    }
+
+    /*.laydate-day-mark::after {*/
+    /*background-color: transparent;*/
+    /*content: "1000";*/
+    /*color: #f94c4c;*/
+    /*top: 20px;*/
+    /*width: 50px;*/
+    /*}*/
+    .laydate-day-mark {
+        font-size: inherit;
+    }
+
+    .laydate-day-mark p {
+        color: #ff5741;
+        padding: 0px;
+        margin: 0px;
+        line-height: 10px;
+        font-size: 12px;
+    }
+
+    .layui-laydate-content td.layui-this .laydate-day-mark::after {
+        display: none;
+    }
+
+    .layui-laydate .layui-this {
+        background-color: #fff2ea !important;
+        color: #666 !important;
+    }
+
+    .layui-upload-list img {
+        width: 91px;
+        height: 91px;
+        margin: 0 10px 10px 0;
+    }
+
+    .layui-upload-list p {
+        text-align: center;
+        color: red;
+        font-size: 12px;
+        line-height: 8px;
+        cursor: pointer;
+        padding-right: 10px;
+    }
+
+    .layui-card-header .layui-form-radio {
+        margin: 0px 10px 0px 0px;
+    }
+
+    .layui-upload-drag {
+        display: inline-block;
+        vertical-align: middle;
+        width: 90px;
+        height: 90px;
+        margin: 0 10px 10px 0;
+        line-height: 92px;
+        padding: 0px;
+    }
+
+    .layui-upload-list ul li {
+        float: left;
+    }
+</style>
+
+<div class="layui-tab layui-tab-card" style="margin: -1px 0;">
+    <ul class="layui-tab-title" style="padding-left: 28px;margin-bottom: 10px;">
+        <li class="layui-this">基本信息</li>
+        <li>行程内容</li>
+        <li>套餐信息</li>
+        <li class="site-date-active" data-type="initGroupDateList">团期管理</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+
+            <form class="layui-form" id="productinfo">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>产品编号
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="product_no"
+                                   autocomplete="off" class="layui-input">
+
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>产品名称
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="product_name"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>产品分类
+                        </label>
+                        <div class="layui-input-inline">
+                            <select id="product_cate" name="product_cate" class="valid">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>产品标签</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="product_tag" placeholder="多个标签请用|分割 最多不超过5个"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>产品负责人
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="principal"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">
+                        产品简述
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea name="sketch" placeholder="请输入产品简述，最多五百字" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>出发地
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="origin"
+                               autocomplete="off" placeholder="多个出发地请用|分割" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>目的地
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="destination"
+                               placeholder="多个目的地请用|分割"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>价格区间
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="price"
+                               autocomplete="off" placeholder="100-200" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>产品保障</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="security" placeholder="请用|分割 最多不超过4个"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>咨询电话
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="hotline" class="layui-input">
+                    </div>
+                    <div class="layui-input-block" style="margin-left: 310px;">
+                        <input value="1" type="checkbox" name="notmobile" lay-skin="primary" title="不支持电话咨询">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text" style="display: none">
+                    <label class="layui-form-label">
+                        操作说明
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea name="operate" placeholder="最多500字，仅内部可见" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">
+                        上传图片
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="upimages">多图片上传</button>
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                预览图：
+                                <div class="layui-upload-list">
+                                    <ul id="imagelist">
+
+                                    </ul>
+                                    <div style="clear:  both"></div>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否上架</label>
+                    <div class="layui-input-block">
+                        <input value="1" type="checkbox" name="isshow" lay-skin="switch">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-tab triplist layui-tab-brief" lay-filter="trip" lay-allowclose="true">
+                <ul class="layui-tab-title" style="float: left">
+                </ul>
+                <button style="margin-left: 20px;height: 28px;line-height: 28px;margin-top: 7px;padding: 0 8px"
+                        type="button" class="layui-btn site-trip-active add" id="tabAddDay" data-type="tabAddDay">
+                    添加时间安排
+                </button>
+                <div class="layui-tab-content triplist" style="padding: 10px 0px;">
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-tab packagelist layui-tab-brief" lay-filter="package" lay-allowclose="true">
+                <ul class="layui-tab-title" style="float: left">
+
+                </ul>
+                <button style="margin-left: 20px;height: 28px;line-height: 28px;margin-top: 7px;padding: 0 8px"
+                        type="button" class="layui-btn site-package-active add" id="tabAdd" data-type="tabAdd">
+                    新增套餐
+                </button>
+                <div class="layui-tab-content">
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-tab-item">
+            <div style="float: left" class="layui-inline price_data" id="test-n1"></div>
+            <div style="margin-left: 30px;width: 55%;float: left">
+                <button type="button" class="layui-btn site-date-active" data-type="adddate"
+                        style="height: 28px;line-height: 28px;padding: 0 8px;">设置团期
+                </button>
+                <button type="button" class="layui-btn site-date-active" data-type="deldate"
+                        style="margin-left: 20px;height: 28px;line-height: 28px;padding: 0 8px;">删除团期
+                </button>
+                <button type="button" class="layui-btn site-date-active" data-type="addDatelist"
+                        style="margin-left: 20px;height: 28px;line-height: 28px;padding: 0 8px;">批量添加团期
+                </button>
+                <table id="showGroupDate" type="button" class="layui-table" lay-size="sm">
+
+                </table>
+            </div>
+
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">
+        </label>
+        <div class="layui-input-inline">
+            <button class="layui-btn site-content-active" lay-filter="addproduct" lay-submit="">
+                立即添加
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/html" id="trip">
+    <div class="layui-form formtrip">
+        <div class="day_title" style="display: none">{{d.text}}</div>
+        <div class="layui-col-md6 " style="padding: 20px;background-color: #F2F2F2;">
+            <div id="cardlist-{{d.day_no}}">
+            </div>
+            <div onclick="addDayItem('{{d.day_no}}')" class="addcard" data-id="" style="cursor: pointer;margin-top: 10px;width: 100%;text-align: center;
+     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);background: #fff;
+    padding: 10px 0px;">
+                新增
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tripDay">
+
+    <div class="layui-card">
+        <form class="layui-form formcard">
+            <div class="layui-card-header">
+                <input value="0点0分" id="time_{{d.day_no}}_{{d.item_no}}" name="time" hidden="hidden">
+                <div class="layui-input-inline datatime-{{d.day_no}}-{{d.item_no}}"
+                     style="cursor: pointer;float: left;">
+                    0点0分
+                </div>
+                <div class="layui-input-inline" style="float: right;">
+                    <input type="radio" name="type_{{d.item_no}}" value="1" title="景点" checked="">
+                    <input type="radio" name="type_{{d.item_no}}" value="2" title="酒店住宿">
+                    <input type="radio" name="type_{{d.item_no}}" value="3" title="出行">
+                    <input type="radio" name="type_{{d.item_no}}" value="4" title="其他">
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" placeholder="标题" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux"></div>
+                </div>
+                <textarea placeholder="请输入内容" class="layui-textarea"
+                          name="content"></textarea>
+            </div>
+            <div class="layui-upload" style="padding: 0px 15px 15px 15px;">
+                <div class="layui-upload-list" style="margin: 0px 0;">
+                    <ul>
+                    </ul>
+                    <div class="layui-upload-drag day-upload-drag-{{d.day_no}}-{{d.item_no}}">
+                        <i class="layui-icon"></i>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</script>
+<script type="text/html" id="package">
+    <div class="layui-tab-item package layui-show">
+        <div style="margin-left: -30px;margin-top: 25px;">
+            <form id="textform" class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>套餐名称
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="package_name" value="{{ d.name }}"
+                                   autocomplete="off" class="layui-input">
+                            <input type="hidden" name="package_no" value="{{ d.package_no }}" class="layui-input">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item" pane="">
+                    <label class="layui-form-label">套餐限定</label>
+                    <div class="layui-input-block">
+
+                        <input {{# if(d.notchildren== 1){ }}checked="checked" {{# } }} type="checkbox"
+                               name="notchildren" value="1" title="不收儿童">
+                        <input {{# if(d.isshow== 1){ }}checked="checked" {{# } }} type="checkbox" name="isshow"
+                               value="1" title="是否可用">
+                    </div>
+                </div>
+
+            </form>
+            <form id="htmlform" class="layui-form">
+                <div class="layui-form-item" pane="">
+                    <div class="layui-tab layui-tab-card" style="max-width: 60%;margin-left: 38px;
+     background-color: #f2f2f2;"
+                         lay-allowclose="true" lay-filter="{{ d.packageName }}">
+                        <ul class="layui-tab-title" style="float: left">
+                            {{# layui.each(d.list, function(index, item){ }}
+                            <li>
+                                <span>{{ item.modname }}</span>
+                                <span>{{ item.alias }}：</span>
+                                <span>{{ item.site || '' }}</span>
+                            </li>
+                            {{# }); }}
+                        </ul>
+                        <button style="margin-bottom: 6px;margin-left: 20px;height: 28px;line-height: 28px;margin-top: 7px;padding: 0 8px;"
+                                type="button" class="layui-btn site-content-active add"
+                                onclick="tabContentAdd('{{ d.packageName }}')">{{ d.title }}
+                        </button>
+                        <div class="layui-tab-content" style="height: 350px;background: #fff;">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</script>
+<style>
+    .layui-table-edit {
+        border: none;
+        box-shadow: none;
+    }
+</style>
+<script type="text/html" id="adddate">
+    <table lay-filter="parse-table" type="button" class="layui-table layui-form-item" id="adddate-div" lay-size="sm">
+        <thead>
+        <tr>
+            <th lay-data="{field:'isshow',LAY_CHECKED:true,type:'checkbox'}"></th>
+            <th lay-data="{field:'teamtime'}">套餐日期</th>
+            <th lay-data="{field:'package_name'}">套餐名称</th>
+            <th lay-data="{field:'adult_price',edit: 'text'}">成人价</th>
+            <th lay-data="{field:'children_price',edit: 'text'}">儿童价</th>
+            <th lay-data="{field:'housing_price',edit: 'text'}">单房差</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d.packagelist, function(index, item){ }}
+        <li class="datelist-item">
+            <tr>
+                <td></td>
+                <td>{{ item.day }}</td>
+                <td>{{ item.package_name }}</td>
+                <td>{{ item.adult_price }}</td>
+                <td>{{ item.children_price }}</td>
+                <td>{{ item.housing_price }}</td>
+            </tr>
+        </li>
+        {{# }); }}
+        </tbody>
+    </table>
+</script>
+<script type="text/html" id="adddatelistview">
+    <table lay-filter="parse-batchlist" type="button" class="layui-table layui-form-item" id="adddate-div"
+           lay-size="sm">
+        <thead>
+        <tr>
+            <th lay-data="{field:'isshow',LAY_CHECKED:true,type:'checkbox'}"></th>
+            <th lay-data="{field:'package_name'}">套餐名称</th>
+            <th lay-data="{field:'adult_price',edit: 'text'}">成人价</th>
+            <th lay-data="{field:'children_price',edit: 'text'}">儿童价</th>
+            <th lay-data="{field:'housing_price',edit: 'text'}">单房差</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d.packagelist, function(index, item){ }}
+        <li class="datelist-item">
+            <tr>
+                <td></td>
+                <td>{{ item.package_name }}</td>
+                <td>{{ item.adult_price }}</td>
+                <td>{{ item.children_price }}</td>
+                <td>{{ item.housing_price }}</td>
+            </tr>
+        </li>
+        {{# }); }}
+        </tbody>
+    </table>
+</script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script type="text/javascript" src="../js/addProduct.js"></script>
+
+</body>
+<div style="display: none" class="adddatelist">
+    <div class="layui-inline" style="width: 100%;">
+        <label class="layui-form-label">日期范围</label>
+        <div class="layui-input-inline">
+            <input style="width: 180px" type="text" class="layui-input" id="test6" placeholder=" - ">
+        </div>
+    </div>
+    <div id="adddatesview">
+
+    </div>
+</div>
+<style>
+    #layui-laydate3 .layui-laydate-main {
+        width: 272px;
+    }
+
+    #layui-laydate3 .layui-this {
+        background-color: #009688 !important;
+        color: #fff !important;
+    }
+</style>
+</html>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.OrderVisitorsBaseMapper">
+
+
+    <insert id="insertOrderVisitors"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tb_order_visitors`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="orderId!=null">
+                        `order_id`,
+                    </if>
+                    <if test="isadult!=null">
+                        `isadult`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="idCard!=null">
+                        `id_card`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="orderId!=null">
+                    #{orderId},
+                </if>
+                <if test="isadult!=null">
+                    #{isadult},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="idCard!=null">
+                    #{idCard},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateOrderVisitors">
+        UPDATE `tb_order_visitors`
+        SET
+        <trim suffixOverrides=",">
+            <if test="orderId != null">
+                `order_id` = #{orderId},
+            </if>
+            <if test="isadult != null">
+                `isadult` = #{isadult},
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="idCard != null and idCard!=''">
+                `id_card` = #{idCard},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.OrderVisitors" id="OrderVisitorsMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="isadult" column="isadult"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="id_card"/>
+    </resultMap>
+
+
+    <select id="queryOrderVisitors" resultMap="OrderVisitorsMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_visitors`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="isadult != null">
+                `isadult` = #{isadult} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="idCard != null and idCard!=''">
+                `id_card` = #{idCard} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderVisitors$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="orderIdList != null">
+                    `order_id` in
+                    <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                <if test="isadultList != null">
+                    `isadult` in
+                    <foreach collection="isadultList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="isadultSt !=null">
+                    `isadult` >= #{isadultSt} and
+                </if>
+                <if test="isadultEd!=null">
+                    `isadult` &lt;= #{isadultEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="idCardList != null">
+                    `id_card` in
+                    <foreach collection="idCardList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyIdCard!=null and fuzzyIdCard.size()>0">
+                    (
+                    <foreach collection="fuzzyIdCard"  separator="or" item="item">
+                        `Id_card` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIdCard!=null and rightFuzzyIdCard.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIdCard"  separator="or" item="item">
+                        `Id_card` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryOrderVisitorsLimit1" resultMap="OrderVisitorsMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_visitors`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test="isadult != null">
+                `isadult` = #{isadult} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="idCard != null and idCard!=''">
+                `id_card` = #{idCard} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderVisitors$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="orderIdList != null">
+                        `order_id` in
+                        <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+                    <if test="isadultList != null">
+                        `isadult` in
+                        <foreach collection="isadultList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="isadultSt !=null">
+                    `isadult` >= #{isadultSt} and
+                </if>
+                <if test="isadultEd!=null">
+                    `isadult` &lt;= #{isadultEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="idCardList != null">
+                        `id_card` in
+                        <foreach collection="idCardList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyIdCard!=null and fuzzyIdCard.size()>0">
+                    (
+                    <foreach collection="fuzzyIdCard"  separator="or" item="item">
+                        `Id_card` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIdCard!=null and rightFuzzyIdCard.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIdCard"  separator="or" item="item">
+                        `Id_card` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `order_id`,
+        `isadult`+0 as `isadult`,
+        `name`,
+        `id_card`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderVisitors$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.orderId==true">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.isadult==true">
+                        `isadult`+0 as `isadult`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.idCard==true">
+                        `id_card`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.orderId==null">
+                        `order_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.isadult==null">
+                        `isadult`+0 as `isadult`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.idCard==null">
+                        `id_card`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.OrderVisitors$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

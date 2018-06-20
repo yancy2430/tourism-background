@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.AdminBaseMapper">
+
+
+    <insert id="insertAdmin"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tb_admin`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="password!=null">
+                        `password`,
+                    </if>
+                    <if test="username!=null">
+                        `username`,
+                    </if>
+                    <if test="sex!=null">
+                        `sex`,
+                    </if>
+                    <if test="mobile!=null">
+                        `mobile`,
+                    </if>
+                    <if test="email!=null">
+                        `email`,
+                    </if>
+                    <if test="note!=null">
+                        `note`,
+                    </if>
+                    <if test="loginTime!=null">
+                        `login_time`,
+                    </if>
+                    <if test="loginIp!=null">
+                        `login_ip`,
+                    </if>
+                    <if test="roleId!=null">
+                        `role_id`,
+                    </if>
+                    <if test="roleName!=null">
+                        `role_name`,
+                    </if>
+                    <if test="token!=null">
+                        `token`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="password!=null">
+                    #{password},
+                </if>
+                <if test="username!=null">
+                    #{username},
+                </if>
+                <if test="sex!=null">
+                    #{sex},
+                </if>
+                <if test="mobile!=null">
+                    #{mobile},
+                </if>
+                <if test="email!=null">
+                    #{email},
+                </if>
+                <if test="note!=null">
+                    #{note},
+                </if>
+                <if test="loginTime!=null">
+                    #{loginTime},
+                </if>
+                <if test="loginIp!=null">
+                    #{loginIp},
+                </if>
+                <if test="roleId!=null">
+                    #{roleId},
+                </if>
+                <if test="roleName!=null">
+                    #{roleName},
+                </if>
+                <if test="token!=null">
+                    #{token},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateAdmin">
+        UPDATE `tb_admin`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password},
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username},
+            </if>
+            <if test="sex != null and sex!=''">
+                `sex` = #{sex},
+            </if>
+            <if test="mobile != null and mobile!=''">
+                `mobile` = #{mobile},
+            </if>
+            <if test="email != null and email!=''">
+                `email` = #{email},
+            </if>
+            <if test="note != null and note!=''">
+                `note` = #{note},
+            </if>
+            <if test="loginTime != null">
+                `login_time` = #{loginTime},
+            </if>
+            <if test="loginIp != null and loginIp!=''">
+                `login_ip` = #{loginIp},
+            </if>
+            <if test="roleId != null">
+                `role_id` = #{roleId},
+            </if>
+            <if test="roleName != null and roleName!=''">
+                `role_name` = #{roleName},
+            </if>
+            <if test="token != null and token!=''">
+                `token` = #{token},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Admin" id="AdminMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="username" column="username"/>
+        <result property="sex" column="sex"/>
+        <result property="mobile" column="mobile"/>
+        <result property="email" column="email"/>
+        <result property="note" column="note"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="roleId" column="role_id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="token" column="token"/>
+    </resultMap>
+
+
+    <select id="queryAdmin" resultMap="AdminMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_admin`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="sex != null and sex!=''">
+                `sex` = #{sex} and
+            </if>
+            <if test="mobile != null and mobile!=''">
+                `mobile` = #{mobile} and
+            </if>
+            <if test="email != null and email!=''">
+                `email` = #{email} and
+            </if>
+            <if test="note != null and note!=''">
+                `note` = #{note} and
+            </if>
+            <if test="loginTime != null">
+                `login_time` = #{loginTime} and
+            </if>
+            <if test="loginIp != null and loginIp!=''">
+                `login_ip` = #{loginIp} and
+            </if>
+            <if test="roleId != null">
+                `role_id` = #{roleId} and
+            </if>
+            <if test="roleName != null and roleName!=''">
+                `role_name` = #{roleName} and
+            </if>
+            <if test="token != null and token!=''">
+                `token` = #{token} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Admin$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="passwordList != null">
+                    `password` in
+                    <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="usernameList != null">
+                    `username` in
+                    <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="sexList != null">
+                    `sex` in
+                    <foreach collection="sexList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySex!=null and fuzzySex.size()>0">
+                    (
+                    <foreach collection="fuzzySex"  separator="or" item="item">
+                        `Sex` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySex!=null and rightFuzzySex.size()>0">
+                    (
+                    <foreach collection="rightFuzzySex"  separator="or" item="item">
+                        `Sex` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="mobileList != null">
+                    `mobile` in
+                    <foreach collection="mobileList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyMobile!=null and fuzzyMobile.size()>0">
+                    (
+                    <foreach collection="fuzzyMobile"  separator="or" item="item">
+                        `Mobile` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyMobile!=null and rightFuzzyMobile.size()>0">
+                    (
+                    <foreach collection="rightFuzzyMobile"  separator="or" item="item">
+                        `Mobile` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="emailList != null">
+                    `email` in
+                    <foreach collection="emailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyEmail!=null and fuzzyEmail.size()>0">
+                    (
+                    <foreach collection="fuzzyEmail"  separator="or" item="item">
+                        `Email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyEmail!=null and rightFuzzyEmail.size()>0">
+                    (
+                    <foreach collection="rightFuzzyEmail"  separator="or" item="item">
+                        `Email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="noteList != null">
+                    `note` in
+                    <foreach collection="noteList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNote!=null and fuzzyNote.size()>0">
+                    (
+                    <foreach collection="fuzzyNote"  separator="or" item="item">
+                        `Note` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNote!=null and rightFuzzyNote.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNote"  separator="or" item="item">
+                        `Note` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="loginTimeList != null">
+                    `login_time` in
+                    <foreach collection="loginTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="loginTimeSt !=null">
+                    `login_time` >= #{loginTimeSt} and
+                </if>
+                <if test="loginTimeEd!=null">
+                    `login_time` &lt;= #{loginTimeEd} and
+                </if>
+                <if test="loginIpList != null">
+                    `login_ip` in
+                    <foreach collection="loginIpList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyLoginIp!=null and fuzzyLoginIp.size()>0">
+                    (
+                    <foreach collection="fuzzyLoginIp"  separator="or" item="item">
+                        `Login_ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLoginIp!=null and rightFuzzyLoginIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLoginIp"  separator="or" item="item">
+                        `Login_ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="roleIdList != null">
+                    `role_id` in
+                    <foreach collection="roleIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="roleIdSt !=null">
+                    `role_id` >= #{roleIdSt} and
+                </if>
+                <if test="roleIdEd!=null">
+                    `role_id` &lt;= #{roleIdEd} and
+                </if>
+                <if test="roleNameList != null">
+                    `role_name` in
+                    <foreach collection="roleNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRoleName!=null and fuzzyRoleName.size()>0">
+                    (
+                    <foreach collection="fuzzyRoleName"  separator="or" item="item">
+                        `Role_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRoleName!=null and rightFuzzyRoleName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRoleName"  separator="or" item="item">
+                        `Role_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="tokenList != null">
+                    `token` in
+                    <foreach collection="tokenList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyToken!=null and fuzzyToken.size()>0">
+                    (
+                    <foreach collection="fuzzyToken"  separator="or" item="item">
+                        `Token` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyToken!=null and rightFuzzyToken.size()>0">
+                    (
+                    <foreach collection="rightFuzzyToken"  separator="or" item="item">
+                        `Token` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryAdminLimit1" resultMap="AdminMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_admin`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="sex != null and sex!=''">
+                `sex` = #{sex} and
+            </if>
+            <if test="mobile != null and mobile!=''">
+                `mobile` = #{mobile} and
+            </if>
+            <if test="email != null and email!=''">
+                `email` = #{email} and
+            </if>
+            <if test="note != null and note!=''">
+                `note` = #{note} and
+            </if>
+            <if test="loginTime != null">
+                `login_time` = #{loginTime} and
+            </if>
+            <if test="loginIp != null and loginIp!=''">
+                `login_ip` = #{loginIp} and
+            </if>
+            <if test="roleId != null">
+                `role_id` = #{roleId} and
+            </if>
+            <if test="roleName != null and roleName!=''">
+                `role_name` = #{roleName} and
+            </if>
+            <if test="token != null and token!=''">
+                `token` = #{token} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Admin$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="passwordList != null">
+                        `password` in
+                        <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="usernameList != null">
+                        `username` in
+                        <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="sexList != null">
+                        `sex` in
+                        <foreach collection="sexList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySex!=null and fuzzySex.size()>0">
+                    (
+                    <foreach collection="fuzzySex"  separator="or" item="item">
+                        `Sex` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySex!=null and rightFuzzySex.size()>0">
+                    (
+                    <foreach collection="rightFuzzySex"  separator="or" item="item">
+                        `Sex` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="mobileList != null">
+                        `mobile` in
+                        <foreach collection="mobileList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyMobile!=null and fuzzyMobile.size()>0">
+                    (
+                    <foreach collection="fuzzyMobile"  separator="or" item="item">
+                        `Mobile` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyMobile!=null and rightFuzzyMobile.size()>0">
+                    (
+                    <foreach collection="rightFuzzyMobile"  separator="or" item="item">
+                        `Mobile` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="emailList != null">
+                        `email` in
+                        <foreach collection="emailList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyEmail!=null and fuzzyEmail.size()>0">
+                    (
+                    <foreach collection="fuzzyEmail"  separator="or" item="item">
+                        `Email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyEmail!=null and rightFuzzyEmail.size()>0">
+                    (
+                    <foreach collection="rightFuzzyEmail"  separator="or" item="item">
+                        `Email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="noteList != null">
+                        `note` in
+                        <foreach collection="noteList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNote!=null and fuzzyNote.size()>0">
+                    (
+                    <foreach collection="fuzzyNote"  separator="or" item="item">
+                        `Note` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNote!=null and rightFuzzyNote.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNote"  separator="or" item="item">
+                        `Note` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="loginTimeList != null">
+                        `login_time` in
+                        <foreach collection="loginTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="loginTimeSt !=null">
+                    `login_time` >= #{loginTimeSt} and
+                </if>
+                <if test="loginTimeEd!=null">
+                    `login_time` &lt;= #{loginTimeEd} and
+                </if>
+                    <if test="loginIpList != null">
+                        `login_ip` in
+                        <foreach collection="loginIpList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyLoginIp!=null and fuzzyLoginIp.size()>0">
+                    (
+                    <foreach collection="fuzzyLoginIp"  separator="or" item="item">
+                        `Login_ip` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyLoginIp!=null and rightFuzzyLoginIp.size()>0">
+                    (
+                    <foreach collection="rightFuzzyLoginIp"  separator="or" item="item">
+                        `Login_ip` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="roleIdList != null">
+                        `role_id` in
+                        <foreach collection="roleIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="roleIdSt !=null">
+                    `role_id` >= #{roleIdSt} and
+                </if>
+                <if test="roleIdEd!=null">
+                    `role_id` &lt;= #{roleIdEd} and
+                </if>
+                    <if test="roleNameList != null">
+                        `role_name` in
+                        <foreach collection="roleNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRoleName!=null and fuzzyRoleName.size()>0">
+                    (
+                    <foreach collection="fuzzyRoleName"  separator="or" item="item">
+                        `Role_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRoleName!=null and rightFuzzyRoleName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRoleName"  separator="or" item="item">
+                        `Role_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="tokenList != null">
+                        `token` in
+                        <foreach collection="tokenList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyToken!=null and fuzzyToken.size()>0">
+                    (
+                    <foreach collection="fuzzyToken"  separator="or" item="item">
+                        `Token` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyToken!=null and rightFuzzyToken.size()>0">
+                    (
+                    <foreach collection="rightFuzzyToken"  separator="or" item="item">
+                        `Token` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `name`,
+        `password`,
+        `username`,
+        `sex`,
+        `mobile`,
+        `email`,
+        `note`,
+        `login_time`,
+        `login_ip`,
+        `role_id`,
+        `role_name`,
+        `token`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Admin$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.password==true">
+                        `password`,
+                    </if>
+                    <if test="fetchFields.fetchFields.username==true">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sex==true">
+                        `sex`,
+                    </if>
+                    <if test="fetchFields.fetchFields.mobile==true">
+                        `mobile`,
+                    </if>
+                    <if test="fetchFields.fetchFields.email==true">
+                        `email`,
+                    </if>
+                    <if test="fetchFields.fetchFields.note==true">
+                        `note`,
+                    </if>
+                    <if test="fetchFields.fetchFields.loginTime==true">
+                        `login_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.loginIp==true">
+                        `login_ip`,
+                    </if>
+                    <if test="fetchFields.fetchFields.roleId==true">
+                        `role_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.roleName==true">
+                        `role_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.token==true">
+                        `token`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.password==null">
+                        `password`,
+                    </if>
+                    <if test="fetchFields.excludeFields.username==null">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sex==null">
+                        `sex`,
+                    </if>
+                    <if test="fetchFields.excludeFields.mobile==null">
+                        `mobile`,
+                    </if>
+                    <if test="fetchFields.excludeFields.email==null">
+                        `email`,
+                    </if>
+                    <if test="fetchFields.excludeFields.note==null">
+                        `note`,
+                    </if>
+                    <if test="fetchFields.excludeFields.loginTime==null">
+                        `login_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.loginIp==null">
+                        `login_ip`,
+                    </if>
+                    <if test="fetchFields.excludeFields.roleId==null">
+                        `role_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.roleName==null">
+                        `role_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.token==null">
+                        `token`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Admin$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

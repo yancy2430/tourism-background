@@ -1,0 +1,163 @@
+.product .images {
+    width: 100%;
+    height: 300px;
+}
+
+.product .images img {
+    width: 100%;
+    height: 100%;
+}
+
+.product .title {
+    background: #ffffff;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.product .title .share {
+    width: 45px;
+    height: 45px;
+    float: right;
+    position: absolute;
+    top: 0%;
+    right: 0;
+    text-align: center;
+    margin: 12px;
+    color: #888888;
+    border-left: 1px solid #EEEEEE;
+}
+
+.product .title h2 {
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 4rem;
+    padding: 10px;
+}
+
+.product .title .price {
+    font-size: 20px;
+    font-weight: 500;
+    color: red;
+    padding-left: 10px;
+}
+
+.product .taglist {
+    text-align: center;
+    padding: 5px 10px;
+    background: #F8F8F8;
+}
+
+.product .taglist p {
+
+}
+
+.product .selectInfo {
+    height: 100px;
+    padding: 10px;
+    background: #ffffff;
+}
+
+.product .selectInfo span {
+    padding: 0px 5px;
+    background: #ffffff;
+}
+
+.product .selectdate {
+
+}
+
+.product .selectdate .date {
+    border: 1px solid #EEEEEE;
+    text-align: center;
+    font-size: 12px;
+}
+
+.product .selectdate .all_date {
+    width: 14%;
+}
+
+.product .selectdate .all_date > p {
+    color: #333333;
+}
+
+.product .selectdate > div {
+    width: 20%;
+    text-align: center;
+    padding: 5px;
+    float: left;
+    margin: 0.5%;
+}
+
+.product .selectdate > div > p {
+    font-size: 14px;
+    color: red;
+}
+
+.product .selectInfo .weui-cell_access {
+    padding: 0px 0px 5px 3px;
+}
+
+.details .tabbar {
+    background: #ffffff;
+}
+
+.recommend h3 {
+    padding: 10px;
+}
+
+.recommend ul li {
+    height: 290px;
+    width: 50%;
+}
+
+.packagelist {
+    padding-bottom: .8em;
+}
+
+.packagelist .placeholder {
+    text-align: center;
+    font-size: .85rem;
+    color: #666;
+    background: #F5F5F5;
+    margin: 5px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    float: left;
+}
+
+.placeholder .iconline-checked2 {
+    color: #FDC03A;
+}
+
+.packagelist .select {
+    background: #FE8A2E;
+    color: #ffffff;
+}
+
+.all_date {
+    color: #FE8A2E;
+    font-weight: 700;
+}
+
+.all_date p {
+    color: #FE8A2E !important;
+    font-weight: 700;
+}
+
+.product_info .titlebar .iconfont {
+    font-size: 16px;
+    width: 28px;
+    height: 28px;
+    background: rgba(39, 39, 39, 0.58);
+    border-radius: 50px;
+    padding: 2px 8px 5px 5px;
+    color: #ffffff;
+}
+
+.product .details .content {
+    padding: 10px;
+}
+
+.product .details .content img {
+    width: 100%;
+}

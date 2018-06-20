@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-body">
+
+    <div id="view"></div>
+
+</div>
+<script type="text/html" id="html">
+    <fieldset class="layui-elem-field layui-field-title site-title">
+        <legend><a name="default">预定信息</a></legend>
+        <xblock style="text-align: right">
+            <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">取消订单</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">变更需求</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">确认需求</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">编辑金额</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">添加备注</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">已发送出团通知书</button>
+            <button class="layui-btn" onclick="x_admin_show('代下单','./order-add.html')">已出游归来</button>
+        </xblock>
+    </fieldset>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th colspan="6" scope="col">订单信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>订单编号</th>
+            <td>{{d.order.orderId}}</td>
+            <th>订单状态</th>
+            <td>
+                {{# if(d.order.status === 1){ }}
+                未支付
+                {{# }else if(d.order.status === 1){ }}
+                已支付
+                {{# }else if(d.order.status === 2){ }}
+                未确认
+                {{# }else if(d.order.status === 3){ }}
+                已确认
+                {{# }else if(d.order.status === 4){ }}
+                已出行
+                {{# }else if(d.order.status === 5){ }}
+                已返程
+                {{# }else if(d.order.status === 6){ }}
+                已完成
+                {{# }}}
+            </td>
+            <th>订单金额</th>
+            <td>{{d.order.orderPrice}}元</td>
+        </tr>
+        <tr>
+            <td>销售人员</td>
+            <td>{{d.order.salesman}}</td>
+            <td>销售人员手机号</td>
+            <td>{{d.order.salesmanMobile}}</td>
+            <td>下单时间</td>
+            <td>{{d.order.addtime}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <fieldset class="layui-elem-field layui-field-title site-title">
+        <legend><a name="default">产品信息</a></legend>
+    </fieldset>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th colspan="6" scope="col">预定信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>产品编号</th>
+            <td>{{d.product.productNo}}</td>
+            <th>产品名称</th>
+            <td>{{d.product.productName}}</td>
+            <th>套餐名称</th>
+            <td>{{d.packageInfo.packageName}}</td>
+        </tr>
+        <tr>
+            <td>预定日期</td>
+            <td>{{d.order.teamdate}}</td>
+            <td>出游人数</td>
+            <td>成人{{d.order.adultNum}}人 儿童{{d.order.childrenNum}}人 单房差{{d.order.housingNum}}人</td>
+            <td>联系人</td>
+            <td>{{d.order.contact}}</td>
+        </tr>
+        <tr>
+            <td>联系人手机号</td>
+            <td>{{d.order.contactMobile}}</td>
+            <td>其他需求</td>
+            <td colspan="3">{{d.order.remark}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <fieldset class="layui-elem-field layui-field-title site-title">
+        <legend><a name="default">操作备注</a></legend>
+    </fieldset>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>操作时间</th>
+            <th>备注内容</th>
+            <th>同步前台</th>
+            <th>操作人</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d.orderOperate, function(index, item){ }}
+        <li>
+            <tr>
+                <td>{{item.addtime}}</td>
+                <td>{{item.remark}}</td>
+                <td>
+                    {{# if(item.issync === 0){ }}
+                    否
+                    {{# }else if(item.issync === 1){ }}
+                    是
+                    {{# }}}
+                </td>
+                <td>{{item.operator}}</td>
+            </tr>
+        </li>
+        {{# }); }}
+
+        </tbody>
+    </table>
+</script>
+<script>
+    layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table'], function () {
+        $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer
+            , element = layui.element
+            , laydate = layui.laydate
+            , laytpl = layui.laytpl
+            , table = layui.table
+
+        reqPost("admin/order/getOrder", {orderId: $_GET['orderId']}, function (res) {
+            var data = {
+                order: res.data.order,
+                product: JSON.parse(res.data.order.productInfo),
+                packageInfo: JSON.parse(res.data.order.packageInfo),
+                dateInfo: JSON.parse(res.data.order.dateInfo),
+                orderOperate: res.data.orderOperate,
+                orderPay: res.data.orderPay
+            }
+            console.log(data)
+            var getTpl = html.innerHTML
+                , view = document.getElementById('view');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+        })
+    })
+
+
+</script>
+</body>
+
+</html>

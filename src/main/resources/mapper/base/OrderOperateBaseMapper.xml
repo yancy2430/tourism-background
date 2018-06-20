@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.OrderOperateBaseMapper">
+
+
+    <insert id="insertOrderOperate"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tb_order_operate`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="addtime!=null">
+                        `addtime`,
+                    </if>
+                    <if test="remark!=null">
+                        `remark`,
+                    </if>
+                    <if test="issync!=null">
+                        `issync`,
+                    </if>
+                    <if test="operator!=null">
+                        `operator`,
+                    </if>
+                    <if test="orderId!=null">
+                        `order_id`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="addtime!=null">
+                    #{addtime},
+                </if>
+                <if test="remark!=null">
+                    #{remark},
+                </if>
+                <if test="issync!=null">
+                    #{issync},
+                </if>
+                <if test="operator!=null">
+                    #{operator},
+                </if>
+                <if test="orderId!=null">
+                    #{orderId},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateOrderOperate">
+        UPDATE `tb_order_operate`
+        SET
+        <trim suffixOverrides=",">
+            <if test="addtime != null">
+                `addtime` = #{addtime},
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark},
+            </if>
+            <if test="issync != null">
+                `issync` = #{issync},
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator},
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.OrderOperate" id="OrderOperateMap">
+        <result property="id" column="id"/>
+        <result property="addtime" column="addtime"/>
+        <result property="remark" column="remark"/>
+        <result property="issync" column="issync"/>
+        <result property="operator" column="operator"/>
+        <result property="orderId" column="order_id"/>
+    </resultMap>
+
+
+    <select id="queryOrderOperate" resultMap="OrderOperateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_operate`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="issync != null">
+                `issync` = #{issync} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderOperate$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="addtimeList != null">
+                    `addtime` in
+                    <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+                <if test="remarkList != null">
+                    `remark` in
+                    <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="issyncList != null">
+                    `issync` in
+                    <foreach collection="issyncList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="issyncSt !=null">
+                    `issync` >= #{issyncSt} and
+                </if>
+                <if test="issyncEd!=null">
+                    `issync` &lt;= #{issyncEd} and
+                </if>
+                <if test="operatorList != null">
+                    `operator` in
+                    <foreach collection="operatorList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOperator!=null and fuzzyOperator.size()>0">
+                    (
+                    <foreach collection="fuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperator!=null and rightFuzzyOperator.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="orderIdList != null">
+                    `order_id` in
+                    <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryOrderOperateLimit1" resultMap="OrderOperateMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_order_operate`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="remark != null and remark!=''">
+                `remark` = #{remark} and
+            </if>
+            <if test="issync != null">
+                `issync` = #{issync} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderOperate$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="addtimeList != null">
+                        `addtime` in
+                        <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+                    <if test="remarkList != null">
+                        `remark` in
+                        <foreach collection="remarkList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyRemark!=null and fuzzyRemark.size()>0">
+                    (
+                    <foreach collection="fuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyRemark!=null and rightFuzzyRemark.size()>0">
+                    (
+                    <foreach collection="rightFuzzyRemark"  separator="or" item="item">
+                        `Remark` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="issyncList != null">
+                        `issync` in
+                        <foreach collection="issyncList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="issyncSt !=null">
+                    `issync` >= #{issyncSt} and
+                </if>
+                <if test="issyncEd!=null">
+                    `issync` &lt;= #{issyncEd} and
+                </if>
+                    <if test="operatorList != null">
+                        `operator` in
+                        <foreach collection="operatorList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOperator!=null and fuzzyOperator.size()>0">
+                    (
+                    <foreach collection="fuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperator!=null and rightFuzzyOperator.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperator"  separator="or" item="item">
+                        `Operator` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="orderIdList != null">
+                        `order_id` in
+                        <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="orderIdSt !=null">
+                    `order_id` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `order_id` &lt;= #{orderIdEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `addtime`,
+        `remark`,
+        `issync`+0 as `issync`,
+        `operator`,
+        `order_id`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.OrderOperate$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addtime==true">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.remark==true">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.fetchFields.issync==true">
+                        `issync`+0 as `issync`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operator==true">
+                        `operator`,
+                    </if>
+                    <if test="fetchFields.fetchFields.orderId==true">
+                        `order_id`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addtime==null">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.remark==null">
+                        `remark`,
+                    </if>
+                    <if test="fetchFields.excludeFields.issync==null">
+                        `issync`+0 as `issync`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operator==null">
+                        `operator`,
+                    </if>
+                    <if test="fetchFields.excludeFields.orderId==null">
+                        `order_id`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.OrderOperate$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

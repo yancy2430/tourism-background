@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.SettingBaseMapper">
+
+
+    <insert id="insertSetting" >
+        INSERT INTO `tb_setting`
+        (
+        <trim suffixOverrides=",">
+                    <if test="settingName!=null">
+                        `setting_name`,
+                    </if>
+                    <if test="settingValue!=null">
+                        `setting_value`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="settingName!=null">
+                    #{settingName},
+                </if>
+                <if test="settingValue!=null">
+                    #{settingValue},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateSetting">
+        UPDATE `tb_setting`
+        SET
+        <trim suffixOverrides=",">
+            <if test="settingName != null and settingName!=''">
+                `setting_name` = #{settingName},
+            </if>
+            <if test="settingValue != null and settingValue!=''">
+                `setting_value` = #{settingValue},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Setting" id="SettingMap">
+        <result property="settingName" column="setting_name"/>
+        <result property="settingValue" column="setting_value"/>
+    </resultMap>
+
+
+    <select id="querySetting" resultMap="SettingMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_setting`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="settingName != null and settingName!=''">
+                `setting_name` = #{settingName} and
+            </if>
+            <if test="settingValue != null and settingValue!=''">
+                `setting_value` = #{settingValue} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Setting$QueryBuilder) == true">
+                <if test="settingNameList != null">
+                    `setting_name` in
+                    <foreach collection="settingNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySettingName!=null and fuzzySettingName.size()>0">
+                    (
+                    <foreach collection="fuzzySettingName"  separator="or" item="item">
+                        `Setting_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySettingName!=null and rightFuzzySettingName.size()>0">
+                    (
+                    <foreach collection="rightFuzzySettingName"  separator="or" item="item">
+                        `Setting_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="settingValueList != null">
+                    `setting_value` in
+                    <foreach collection="settingValueList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzySettingValue!=null and fuzzySettingValue.size()>0">
+                    (
+                    <foreach collection="fuzzySettingValue"  separator="or" item="item">
+                        `Setting_value` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySettingValue!=null and rightFuzzySettingValue.size()>0">
+                    (
+                    <foreach collection="rightFuzzySettingValue"  separator="or" item="item">
+                        `Setting_value` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="querySettingLimit1" resultMap="SettingMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_setting`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="settingName != null and settingName!=''">
+                `setting_name` = #{settingName} and
+            </if>
+            <if test="settingValue != null and settingValue!=''">
+                `setting_value` = #{settingValue} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Setting$QueryBuilder) == true">
+                    <if test="settingNameList != null">
+                        `setting_name` in
+                        <foreach collection="settingNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySettingName!=null and fuzzySettingName.size()>0">
+                    (
+                    <foreach collection="fuzzySettingName"  separator="or" item="item">
+                        `Setting_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySettingName!=null and rightFuzzySettingName.size()>0">
+                    (
+                    <foreach collection="rightFuzzySettingName"  separator="or" item="item">
+                        `Setting_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="settingValueList != null">
+                        `setting_value` in
+                        <foreach collection="settingValueList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzySettingValue!=null and fuzzySettingValue.size()>0">
+                    (
+                    <foreach collection="fuzzySettingValue"  separator="or" item="item">
+                        `Setting_value` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzySettingValue!=null and rightFuzzySettingValue.size()>0">
+                    (
+                    <foreach collection="rightFuzzySettingValue"  separator="or" item="item">
+                        `Setting_value` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `setting_name`,
+        `setting_value`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Setting$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.settingName==true">
+                        `setting_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.settingValue==true">
+                        `setting_value`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.settingName==null">
+                        `setting_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.settingValue==null">
+                        `setting_value`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Setting$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

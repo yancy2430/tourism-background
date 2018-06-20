@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section id="search_section" class="active" data-role="section">
+    <article data-role="article" id="productlist_article" class="active" style="">
+        <div class="page searchbar js_show">
+            <div class="page__bd">
+                <div class="titlebar weui-search-bar weui-search-bar_focusing " id="searchBar" style="line-height: normal;">
+                    <a data-toggle="back" href="#"><i style="color: #666;    font-size: 18px;    width: 20px;" class="iconfont iconline-arrow-left"></i></a>
+                    <form style="margin-left: 30px;" class="weui-search-bar__form">
+                        <div class="weui-search-bar__box">
+                            <i class="weui-icon-search"></i>
+                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                            <i href="javascript:" class="weui-icon-clear" id="searchClear"></i>
+                        </div>
+                        <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                            <i class="weui-icon-search"></i>
+                            <span>搜索</span>
+                        </label>
+                    </form>
+                    <strong class="weui-search-bar__cancel-btn" id="searchCancel">取消</strong>
+                </div>
+                <div class="weui-cells searchbar-result" id="searchResult" style="display: none; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+
+                    <!--<div class="weui-cell weui-cell_access">-->
+                        <!--<div class="weui-cell__bd weui-cell_primary">-->
+                            <!--<p>实时搜索文本4</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="weui-cells" id="selectKey" style="    margin-top: -2px;display: block; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                    <div class="weui-cells__title">热门搜索</div>
+                    <div class="keys">
+                        <th:block th:each="item,iterStat:${keys}">
+                            <div class="placeholder" th:text="${item}"></div>
+                        </th:block>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+</section>
+<th:block th:include="footer"></th:block>

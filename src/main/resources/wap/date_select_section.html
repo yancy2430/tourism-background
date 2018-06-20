@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section data-cache="true" id="date_select_section" data-role="section" data-transition="empty">
+    <style type="text/css">
+        .calendar_tr .curr_top:after {
+            font-family: 'iconline';
+            color: #FF0000;
+            content: "\e119";
+        }
+
+        .calendar_tr .curr:after {
+            font-family: 'iconline';
+            color: #FF0000;
+            content: "\e196";
+        }
+
+        .hoilday {
+            color: #CBD0D6;
+        }
+
+        .curr_td {
+            border: 1px solid #DA8484;
+        }
+
+        .calendar_td {
+            border: 1px solid transparent;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0px;
+            overflow: hidden;
+        }
+
+        .hoilday {
+            color: #ff1111;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .calendar_table thead tr:first-child {
+            background: #F1F2F4;
+            text-align: center;
+            position: relative;
+        }
+
+        .calendar_table thead tr:first-child > td > div {
+            text-align: left;
+            width: 50%;
+        }
+
+        .calendar_table thead tr:first-child > td > div:first-child {
+            width: 50%;
+            text-align: right;
+        }
+
+        .calendar_table thead tr:first-child > td > div:nth-child(3) > select {
+            margin-left: 5px;
+        }
+
+        .calendar_table thead tr:first-child > td > div:nth-child(2) {
+            text-align: center;
+            display: none;
+            /*float: none !important;*/
+        }
+
+        #calendar_calendar_year_decrease, #calendar_calendar_year_increase {
+            display: none;
+        }
+
+        #calendar_calendar_month_decrease {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #calendar_calendar_month_increase {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        [data-role="calendar"] {
+            border: 0px solid #ff0000;
+            margin: 0px;
+            /* background: url(assets/agile/img/paper.jpg); */
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-color: #FFFFFF;
+        }
+
+        .calendar_header td {
+            padding-bottom: 0px;
+            padding-top: 10px;
+        }
+
+        .weui-cell__ft {
+            flex: 1;
+        }
+
+        .weui-cell__ft strong {
+            font-weight: 400;
+        }
+
+        .weui-cell__ft .sub, .weui-cell__ft .add {
+            border: 1px solid #F8F8F8;
+            color: #0E90D2;
+            padding: 2px;
+        }
+
+        .menubar {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            bottom: 0;
+        }
+    </style>
+    <header>
+        <div class="titlebar">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <h1>选择日期和人数</h1>
+            <a id="add_mark">起价说明</a>
+        </div>
+    </header>
+    <article data-role="article" id="calendar_article" class="active" style="top:44px;bottom:44px;">
+            <div style="clear:both;"></div>
+            <div data-role="calendar" id="calendar_calendar"></div>
+            <div class="weui-cells" style="margin:0">
+                <div class="weui-cell" id="adult">
+                    <div class="weui-cell__bd">
+                        <p>成人<span style="font-size: 12px;color: #888;padding-left: 10px;">￥1299</span></p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <span class="sub iconline-mark-minus"></span>
+                        <strong class="num">1</strong>
+                        <span class="add iconline-mark-plus"></span>
+                    </div>
+                </div>
+                <div class="weui-cell" id="children">
+                    <div class="weui-cell__bd">
+                        <p>儿童<span style="font-size: 12px;color: #888;padding-left: 10px;">￥1299</span></p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <span class="sub iconline-mark-minus"></span>
+                        <strong class="num">0</strong>
+                        <span class="add iconline-mark-plus"></span>
+                    </div>
+                </div>
+
+                <div class="weui-cell" id="single">
+                    <div class="weui-cell__bd">
+                        <p>单房差<span style="font-size: 12px;color: #888;padding-left: 10px;">￥1299</span></p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <span class="sub iconline-mark-minus"></span>
+                        <strong class="num">0</strong>
+                        <span class="add iconline-mark-plus"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-panel__bd" s>
+                <div class="weui-media-box weui-media-box_text">
+                    <p class="weui-media-box__desc"><span class="iconline-rdo-info"> </span>
+                        由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                    <p class="weui-media-box__desc"><span class="iconline-rdo-info"> </span>
+                        由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                </div>
+            </div>
+    </article>
+    <footer>
+        <nav class="menubar">
+            <a class="menu price" data-role="tab" href="#" style="width: 55px;
+     font-size: 18px;color: #ff1111;padding: 10px">
+                ￥1233
+            </a>
+            <a class="menu" data-role="tab" href="#" style="width: 85px;padding: 0 5px  0 10px;">
+                <span class="menu-icon iconfont iconline-media-arphones-microphone"></span>
+                <span class="menu-text">联系客服</span>
+            </a>
+            <button id="place_order" class="block submit" style="margin: 10px;width: -webkit-fill-available;">
+                <i class="iconfont iconline-rdo-tick"></i>
+                <span>继续预定</span>
+            </button>
+        </nav>
+    </footer>
+</section>
+
+<th:block th:include="footer"></th:block>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>选择产品</label>
+                <div class="layui-input-inline" id="product_name">
+                    <select lay-filter="search_product" name="product_id" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>订单名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="order_name" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>预定套餐
+            </label>
+            <div class="layui-input-inline">
+                <select lay-filter="package_id" name="package_id" class="valid">
+                    <option value="">请先选择产品</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>预定日期
+            </label>
+            <div class="layui-input-inline" id="selectdate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>支付方式
+            </label>
+            <div class="layui-input-inline">
+                <select name="pay_type">
+                    <option>支付方式</option>
+                    <option value="2">支付宝</option>
+                    <option value="1">微信</option>
+                    <option class="3">网银转账</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>预定人数
+                </label>
+                <div class="layui-input-inline">
+
+                    <input type="number" name="adult_num" required=""
+                           placeholder="成人"
+                           autocomplete="off" class="layui-input">
+
+                </div>
+
+                <div class="layui-input-inline">
+                    <input type="number" name="children_num" required=""
+                           placeholder="儿童"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <input type="number" name="housing_num" required=""
+                           placeholder="单房差"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>联系人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="contact" required=""
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>联系人手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="contact_mobile" required=""
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">
+                其他需求
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入其他需求内容" name="remark" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>销售员
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="salesman"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>销售员手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="salesman_mobile"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="add" lay-submit="">
+                下单
+            </button>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], function () {
+
+        $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer
+            , element = layui.element
+            , laydate = layui.laydate
+            , laytpl = layui.laytpl
+            , table = layui.table
+            , upload = layui.upload
+
+
+        reqPost("admin/product/productlist", {
+            page: 1,
+            limit: 1000
+        }, function (res) {
+            $.each(res.data, function (k, v) {
+                $("#product_name select[name='product_id']").append('<option value="' + v.productId + '">' + v.productName + '</option>');
+            })
+            form.render();
+            console.log(res.data)
+        }, function (err) {
+        })
+
+        var productData = {}
+
+        var getProduct = function (id) {
+
+
+            reqPost("admin/product/getProduct", {
+                product_id: id
+            }, function (res) {
+                $("select[name='package_id']").html('')
+                $("select[name='package_id']").append('<option value="">请选择套餐</option>')
+                $.each(res.data.packagelist, function (k, v) {
+                    $("select[name='package_id']").append('<option value="' + v.package_no + '">' + v.package_name + '</option>')
+                })
+                productData = res.data;
+                $("select[name='package_id").trigger("change");
+                form.render();
+            }, function (err) {
+            })
+
+        }
+
+
+        //监听指定开关
+        form.on('select(search_product)', function (obj) {
+            getProduct(obj.value)
+        });
+        //设置日期
+        form.on('select(package_id)', function (obj) {
+
+            var marks = {}
+            $.each(productData.groupdate, function (k, v) {
+                $.each(v.list, function (key, val) {
+                    if (val.package_no == obj.value) {
+                        var arr = val.teamtime.split('-');
+                        marks[val.teamtime] = arr[2];
+                    }
+                })
+            })
+            $("#selectdate").html("");
+            $("#selectdate").append('<input class="layui-input" placeholder="预定日期" name="start" id="startDate">')
+            var layda = laydate.render({
+                elem: '#startDate',
+                min: getNowFormatDate(),
+                mark: marks,
+                done: function (value, date, endDate) {
+                    console.log(marks)
+                    if (null != marks[value]) {
+                        console.log("++"+value); //得到日期生成的值，如：2017-08-18
+                    }else {
+                        layer.alert("当前日期未开团",{
+                            icon:5,
+                            title:"提示"
+                        })
+                    }
+                }
+            });
+
+        });
+
+
+        //监听提交
+        form.on('submit(add)', function (data) {
+
+            reqPost("admin/order/addOrder", {orderinfo: JSON.stringify(data.field)}, function (res) {
+                if (res.code == 0) {
+                    layer.alert(res.msg, {
+                        title: '提示',
+                        icon: 6,
+                        yes:function (i,x) {
+                            x_admin_close()
+                        }
+                    })
+                } else {
+                    layer.alert(res.msg, {
+                        title: '提示',
+                        icon: 5
+                    })
+                }
+            }, function (err) {
+                layer.alert("网络错误！", {
+                    title: '提示',
+                    icon: 5
+                })
+            })
+
+            return false;
+        });
+
+    })
+
+    /**
+     * 获取当前日期
+     * @returns {string}
+     */
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+</script>
+
+
+</body>
+
+</html>

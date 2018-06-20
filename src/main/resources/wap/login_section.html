@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<link rel="stylesheet" href="/static/third/flat/iconlogo.css">
+<section data-cache="true" class="" id="login_section" data-role="section" data-transition="empty">
+    <header>
+        <div class="titlebar">
+            <a href="#"><i class="iconfont_new">&#xe86e;</i></a>
+            <h1>立即登录</h1>
+            <a href="#"></a>
+        </div>
+    </header>
+    <article data-role="article" id="login_article" class="dialog-backdrop active" style="top: 44px;">
+
+        <div class="login">
+            <div class="avater">
+                <span style="font-size: 50px;text-align: center;" class="iconfont iconline-uid"></span>
+            </div>
+            <div class="inputUser">
+                <form autocomplete="off" class="form-common">
+                    <label class="label-right" style="width: 100%;margin: 5px 0px;">
+                        <input name="username" type="text" placeholder="手机号"
+                               title="英文数字下滑线" required="">
+                    </label>
+                    <hr>
+                    <label class="label-right" style="width: 100%;margin: 5px 0px;">
+                        <input name="password" type="password" placeholder="登录密码" autocomplete="on" required="">
+                    </label>
+                    <hr>
+                    <button style="margin-top: 40px" class="block">登录</button>
+                    <div style="border-top: 0px solid #E5E5E5;" class="weui-loadmore weui-loadmore_line">
+                        <span class="weui-loadmore__tips">立即注册</span>
+                    </div>
+                </form>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">第三方账号登录</span>
+            </div>
+            <div class="party_login">
+                <div class="weui-flex">
+                    <div class="weui-flex__item">
+                        <div class="placeholder">
+                            <span style="font-size: 30px;color: rgb(126, 222, 64);"
+                                  class="iconfont iconlogo-logo-wechat"></span>
+                        </div>
+                    </div>
+                    <div class="weui-flex__item">
+                        <div class="placeholder">
+                            <span style="font-size: 30px;color: rgb(37, 166, 241);"
+                                  class="iconfont iconlogo-logo-qq"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </article>
+    <article data-role="article" id="reg_article" class="dialog-backdrop ">
+        <header>
+            <div class="titlebar">
+                <a href="#"><i class="iconfont_new"></i></a>
+                <h1>立即注册</h1>
+                <a href="#"><i class="iconfont_new"></i></a>
+            </div>
+        </header>
+    </article>
+</section>
+<th:block th:include="footer"></th:block>

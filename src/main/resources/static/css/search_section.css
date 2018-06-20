@@ -1,0 +1,21 @@
+.keys{
+    padding-bottom: .8em;
+}
+.keys .placeholder {
+    text-align: center;
+    font-size: .85rem;
+    color: #666;
+    background: #eee;
+    margin: 5px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    float: left;
+}
+.weui-cells {
+    margin-top: 0em;
+    background-color: #FFFFFF;
+    line-height: 1.47058824;
+    font-size: 17px;
+    overflow: hidden;
+    position: relative;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+
+<section id="user_order_section" data-role="section" data-transition="empty">
+    <header>
+        <div class="titlebar">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <h1>全部订单</h1>
+        </div>
+        <div class="tabbar">
+            <a class="tab" data-role="tab" data-toggle="article"  href="#all_article">全部</a>
+            <a class="tab" data-role="tab" data-toggle="article" href="#dfk_article">待付款</a>
+            <a class="tab" data-role="tab" data-toggle="article" href="#clz_article">处理中</a>
+            <a class="tab" data-role="tab" data-toggle="article" href="#dcx_article">待出行</a>
+            <a class="tab" data-role="tab" data-toggle="article" href="#dpj_article">待评价</a>
+            <a class="tab" data-role="tab" data-toggle="article" href="#tk_article">退款/售后</a>
+        </div>
+    </header>
+    <article data-role="article" id="all_article" style="top:88px;">
+            <ul class="orderlist">
+            </ul>
+    </article>
+    <article data-role="article" id="dfk_article" style="top:88px;">
+        <ul class="orderlist">
+        </ul>
+    </article>
+    <article data-role="article" id="clz_article" style="top:88px;">
+        <ul class="orderlist">
+        </ul>
+    </article>
+    <article data-role="article" id="dcx_article" style="top:88px;">
+        <ul class="orderlist">
+        </ul>
+    </article>
+    <article data-role="article" id="dpj_article" style="top:88px;">
+        <ul class="orderlist">
+        </ul>
+    </article>
+    <article data-role="article" id="tk_article" style="top:88px;">
+        <ul class="orderlist">
+        </ul>
+    </article>
+</section>
+<script id="order_item" type="text/html">
+    <% for(i=0;i< data.length;i++){ %>
+    <li  data-toggle="article" href="#user_order_details_section" class="orderitem">
+        <h3><p style="width: 80%;float: left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"><%=data[i].orderName%></p>
+            <%= (data[i].status==0?'<span>代付款</span>':"") %>
+            <%= (data[i].status==1?'<span>已确认</span>':"") %>
+            <%= (data[i].status==2?'<span>进行中</span>':"") %>
+            <%= (data[i].status==3?'<span>已完成</span>':"") %>
+            <%= (data[i].status==4?'<span>已结束</span>':"") %>
+            <%= (data[i].status==5?'<span>已退款</span>':"") %>
+        </h3>
+        <div style="clear: both"></div>
+        <div class="product">
+            <img src="https://dimg06.c-ctrip.com/images/100k0g0000007qkp5F0C3_C_360_202.jpg"/>
+            <div class="product_info">
+                <h4><%=data[i].productName%></h4>
+                <p>出游日期：<%=data[i].teamdate%></p>
+                <p>出游人数：<%=data[i].adultNum%>成人 <%=data[i].childrenNum%>儿童 <span class="price">合计：￥<%=data[i].orderPrice%></span></p>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="order_status">
+            <%= (data[i].status==0?'<span>立即付款</span>':"") %>
+            <%= (data[i].status==3?'<span>评价</span>':"") %>
+        </div>
+        <div class="divider"></div>
+    </li>
+    <% } %>
+
+</script>
+<th:block th:include="footer"></th:block>

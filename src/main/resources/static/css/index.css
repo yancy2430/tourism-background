@@ -1,0 +1,429 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+#index_section .weui-search-bar:after {
+    content: "";
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #D7D6DC;
+    color: #D7D6DC;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+#route_article{
+
+    background: #E5E5E6;
+}
+.trip{
+    margin: 20px;
+}
+
+.trip .date{
+    background: rgba(0, 0, 0, 0.76);
+    color: #fff;
+    width: max-content;
+    padding: 5px 10px 5px 28px;
+    border-radius: 30px;
+    position: relative;
+}
+
+.trip .date span{
+    color: #eee;
+    padding-left: 10px;
+    font-size: 12px;
+
+}
+.trip .date i{
+    padding: 10px;
+}
+.trip .date::after{
+    content: " ";
+    position: absolute;
+    background: #ffffff;
+    top: 11px;
+    height: 10px;
+    width: 10px;
+    left: 10px;
+    border-radius: 50px;
+}
+.trip .view{
+    background: #ffffff;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.trip .view .top{
+    padding: 10px;
+}
+.trip .view .top img{
+    float: left;
+    border-radius: 50px;
+}
+.trip .view .top h3{
+    float: left;
+    font-weight: 500;
+    margin-left: 5px;
+}
+.trip .view .trip_info{
+    background: #FEF9EE;
+    padding: 10px 15px;
+}
+.trip .view .trip_bar p{
+    padding: 10px;
+    font-size: 13px;
+    color: #808081;
+}
+.trip .view .product{
+}
+
+.trip .view .product img{
+    height: 65px;
+    width: 65px;
+    float: left;
+}
+.trip .view .product .product_info {
+    width: max-content;
+    width: 100%;
+    padding: 0px 0px 0px 76px;
+}
+.trip .view .product .product_info h4{
+    color: #666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 500;
+}
+.trip .view .product .product_info p{
+    color: #888;
+}
+.trip .view .product .product_info .price{
+    color: red;
+    text-align: right;
+    float: right;
+}
+.trip .view .order_status{
+    padding: 10px;
+    text-align: right;
+}
+.trip .view .order_status span{
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    margin-left: 5px;
+    font-size: 13px;
+}
+.trip ul li{
+    margin-bottom: 20px;
+}
+.grid-img {
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin: 0px auto;
+    border-radius: 60px;
+    text-align: center;
+    overflow: hidden;
+}
+.grid-img .iconfont {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+.travel{
+    width: 100%;
+    height: 120px;
+}
+.travel .tit{
+    float: left;
+    width: 8%;
+    text-align: center;
+    background: #2fa1ea;
+    padding: 10px;
+    line-height: 20px;
+    color: #fff;
+}
+.travel .grid_item{
+    float: left;
+    width: 23%;
+    padding: 10px 5px;
+}
+.travel .grid_item .toptit {
+    float: left;
+}
+.travel .grid_item .toptit .i1{
+    padding: 0px 3px;
+    background: #E84F5E;
+    border-radius: 3px 0px 0px 0px;
+    margin-right: 4px;
+}
+.travel .grid_item .toptit .i2{
+    padding: 0px 3px;
+    background: #F79153;
+    border-radius: 3px 0px 0px 0px;
+    margin-right: 4px;
+}
+.travel .grid_item .toptit .i3{
+    padding: 0px 3px;
+    background: #83B6DA;
+    border-radius: 3px 0px 0px 0px;
+    margin-right: 4px;
+}
+.travel .grid_item .toptit .i4{
+    padding: 0px 3px;
+    background: #0BB20C;
+    border-radius: 3px 0px 0px 0px;
+    margin-right: 4px;
+}
+.travel .grid_item .img{
+    width: 100%;
+    padding-top: 3px;
+    height: 80px;
+}
+.travel .grid_item .img img{
+    padding: 10px 0 0px 0;
+    width: 100%;
+    height: 100%;
+}
+.mmlc{
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 35px;
+}
+.mmlc span{
+    color: #0E90D2;
+}
+.xs_listitem li{
+    background: #ffffff;
+}
+.xs_listitem li img{
+    width: 100%;
+}
+.xs_listitem li .info{
+    padding: 0px  10px;;
+}
+.xs_listitem li .tag{
+}
+.xs_listitem li .image .top_tag{
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    padding: 5px 10px 5px 10px;
+    background: rgba(39, 39, 39, 0.58);
+    color: #fff;
+    border-radius: 25px;
+    font-weight: 500;
+}
+.xs_listitem li .image .top_tag i{
+    margin-right: 5px;
+}
+.xs_listitem li .image .right_bottom_tag{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 10px 5px 30px;
+    color: #fff;
+    font-weight: 500;
+}
+.xs_listitem li .image .left_bottom_price{
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    color: #fff;
+    text-align: center;
+    width: 95px;
+    border-radius: 6px;
+    background: #fb7732;
+    height: 48px;
+}
+.xs_listitem li .image .left_bottom_price p{
+    position: absolute;
+    top: 0;
+    font-weight: 500;
+    width: 100%;
+}
+.xs_listitem li .image .left_bottom_price .ys{
+    background: #494949;
+    top: inherit;
+    bottom: 0;
+    border-radius: 0px 0px 6px 6px;
+}
+.xs_listitem li .info h3{
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.xs_listitem li .info .desc{
+    font-size: 13px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.xs_listitem li .info .tag{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.xs_listitem li .info .tag span{
+    border: 1px solid #ddd;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+ * {
+     margin: 0;
+     padding: 0;
+ }
+
+#index_section .weui-search-bar:after {
+    content: "";
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #D7D6DC;
+    color: #D7D6DC;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.member .my_info {
+    background: linear-gradient(to right, #1F97FE, #126DFE);
+    width: 100%;
+    background-size: 100% 100%;
+    padding: 60px 20px 20px 20px;
+}
+
+.member .my_info .avater {
+    float: left;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+.member .my_info .avater img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background: #ffffff;
+    padding: 2px;
+}
+
+.member .my_info .user_info {
+    float: left;
+    padding: 5px 10px 5px 10px;
+}
+
+.member .my_info .user_info h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.member .my_info .user_info p {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+  .member {
+      background: #ffffff;
+      width: 100%;
+  }
+
+.member .my_order {
+    background: #ffffff;
+}
+
+.member .my_order .weui-cells__title {
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.member .my_order .weui-cells__title span {
+    font-size: 13px;
+    float: right;
+    color: #666;
+}
+
+.grid-img {
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin: 0px auto;
+    border-radius: 60px;
+    text-align: center;
+}
+.grid-img img{
+    border-radius: 60px;
+}
+.grid-img .iconfont {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+.full-width {
+    width: 100%;
+    height: 220px;
+}
+.member .grid-img {
+    background-color: transparent!important;
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin: 0px auto;
+    border-radius: 60px;
+    text-align: center;
+}
+.titlebar {
+    background-color: transparent;
+}
+
+.fill {
+    fill: white;
+}
+.member .grid-img {
+    background-color: transparent!important;
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin: 0px auto;
+    border-radius: 60px;
+    text-align: center;
+    line-height: 45px;
+}
+
+.member .grid-img i{
+    font-size: 32px;
+}
+.titlebar a {
+    color: #fff;
+}
+.titlebar {
+    border-bottom: none;
+}

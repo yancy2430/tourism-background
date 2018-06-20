@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.ProductDateMapper">
+
+    <insert id="insertProductDateList">
+        INSERT INTO `tb_product_date`
+        (
+                `product_id`,
+                `package_id`,
+                `adult_price`,
+                `children_price`,
+                `teamtime`
+        )
+        VALUES
+        <foreach collection="list" item="listbean" separator=",">
+        (
+        <trim suffixOverrides=",">
+
+            <if test="product_id!=null">
+                #{product_id},
+            </if>
+            <if test="package_id!=null">
+                #{package_id},
+            </if>
+            <if test="adult_price!=null">
+                #{adult_price},
+            </if>
+            <if test="children_price!=null">
+                #{children_price},
+            </if>
+            <if test="teamtime!=null">
+                #{teamtime},
+            </if>
+        </trim>
+        )
+        </foreach>
+    </insert>
+
+    <select id="queryGroupList">
+        select * from tb_product_date
+        where
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="packageId != null">
+                `package_id` = #{packageId} and
+            </if>
+            <if test="adultPrice != null">
+                `adult_price` = #{adultPrice} and
+            </if>
+            <if test="childrenPrice != null">
+                `children_price` = #{childrenPrice} and
+            </if>
+            <if test="teamtime != null and teamtime!=''">
+                `teamtime` = #{teamtime} and
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.ProductDate$QueryBuilder) == true">
+                <if test="productIdList != null">
+                    `product_id` in
+                    <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                <if test="packageIdList != null">
+                    `package_id` in
+                    <foreach collection="packageIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="packageIdSt !=null">
+                    `package_id` >= #{packageIdSt} and
+                </if>
+                <if test="packageIdEd!=null">
+                    `package_id` &lt;= #{packageIdEd} and
+                </if>
+                <if test="adultPriceList != null">
+                    `adult_price` in
+                    <foreach collection="adultPriceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="adultPriceSt !=null">
+                    `adult_price` >= #{adultPriceSt} and
+                </if>
+                <if test="adultPriceEd!=null">
+                    `adult_price` &lt;= #{adultPriceEd} and
+                </if>
+                <if test="childrenPriceList != null">
+                    `children_price` in
+                    <foreach collection="childrenPriceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="childrenPriceSt !=null">
+                    `children_price` >= #{childrenPriceSt} and
+                </if>
+                <if test="childrenPriceEd!=null">
+                    `children_price` &lt;= #{childrenPriceEd} and
+                </if>
+                <if test="teamtimeList != null">
+                    `teamtime` in
+                    <foreach collection="teamtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTeamtime!=null and fuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="fuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTeamtime!=null and rightFuzzyTeamtime.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTeamtime"  separator="or" item="item">
+                        `Teamtime` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="isshowList != null">
+                    `isshow` in
+                    <foreach collection="isshowList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="isshowSt !=null">
+                    `isshow` >= #{isshowSt} and
+                </if>
+                <if test="isshowEd!=null">
+                    `isshow` &lt;= #{isshowEd} and
+                </if>
+            </if>
+        </trim>
+         GROUP BY  teamtime
+    </select>
+
+    <delete id="deleteByProduct" parameterType="int">
+        delete from tb_product_date where product_id=#{product_id}
+    </delete>
+    
+    <select id="queryDateList">
+
+    </select>
+</mapper>

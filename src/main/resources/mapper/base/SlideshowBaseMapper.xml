@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.SlideshowBaseMapper">
+
+
+    <insert id="insertSlideshow"  useGeneratedKeys="true" keyProperty="slideId">
+        INSERT INTO `tb_slideshow`
+        (
+        <trim suffixOverrides=",">
+                    <if test="slideId!=null">
+                        `slide_id`,
+                    </if>
+                    <if test="image!=null">
+                        `image`,
+                    </if>
+                    <if test="type!=null">
+                        `type`,
+                    </if>
+                    <if test="url!=null">
+                        `url`,
+                    </if>
+                    <if test="productId!=null">
+                        `product_id`,
+                    </if>
+                    <if test="sort!=null">
+                        `sort`,
+                    </if>
+                    <if test="isshow!=null">
+                        `isshow`,
+                    </if>
+                    <if test="areas!=null">
+                        `areas`,
+                    </if>
+                    <if test="starttime!=null">
+                        `starttime`,
+                    </if>
+                    <if test="endtime!=null">
+                        `endtime`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="slideId!=null">
+                    #{slideId},
+                </if>
+                <if test="image!=null">
+                    #{image},
+                </if>
+                <if test="type!=null">
+                    #{type},
+                </if>
+                <if test="url!=null">
+                    #{url},
+                </if>
+                <if test="productId!=null">
+                    #{productId},
+                </if>
+                <if test="sort!=null">
+                    #{sort},
+                </if>
+                <if test="isshow!=null">
+                    #{isshow},
+                </if>
+                <if test="areas!=null">
+                    #{areas},
+                </if>
+                <if test="starttime!=null">
+                    #{starttime},
+                </if>
+                <if test="endtime!=null">
+                    #{endtime},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateSlideshow">
+        UPDATE `tb_slideshow`
+        SET
+        <trim suffixOverrides=",">
+            <if test="image != null and image!=''">
+                `image` = #{image},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url},
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId},
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort},
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow},
+            </if>
+            <if test="areas != null and areas!=''">
+                `areas` = #{areas},
+            </if>
+            <if test="starttime != null">
+                `starttime` = #{starttime},
+            </if>
+            <if test="endtime != null">
+                `endtime` = #{endtime},
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `slide_id` = #{slideId} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Slideshow" id="SlideshowMap">
+        <result property="slideId" column="slide_id"/>
+        <result property="image" column="image"/>
+        <result property="type" column="type"/>
+        <result property="url" column="url"/>
+        <result property="productId" column="product_id"/>
+        <result property="sort" column="sort"/>
+        <result property="isshow" column="isshow"/>
+        <result property="areas" column="areas"/>
+        <result property="starttime" column="starttime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+
+    <select id="querySlideshow" resultMap="SlideshowMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_slideshow`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="slideId != null">
+                `slide_id` = #{slideId} and
+            </if>
+            <if test="image != null and image!=''">
+                `image` = #{image} and
+            </if>
+            <if test="type != null">
+                `type` = #{type} and
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow} and
+            </if>
+            <if test="areas != null and areas!=''">
+                `areas` = #{areas} and
+            </if>
+            <if test="starttime != null">
+                `starttime` = #{starttime} and
+            </if>
+            <if test="endtime != null">
+                `endtime` = #{endtime} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Slideshow$QueryBuilder) == true">
+                <if test="slideIdList != null">
+                    `slide_id` in
+                    <foreach collection="slideIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="slideIdSt !=null">
+                    `slide_id` >= #{slideIdSt} and
+                </if>
+                <if test="slideIdEd!=null">
+                    `slide_id` &lt;= #{slideIdEd} and
+                </if>
+                <if test="imageList != null">
+                    `image` in
+                    <foreach collection="imageList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyImage!=null and fuzzyImage.size()>0">
+                    (
+                    <foreach collection="fuzzyImage"  separator="or" item="item">
+                        `Image` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyImage!=null and rightFuzzyImage.size()>0">
+                    (
+                    <foreach collection="rightFuzzyImage"  separator="or" item="item">
+                        `Image` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="typeList != null">
+                    `type` in
+                    <foreach collection="typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="typeSt !=null">
+                    `type` >= #{typeSt} and
+                </if>
+                <if test="typeEd!=null">
+                    `type` &lt;= #{typeEd} and
+                </if>
+                <if test="urlList != null">
+                    `url` in
+                    <foreach collection="urlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUrl!=null and fuzzyUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyUrl"  separator="or" item="item">
+                        `Url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUrl!=null and rightFuzzyUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUrl"  separator="or" item="item">
+                        `Url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="productIdList != null">
+                    `product_id` in
+                    <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                <if test="sortList != null">
+                    `sort` in
+                    <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+                <if test="isshowList != null">
+                    `isshow` in
+                    <foreach collection="isshowList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="isshowSt !=null">
+                    `isshow` >= #{isshowSt} and
+                </if>
+                <if test="isshowEd!=null">
+                    `isshow` &lt;= #{isshowEd} and
+                </if>
+                <if test="areasList != null">
+                    `areas` in
+                    <foreach collection="areasList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAreas!=null and fuzzyAreas.size()>0">
+                    (
+                    <foreach collection="fuzzyAreas"  separator="or" item="item">
+                        `Areas` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAreas!=null and rightFuzzyAreas.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAreas"  separator="or" item="item">
+                        `Areas` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="starttimeList != null">
+                    `starttime` in
+                    <foreach collection="starttimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="starttimeSt !=null">
+                    `starttime` >= #{starttimeSt} and
+                </if>
+                <if test="starttimeEd!=null">
+                    `starttime` &lt;= #{starttimeEd} and
+                </if>
+                <if test="endtimeList != null">
+                    `endtime` in
+                    <foreach collection="endtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="endtimeSt !=null">
+                    `endtime` >= #{endtimeSt} and
+                </if>
+                <if test="endtimeEd!=null">
+                    `endtime` &lt;= #{endtimeEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="querySlideshowLimit1" resultMap="SlideshowMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_slideshow`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="slideId != null">
+                `slide_id` = #{slideId} and
+            </if>
+            <if test="image != null and image!=''">
+                `image` = #{image} and
+            </if>
+            <if test="type != null">
+                `type` = #{type} and
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url} and
+            </if>
+            <if test="productId != null">
+                `product_id` = #{productId} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test="isshow != null">
+                `isshow` = #{isshow} and
+            </if>
+            <if test="areas != null and areas!=''">
+                `areas` = #{areas} and
+            </if>
+            <if test="starttime != null">
+                `starttime` = #{starttime} and
+            </if>
+            <if test="endtime != null">
+                `endtime` = #{endtime} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Slideshow$QueryBuilder) == true">
+                    <if test="slideIdList != null">
+                        `slide_id` in
+                        <foreach collection="slideIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="slideIdSt !=null">
+                    `slide_id` >= #{slideIdSt} and
+                </if>
+                <if test="slideIdEd!=null">
+                    `slide_id` &lt;= #{slideIdEd} and
+                </if>
+                    <if test="imageList != null">
+                        `image` in
+                        <foreach collection="imageList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyImage!=null and fuzzyImage.size()>0">
+                    (
+                    <foreach collection="fuzzyImage"  separator="or" item="item">
+                        `Image` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyImage!=null and rightFuzzyImage.size()>0">
+                    (
+                    <foreach collection="rightFuzzyImage"  separator="or" item="item">
+                        `Image` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="typeList != null">
+                        `type` in
+                        <foreach collection="typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="typeSt !=null">
+                    `type` >= #{typeSt} and
+                </if>
+                <if test="typeEd!=null">
+                    `type` &lt;= #{typeEd} and
+                </if>
+                    <if test="urlList != null">
+                        `url` in
+                        <foreach collection="urlList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUrl!=null and fuzzyUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyUrl"  separator="or" item="item">
+                        `Url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUrl!=null and rightFuzzyUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUrl"  separator="or" item="item">
+                        `Url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="productIdList != null">
+                        `product_id` in
+                        <foreach collection="productIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="productIdSt !=null">
+                    `product_id` >= #{productIdSt} and
+                </if>
+                <if test="productIdEd!=null">
+                    `product_id` &lt;= #{productIdEd} and
+                </if>
+                    <if test="sortList != null">
+                        `sort` in
+                        <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+                    <if test="isshowList != null">
+                        `isshow` in
+                        <foreach collection="isshowList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="isshowSt !=null">
+                    `isshow` >= #{isshowSt} and
+                </if>
+                <if test="isshowEd!=null">
+                    `isshow` &lt;= #{isshowEd} and
+                </if>
+                    <if test="areasList != null">
+                        `areas` in
+                        <foreach collection="areasList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAreas!=null and fuzzyAreas.size()>0">
+                    (
+                    <foreach collection="fuzzyAreas"  separator="or" item="item">
+                        `Areas` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAreas!=null and rightFuzzyAreas.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAreas"  separator="or" item="item">
+                        `Areas` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="starttimeList != null">
+                        `starttime` in
+                        <foreach collection="starttimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="starttimeSt !=null">
+                    `starttime` >= #{starttimeSt} and
+                </if>
+                <if test="starttimeEd!=null">
+                    `starttime` &lt;= #{starttimeEd} and
+                </if>
+                    <if test="endtimeList != null">
+                        `endtime` in
+                        <foreach collection="endtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="endtimeSt !=null">
+                    `endtime` >= #{endtimeSt} and
+                </if>
+                <if test="endtimeEd!=null">
+                    `endtime` &lt;= #{endtimeEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `slide_id`,
+        `image`,
+        `type`+0 as `type`,
+        `url`,
+        `product_id`,
+        `sort`,
+        `isshow`+0 as `isshow`,
+        `areas`,
+        `starttime`,
+        `endtime`,
+        `name`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Slideshow$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.slideId==true">
+                        `slide_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.image==true">
+                        `image`,
+                    </if>
+                    <if test="fetchFields.fetchFields.type==true">
+                        `type`+0 as `type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.url==true">
+                        `url`,
+                    </if>
+                    <if test="fetchFields.fetchFields.productId==true">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sort==true">
+                        `sort`,
+                    </if>
+                    <if test="fetchFields.fetchFields.isshow==true">
+                        `isshow`+0 as `isshow`,
+                    </if>
+                    <if test="fetchFields.fetchFields.areas==true">
+                        `areas`,
+                    </if>
+                    <if test="fetchFields.fetchFields.starttime==true">
+                        `starttime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.endtime==true">
+                        `endtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.slideId==null">
+                        `slide_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.image==null">
+                        `image`,
+                    </if>
+                    <if test="fetchFields.excludeFields.type==null">
+                        `type`+0 as `type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.url==null">
+                        `url`,
+                    </if>
+                    <if test="fetchFields.excludeFields.productId==null">
+                        `product_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sort==null">
+                        `sort`,
+                    </if>
+                    <if test="fetchFields.excludeFields.isshow==null">
+                        `isshow`+0 as `isshow`,
+                    </if>
+                    <if test="fetchFields.excludeFields.areas==null">
+                        `areas`,
+                    </if>
+                    <if test="fetchFields.excludeFields.starttime==null">
+                        `starttime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.endtime==null">
+                        `endtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Slideshow$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

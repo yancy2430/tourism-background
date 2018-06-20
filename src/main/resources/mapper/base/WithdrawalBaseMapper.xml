@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.WithdrawalBaseMapper">
+
+
+    <insert id="insertWithdrawal"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tb_withdrawal`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="userId!=null">
+                        `user_id`,
+                    </if>
+                    <if test="userName!=null">
+                        `user_name`,
+                    </if>
+                    <if test="succeed!=null">
+                        `succeed`,
+                    </if>
+                    <if test="amount!=null">
+                        `amount`,
+                    </if>
+                    <if test="before!=null">
+                        `before`,
+                    </if>
+                    <if test="after!=null">
+                        `after`,
+                    </if>
+                    <if test="operatorId!=null">
+                        `operator_id`,
+                    </if>
+                    <if test="collectionType!=null">
+                        `collection_type`,
+                    </if>
+                    <if test="collection!=null">
+                        `collection`,
+                    </if>
+                    <if test="operatorName!=null">
+                        `operator_name`,
+                    </if>
+                    <if test="addtime!=null">
+                        `addtime`,
+                    </if>
+                    <if test="operatorTime!=null">
+                        `operator_time`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="userId!=null">
+                    #{userId},
+                </if>
+                <if test="userName!=null">
+                    #{userName},
+                </if>
+                <if test="succeed!=null">
+                    #{succeed},
+                </if>
+                <if test="amount!=null">
+                    #{amount},
+                </if>
+                <if test="before!=null">
+                    #{before},
+                </if>
+                <if test="after!=null">
+                    #{after},
+                </if>
+                <if test="operatorId!=null">
+                    #{operatorId},
+                </if>
+                <if test="collectionType!=null">
+                    #{collectionType},
+                </if>
+                <if test="collection!=null">
+                    #{collection},
+                </if>
+                <if test="operatorName!=null">
+                    #{operatorName},
+                </if>
+                <if test="addtime!=null">
+                    #{addtime},
+                </if>
+                <if test="operatorTime!=null">
+                    #{operatorTime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateWithdrawal">
+        UPDATE `tb_withdrawal`
+        SET
+        <trim suffixOverrides=",">
+            <if test="userId != null">
+                `user_id` = #{userId},
+            </if>
+            <if test="userName != null and userName!=''">
+                `user_name` = #{userName},
+            </if>
+            <if test="succeed != null">
+                `succeed` = #{succeed},
+            </if>
+            <if test="amount != null">
+                `amount` = #{amount},
+            </if>
+            <if test="before != null">
+                `before` = #{before},
+            </if>
+            <if test="after != null">
+                `after` = #{after},
+            </if>
+            <if test="operatorId != null">
+                `operator_id` = #{operatorId},
+            </if>
+            <if test="collectionType != null">
+                `collection_type` = #{collectionType},
+            </if>
+            <if test="collection != null and collection!=''">
+                `collection` = #{collection},
+            </if>
+            <if test="operatorName != null and operatorName!=''">
+                `operator_name` = #{operatorName},
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime},
+            </if>
+            <if test="operatorTime != null">
+                `operator_time` = #{operatorTime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Withdrawal" id="WithdrawalMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="succeed" column="succeed"/>
+        <result property="amount" column="amount"/>
+        <result property="before" column="before"/>
+        <result property="after" column="after"/>
+        <result property="operatorId" column="operator_id"/>
+        <result property="collectionType" column="collection_type"/>
+        <result property="collection" column="collection"/>
+        <result property="operatorName" column="operator_name"/>
+        <result property="addtime" column="addtime"/>
+        <result property="operatorTime" column="operator_time"/>
+    </resultMap>
+
+
+    <select id="queryWithdrawal" resultMap="WithdrawalMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_withdrawal`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="userName != null and userName!=''">
+                `user_name` = #{userName} and
+            </if>
+            <if test="succeed != null">
+                `succeed` = #{succeed} and
+            </if>
+            <if test="amount != null">
+                `amount` = #{amount} and
+            </if>
+            <if test="before != null">
+                `before` = #{before} and
+            </if>
+            <if test="after != null">
+                `after` = #{after} and
+            </if>
+            <if test="operatorId != null">
+                `operator_id` = #{operatorId} and
+            </if>
+            <if test="collectionType != null">
+                `collection_type` = #{collectionType} and
+            </if>
+            <if test="collection != null and collection!=''">
+                `collection` = #{collection} and
+            </if>
+            <if test="operatorName != null and operatorName!=''">
+                `operator_name` = #{operatorName} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="operatorTime != null">
+                `operator_time` = #{operatorTime} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Withdrawal$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="userIdList != null">
+                    `user_id` in
+                    <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                <if test="userNameList != null">
+                    `user_name` in
+                    <foreach collection="userNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUserName!=null and fuzzyUserName.size()>0">
+                    (
+                    <foreach collection="fuzzyUserName"  separator="or" item="item">
+                        `User_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserName!=null and rightFuzzyUserName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserName"  separator="or" item="item">
+                        `User_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="succeedList != null">
+                    `succeed` in
+                    <foreach collection="succeedList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="succeedSt !=null">
+                    `succeed` >= #{succeedSt} and
+                </if>
+                <if test="succeedEd!=null">
+                    `succeed` &lt;= #{succeedEd} and
+                </if>
+                <if test="amountList != null">
+                    `amount` in
+                    <foreach collection="amountList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="amountSt !=null">
+                    `amount` >= #{amountSt} and
+                </if>
+                <if test="amountEd!=null">
+                    `amount` &lt;= #{amountEd} and
+                </if>
+                <if test="beforeList != null">
+                    `before` in
+                    <foreach collection="beforeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="beforeSt !=null">
+                    `before` >= #{beforeSt} and
+                </if>
+                <if test="beforeEd!=null">
+                    `before` &lt;= #{beforeEd} and
+                </if>
+                <if test="afterList != null">
+                    `after` in
+                    <foreach collection="afterList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="afterSt !=null">
+                    `after` >= #{afterSt} and
+                </if>
+                <if test="afterEd!=null">
+                    `after` &lt;= #{afterEd} and
+                </if>
+                <if test="operatorIdList != null">
+                    `operator_id` in
+                    <foreach collection="operatorIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="operatorIdSt !=null">
+                    `operator_id` >= #{operatorIdSt} and
+                </if>
+                <if test="operatorIdEd!=null">
+                    `operator_id` &lt;= #{operatorIdEd} and
+                </if>
+                <if test="collectionTypeList != null">
+                    `collection_type` in
+                    <foreach collection="collectionTypeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="collectionTypeSt !=null">
+                    `collection_type` >= #{collectionTypeSt} and
+                </if>
+                <if test="collectionTypeEd!=null">
+                    `collection_type` &lt;= #{collectionTypeEd} and
+                </if>
+                <if test="collectionList != null">
+                    `collection` in
+                    <foreach collection="collectionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCollection!=null and fuzzyCollection.size()>0">
+                    (
+                    <foreach collection="fuzzyCollection"  separator="or" item="item">
+                        `Collection` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCollection!=null and rightFuzzyCollection.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCollection"  separator="or" item="item">
+                        `Collection` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="operatorNameList != null">
+                    `operator_name` in
+                    <foreach collection="operatorNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyOperatorName!=null and fuzzyOperatorName.size()>0">
+                    (
+                    <foreach collection="fuzzyOperatorName"  separator="or" item="item">
+                        `Operator_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperatorName!=null and rightFuzzyOperatorName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperatorName"  separator="or" item="item">
+                        `Operator_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="addtimeList != null">
+                    `addtime` in
+                    <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+                <if test="operatorTimeList != null">
+                    `operator_time` in
+                    <foreach collection="operatorTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="operatorTimeSt !=null">
+                    `operator_time` >= #{operatorTimeSt} and
+                </if>
+                <if test="operatorTimeEd!=null">
+                    `operator_time` &lt;= #{operatorTimeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryWithdrawalLimit1" resultMap="WithdrawalMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_withdrawal`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="userId != null">
+                `user_id` = #{userId} and
+            </if>
+            <if test="userName != null and userName!=''">
+                `user_name` = #{userName} and
+            </if>
+            <if test="succeed != null">
+                `succeed` = #{succeed} and
+            </if>
+            <if test="amount != null">
+                `amount` = #{amount} and
+            </if>
+            <if test="before != null">
+                `before` = #{before} and
+            </if>
+            <if test="after != null">
+                `after` = #{after} and
+            </if>
+            <if test="operatorId != null">
+                `operator_id` = #{operatorId} and
+            </if>
+            <if test="collectionType != null">
+                `collection_type` = #{collectionType} and
+            </if>
+            <if test="collection != null and collection!=''">
+                `collection` = #{collection} and
+            </if>
+            <if test="operatorName != null and operatorName!=''">
+                `operator_name` = #{operatorName} and
+            </if>
+            <if test="addtime != null">
+                `addtime` = #{addtime} and
+            </if>
+            <if test="operatorTime != null">
+                `operator_time` = #{operatorTime} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Withdrawal$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="userIdList != null">
+                        `user_id` in
+                        <foreach collection="userIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="userIdSt !=null">
+                    `user_id` >= #{userIdSt} and
+                </if>
+                <if test="userIdEd!=null">
+                    `user_id` &lt;= #{userIdEd} and
+                </if>
+                    <if test="userNameList != null">
+                        `user_name` in
+                        <foreach collection="userNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUserName!=null and fuzzyUserName.size()>0">
+                    (
+                    <foreach collection="fuzzyUserName"  separator="or" item="item">
+                        `User_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUserName!=null and rightFuzzyUserName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUserName"  separator="or" item="item">
+                        `User_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="succeedList != null">
+                        `succeed` in
+                        <foreach collection="succeedList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="succeedSt !=null">
+                    `succeed` >= #{succeedSt} and
+                </if>
+                <if test="succeedEd!=null">
+                    `succeed` &lt;= #{succeedEd} and
+                </if>
+                    <if test="amountList != null">
+                        `amount` in
+                        <foreach collection="amountList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="amountSt !=null">
+                    `amount` >= #{amountSt} and
+                </if>
+                <if test="amountEd!=null">
+                    `amount` &lt;= #{amountEd} and
+                </if>
+                    <if test="beforeList != null">
+                        `before` in
+                        <foreach collection="beforeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="beforeSt !=null">
+                    `before` >= #{beforeSt} and
+                </if>
+                <if test="beforeEd!=null">
+                    `before` &lt;= #{beforeEd} and
+                </if>
+                    <if test="afterList != null">
+                        `after` in
+                        <foreach collection="afterList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="afterSt !=null">
+                    `after` >= #{afterSt} and
+                </if>
+                <if test="afterEd!=null">
+                    `after` &lt;= #{afterEd} and
+                </if>
+                    <if test="operatorIdList != null">
+                        `operator_id` in
+                        <foreach collection="operatorIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="operatorIdSt !=null">
+                    `operator_id` >= #{operatorIdSt} and
+                </if>
+                <if test="operatorIdEd!=null">
+                    `operator_id` &lt;= #{operatorIdEd} and
+                </if>
+                    <if test="collectionTypeList != null">
+                        `collection_type` in
+                        <foreach collection="collectionTypeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="collectionTypeSt !=null">
+                    `collection_type` >= #{collectionTypeSt} and
+                </if>
+                <if test="collectionTypeEd!=null">
+                    `collection_type` &lt;= #{collectionTypeEd} and
+                </if>
+                    <if test="collectionList != null">
+                        `collection` in
+                        <foreach collection="collectionList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCollection!=null and fuzzyCollection.size()>0">
+                    (
+                    <foreach collection="fuzzyCollection"  separator="or" item="item">
+                        `Collection` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCollection!=null and rightFuzzyCollection.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCollection"  separator="or" item="item">
+                        `Collection` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="operatorNameList != null">
+                        `operator_name` in
+                        <foreach collection="operatorNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyOperatorName!=null and fuzzyOperatorName.size()>0">
+                    (
+                    <foreach collection="fuzzyOperatorName"  separator="or" item="item">
+                        `Operator_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyOperatorName!=null and rightFuzzyOperatorName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyOperatorName"  separator="or" item="item">
+                        `Operator_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="addtimeList != null">
+                        `addtime` in
+                        <foreach collection="addtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="addtimeSt !=null">
+                    `addtime` >= #{addtimeSt} and
+                </if>
+                <if test="addtimeEd!=null">
+                    `addtime` &lt;= #{addtimeEd} and
+                </if>
+                    <if test="operatorTimeList != null">
+                        `operator_time` in
+                        <foreach collection="operatorTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="operatorTimeSt !=null">
+                    `operator_time` >= #{operatorTimeSt} and
+                </if>
+                <if test="operatorTimeEd!=null">
+                    `operator_time` &lt;= #{operatorTimeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `user_id`,
+        `user_name`,
+        `succeed`+0 as `succeed`,
+        `amount`,
+        `before`,
+        `after`,
+        `operator_id`,
+        `collection_type`,
+        `collection`,
+        `operator_name`,
+        `addtime`,
+        `operator_time`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Withdrawal$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userId==true">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.userName==true">
+                        `user_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.succeed==true">
+                        `succeed`+0 as `succeed`,
+                    </if>
+                    <if test="fetchFields.fetchFields.amount==true">
+                        `amount`,
+                    </if>
+                    <if test="fetchFields.fetchFields.before==true">
+                        `before`,
+                    </if>
+                    <if test="fetchFields.fetchFields.after==true">
+                        `after`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operatorId==true">
+                        `operator_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.collectionType==true">
+                        `collection_type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.collection==true">
+                        `collection`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operatorName==true">
+                        `operator_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.addtime==true">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.operatorTime==true">
+                        `operator_time`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userId==null">
+                        `user_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.userName==null">
+                        `user_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.succeed==null">
+                        `succeed`+0 as `succeed`,
+                    </if>
+                    <if test="fetchFields.excludeFields.amount==null">
+                        `amount`,
+                    </if>
+                    <if test="fetchFields.excludeFields.before==null">
+                        `before`,
+                    </if>
+                    <if test="fetchFields.excludeFields.after==null">
+                        `after`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operatorId==null">
+                        `operator_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.collectionType==null">
+                        `collection_type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.collection==null">
+                        `collection`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operatorName==null">
+                        `operator_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.addtime==null">
+                        `addtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.operatorTime==null">
+                        `operator_time`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Withdrawal$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

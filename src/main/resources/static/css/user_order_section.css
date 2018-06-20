@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#index_section .weui-search-bar:after {
+    content: "";
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #D7D6DC;
+    color: #D7D6DC;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.orderlist {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.orderlist .orderitem {
+    width: 100%;
+    padding: 0px 0 10px 0;
+}
+
+.orderlist .orderitem h3 {
+    padding: 0 10px 5px 10px;
+    font-weight: 400;
+}
+
+.orderlist .orderitem h3 span {
+    float: right;
+    font-weight: 400;
+    color: red;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.orderlist .orderitem .product {
+    background: #f2f2f2;
+    padding: 12px;
+}
+
+.orderlist .orderitem .product img {
+    height: 65px;
+    width: 16%;
+    float: left;
+}
+
+.orderlist .orderitem .product .product_info {
+    width: 83%;
+    float: left;
+    padding: 0px 10px;
+}
+
+.orderlist .orderitem .product .product_info h4 {
+    color: #666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.orderlist .orderitem .product .product_info p {
+    color: #888;
+}
+
+.orderlist .orderitem .product .product_info .price {
+    color: red;
+    text-align: right;
+    float: right;
+}
+
+.orderlist .orderitem .order_status {
+    padding: 10px;
+    text-align: right;
+}
+
+.orderlist .orderitem .order_status span {
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    margin-left: 5px;
+    font-size: 13px;
+}

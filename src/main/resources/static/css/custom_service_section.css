@@ -1,0 +1,28 @@
+.head{
+    height: 44px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+.head h2{
+    margin: 0 40%;
+    font-weight: 500;
+    text-align: center;
+    font-size: 18px;
+    line-height: 35px;
+    color: #DE7C23;
+    border-bottom: 2px solid #DE7C23;
+    height: 100%;
+}
+.content .weui-input{
+    -webkit-appearance: none;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%;
+    font-size: inherit;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+    z-index: 1;
+}

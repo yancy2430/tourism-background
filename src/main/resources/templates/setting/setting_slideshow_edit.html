@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>欢迎页面-X-admin2.0</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="../css/font.css">
+  <link rel="stylesheet" href="../css/xadmin.css">
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../js/xadmin.js"></script>
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div class="x-body">
+  <form id="setting" class="layui-form" wid100="" lay-filter="">
+    <input type="hidden" name="slideId" value="" class="layui-input">
+    <div class="layui-form-item">
+      <label class="layui-form-label">轮播图名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" value="" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">跳转链接</label>
+      <div class="layui-input-block">
+        <input type="text" name="url" placeholder="http://" lay-verify="url" value="" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">轮播图片</label>
+      <div class="layui-input-block">
+        <div class="layui-upload">
+          <button type="button" class="layui-btn" id="test1">上传图片</button>
+          <div class="layui-upload-list">
+            <img style="width: 160px;height: 120px;" class="layui-upload-img" id="demo1">
+            <input type="hidden" name="image" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">开始时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="starttime" id="starttime" placeholder="yyyy-MM-dd HH:mm:ss" value="" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">结束时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="endtime" id="endtime" placeholder="yyyy-MM-dd HH:mm:ss" value="" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否显示</label>
+      <div class="layui-input-block">
+        <input type="checkbox" value="1" name="isshow" lay-skin="switch" lay-text="显|隐">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">排序</label>
+      <div class="layui-input-inline">
+        <input type="number" name="sort" value="" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], function () {
+
+    $ = layui.jquery;
+    var form = layui.form
+            , layer = layui.layer
+            , element = layui.element
+            , laydate = layui.laydate
+            , laytpl = layui.laytpl
+            , table = layui.table
+            , upload = layui.upload
+
+
+      reqGet("admin/setting/getSlide",{slideId:$_GET['slideId']},function (res) {
+          console.log(res)
+          $("input[name='slideId']").val(res.data.slideId)
+          $("input[name='name']").val(res.data.name)
+          $("input[name='url']").val(res.data.url)
+          $("input[name='image']").val(res.data.image)
+          $("#demo1").attr("src",res.data.image)
+          $("input[name='starttime']").val(res.data.starttime.replace('T',' '))
+          $("input[name='endtime']").val(res.data.endtime.replace('T',' '))
+          $("input[name='sort']").val(res.data.sort)
+          if (res.data.isshow==1){
+              $("input[name='isshow']").prop("checked",true);
+          }else {
+              $("input[name='isshow']").prop("checked",false);
+          }
+          form.render();
+      })
+
+
+      //常规用法
+      laydate.render({
+          elem: '#starttime'
+          ,type: 'datetime'
+      });
+      //常规用法
+      laydate.render({
+          elem: '#endtime'
+          ,type: 'datetime'
+      });
+      //普通图片上传
+      var uploadInst = upload.render({
+          elem: '#test1'
+          ,url: '/uploadfile/image'
+          ,before: function(obj){
+              //预读本地文件示例，不支持ie8
+              obj.preview(function(index, file, result){
+                  $('#demo1').attr('src', result); //图片链接（base64）
+              });
+          }
+          ,done: function(res){
+              //如果上传失败
+              if(res.code > 0){
+                  return layer.msg('上传失败');
+              }
+              $("input[name='image']").val(res.data.src)
+              //上传成功
+          }
+      });
+
+      //监听提交
+    form.on('submit(submit)', function(data){
+        reqPost("admin/setting/editSlide",data.field,function (res) {
+            if (res.code==0){
+                x_admin_close();
+            }else {
+                layer.msg(res.msg);
+            }
+        })
+       return false;
+    });
+
+  })
+
+</script>
+
+</body>
+
+</html>

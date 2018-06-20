@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section data-cache="true" id="product_details_section" data-role="section" data-transition="empty">
+
+    <header class="product_info details">
+        <div class="titlebar" style="background: transparent">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <a style="right: 50px;"><i class="iconfont iconline-reply"></i></a>
+            <a><i class="iconfont iconline-more"></i></a>
+        </div>
+    </header>
+    <article data-role="article" id="product_article" data-scroll="verticle" class="active" style="bottom:0px;">
+        <div class="scroller">
+            <div class="product">
+
+            </div>
+        </div>
+    </article>
+    <footer>
+        <nav class="menubar" style="width: 100%;">
+            <a class="menu" id="collect" style="width: 60px;" href="#">
+
+                <th:block th:if="${isCollect} eq '1'">
+                <span class="menu-icon iconfont iconline-heart-fill"></span>
+                    <span class="menu-text">已收藏</span>
+                </th:block>
+
+                <th:block th:if="${isCollect} eq '0'">
+                    <span class="menu-icon iconfont iconline-heart"></span>
+                    <span class="menu-text">收藏</span>
+                </th:block>
+            </a>
+            <a class="menu" id="telephone" data-tel="18152733661" style="width: 60px;" href="#">
+                <span class="menu-icon iconfont iconline-tel-endcall"></span>
+                <span class="menu-text">电话咨询</span>
+            </a>
+            <a class="menu" style="width: 60px;" href="#">
+                <span class="menu-icon iconfont iconline-media-arphones-microphone"></span>
+                <span class="menu-text">在线咨询</span>
+            </a>
+            <button id="todateselect" class="block submit"
+                    style="margin: 10px;width: -webkit-fill-available;">
+                <span>开始预订</span>
+            </button>
+        </nav>
+    </footer>
+</section>
+<script id="product" type="text/html">
+    <div class="images">
+        <div id="slide" data-role="slider" class="full-width active" style="overflow: hidden;height: 100%;">
+            <div class="scroller">
+                <% for(i=0;i < productinfo.images.length;i++){ %>
+                <div class="slide">
+                    <img data-source="http://admin.icsw.cn:8080<%=productinfo.images[i]%>" class="full-width"/>
+                </div>
+                <% }%>
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        <h2><%=productinfo.product_name%></h2>
+        <span class="price">￥<%=productinfo.price%></span>
+        <div class="share"><span class="iconline-share"></span>
+            <p>分享</p></div>
+    </div>
+    <div class="taglist">
+        <div class="weui-flex">
+            <% for(i=0;i < productinfo.security.length;i++){ %>
+            <div class="weui-flex__item">
+                <div class="placeholder"><i style="margin-right: 3px" class="iconline-checked2"></i><%=productinfo.security[i]%>
+                </div>
+            </div>
+            <% }%>
+        </div>
+    </div>
+    <div class="selectpackage">
+        <div class="tit">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>选择套餐</p>
+                </div>
+            </div>
+        </div>
+        <div class="packagelist">
+            <% for(i=0;i < packagelist.length;i++){ %>
+            <div class="placeholder" data-id="<%=packagelist[i].package_no %>"><%=packagelist[i].package_name %></div>
+            <% }%>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="selectInfo">
+        <div class="tit">
+            <div class="weui-cell" style="padding: 2px;">
+                <div class="weui-cell__bd">
+                    <p>选择 出发日期 出游人数</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </div>
+        </div>
+        <div class="selectdate">
+            <% for(i=0;i < 4;i++){ %>
+            <% if(groupdate[i]){ %>
+            <div class="date"><%=groupdate[i].date%><p><%=groupdate[i].list[0].adult_price%></p></div>
+            <% }%>
+            <% }%>
+            <div class="all_date">全部<p>团期</p></div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <a data-role="scrollTop" data-toggle="scrollTop" href="#product_article" style="bottom:56px;right:4px;">
+        <img src="assets/app/img/top.png" style="border: 1px solid #efefef;"></img>
+    </a>
+    <div class="details">
+        <div id="tabbar" class="tabbar">
+            <% for(i=0;i < packagelist[0].content.length;i++){ %>
+            <a class="tab" data-id="<%=i %>" href="#"><%=packagelist[0].content[i].name %></a>
+            <% }%>
+        </div>
+        <div class="content">
+            <% for(i=0;i < packagelist[0].content.length;i++){ %>
+            <div id="c<%=i%>" class="item">
+                <%=packagelist[0].content[i].html %>
+            </div>
+            <% }%>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="recommend">
+        <h3 style="text-align: center">更多产品推荐</h3>
+        <ul>
+            <li>
+
+            </li>
+            <li>
+
+            </li>
+        </ul>
+    </div>
+</script>
+<script type="text/html" id="login_template">
+    <div style="padding:10px 20px;">
+        <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">请先登录</div>
+        <input type="text" name="name" class="full-width" placeholder="用户名" style="margin:0px -8px;"><div class="rowspace"></div>
+        <input type="password" name="password" class="full-width" placeholder="密码" style="margin:0px -8px;"><div class="rowspace"></div>
+        <button class="width-full">登录</button>
+    </div>
+</script>
+<th:block th:include="footer"></th:block>

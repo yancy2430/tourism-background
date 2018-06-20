@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="header"></th:block>
+<section data-cache="true" class="" id="place_order_section" data-role="section" data-transition="empty">
+    <header>
+        <div class="titlebar">
+            <a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+            <h1>填写订单信息</h1>
+        </div>
+    </header>
+    <article data-role="article" id="calendar_article" class="active" style="background:#99A6AE;top:44px;">
+
+        <div class="order_info">
+            <p class="product_info">
+
+            </p>
+            <p><span id="datetime">2018-05-28</span>出发<span id="adultNum"></span>成人<span id="childrenNum"></span>儿童</p>
+        </div>
+        <form class="form-common" action="place_order_succeed_section.html" method="post">
+            <div class="card_list">
+                <div class="carditem">
+                    <h4>出行人信息<span>预订限制</span></h4>
+                    <div id="number_people">
+                    </div>
+                    <p>非必填，可稍后填写，请务必与出游所持证件一致</p>
+                </div>
+                <div class="carditem">
+                    <h4>联系人信息</h4>
+                    <div class="weui-flex">
+                        <div class="input-left">
+                            <div class="placeholder">
+                                联系人
+                            </div>
+                        </div>
+                        <div class="weui-flex__item input-right">
+                            <input name="contact" type="text" placeholder="请填写联系人姓名">
+                        </div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="input-left">
+                            <div class="placeholder">
+                                手机号码
+                            </div>
+                        </div>
+                        <div class="weui-flex__item input-right">
+                            <input name="mobile" type="tel" placeholder="必填，用于接受短信">
+                        </div>
+                    </div>
+                    <div class="weui-flex">
+                        <div class="input-left">
+                            <div class="placeholder">
+                                电子邮箱
+                            </div>
+                        </div>
+                        <div class="weui-flex__item input-right">
+                            <input name="email" type="email" placeholder="非必填，用于接收确认单">
+                        </div>
+                    </div>
+                    <p>为了您顺利出行，请务必保障填写真实信息</p>
+
+                </div>
+                <div class="carditem">
+                    <h4>特殊需求</h4>
+                    <textarea name="remark" style="padding: 5px 10px" rows="4" class="noborder"
+                              placeholder="非必填，您的特殊需求，我们会尽量协调。如无法满足，我们不会另行通知，请您见谅"></textarea>
+
+                </div>
+                <button class="block submit">
+                    <i class="iconfont iconline-rdo-tick"></i>
+                    <span>提交订单</span>
+                </button>
+            </div>
+
+        </form>
+    </article>
+
+</section>
+<script type="text/html" id="identity">
+    <% for(i=0;i< num; i++){ %>
+    <div class="weui-flex">
+        <div class="input-left">
+            <div class="placeholder">
+                <input name="username" type="text" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="weui-flex__item input-right">
+            <input name="userIdcard" type="number" placeholder="请输入身份证号">
+        </div>
+    </div>
+    <% } %>
+</script>
+<th:block th:include="footer"></th:block>

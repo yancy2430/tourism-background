@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdeado.tourism.dao.base.AreaBaseMapper">
+
+
+    <insert id="insertArea"  useGeneratedKeys="true" keyProperty="areaId">
+        INSERT INTO `tb_area`
+        (
+        <trim suffixOverrides=",">
+                    <if test="areaId!=null">
+                        `area_id`,
+                    </if>
+                    <if test="areaUpid!=null">
+                        `area_upid`,
+                    </if>
+                    <if test="areaName!=null">
+                        `area_name`,
+                    </if>
+                    <if test="sort!=null">
+                        `sort`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="areaId!=null">
+                    #{areaId},
+                </if>
+                <if test="areaUpid!=null">
+                    #{areaUpid},
+                </if>
+                <if test="areaName!=null">
+                    #{areaName},
+                </if>
+                <if test="sort!=null">
+                    #{sort},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateArea">
+        UPDATE `tb_area`
+        SET
+        <trim suffixOverrides=",">
+            <if test="areaUpid != null">
+                `area_upid` = #{areaUpid},
+            </if>
+            <if test="areaName != null and areaName!=''">
+                `area_name` = #{areaName},
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `area_id` = #{areaId} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.tdeado.tourism.entity.Area" id="AreaMap">
+        <result property="areaId" column="area_id"/>
+        <result property="areaUpid" column="area_upid"/>
+        <result property="areaName" column="area_name"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+
+    <select id="queryArea" resultMap="AreaMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_area`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="areaId != null">
+                `area_id` = #{areaId} and
+            </if>
+            <if test="areaUpid != null">
+                `area_upid` = #{areaUpid} and
+            </if>
+            <if test="areaName != null and areaName!=''">
+                `area_name` = #{areaName} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Area$QueryBuilder) == true">
+                <if test="areaIdList != null">
+                    `area_id` in
+                    <foreach collection="areaIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="areaIdSt !=null">
+                    `area_id` >= #{areaIdSt} and
+                </if>
+                <if test="areaIdEd!=null">
+                    `area_id` &lt;= #{areaIdEd} and
+                </if>
+                <if test="areaUpidList != null">
+                    `area_upid` in
+                    <foreach collection="areaUpidList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="areaUpidSt !=null">
+                    `area_upid` >= #{areaUpidSt} and
+                </if>
+                <if test="areaUpidEd!=null">
+                    `area_upid` &lt;= #{areaUpidEd} and
+                </if>
+                <if test="areaNameList != null">
+                    `area_name` in
+                    <foreach collection="areaNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAreaName!=null and fuzzyAreaName.size()>0">
+                    (
+                    <foreach collection="fuzzyAreaName"  separator="or" item="item">
+                        `Area_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAreaName!=null and rightFuzzyAreaName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAreaName"  separator="or" item="item">
+                        `Area_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="sortList != null">
+                    `sort` in
+                    <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryAreaLimit1" resultMap="AreaMap">
+        select
+        <include refid="baseResult"></include>
+        from  `tb_area`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="areaId != null">
+                `area_id` = #{areaId} and
+            </if>
+            <if test="areaUpid != null">
+                `area_upid` = #{areaUpid} and
+            </if>
+            <if test="areaName != null and areaName!=''">
+                `area_name` = #{areaName} and
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort} and
+            </if>
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Area$QueryBuilder) == true">
+                    <if test="areaIdList != null">
+                        `area_id` in
+                        <foreach collection="areaIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="areaIdSt !=null">
+                    `area_id` >= #{areaIdSt} and
+                </if>
+                <if test="areaIdEd!=null">
+                    `area_id` &lt;= #{areaIdEd} and
+                </if>
+                    <if test="areaUpidList != null">
+                        `area_upid` in
+                        <foreach collection="areaUpidList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="areaUpidSt !=null">
+                    `area_upid` >= #{areaUpidSt} and
+                </if>
+                <if test="areaUpidEd!=null">
+                    `area_upid` &lt;= #{areaUpidEd} and
+                </if>
+                    <if test="areaNameList != null">
+                        `area_name` in
+                        <foreach collection="areaNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAreaName!=null and fuzzyAreaName.size()>0">
+                    (
+                    <foreach collection="fuzzyAreaName"  separator="or" item="item">
+                        `Area_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAreaName!=null and rightFuzzyAreaName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAreaName"  separator="or" item="item">
+                        `Area_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="sortList != null">
+                        `sort` in
+                        <foreach collection="sortList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="sortSt !=null">
+                    `sort` >= #{sortSt} and
+                </if>
+                <if test="sortEd!=null">
+                    `sort` &lt;= #{sortEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `area_id`,
+        `area_upid`,
+        `area_name`,
+        `sort`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.tdeado.tourism.entity.Area$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.areaId==true">
+                        `area_id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.areaUpid==true">
+                        `area_upid`,
+                    </if>
+                    <if test="fetchFields.fetchFields.areaName==true">
+                        `area_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.sort==true">
+                        `sort`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.areaId==null">
+                        `area_id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.areaUpid==null">
+                        `area_upid`,
+                    </if>
+                    <if test="fetchFields.excludeFields.areaName==null">
+                        `area_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.sort==null">
+                        `sort`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.tdeado.tourism.entity.Area$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
