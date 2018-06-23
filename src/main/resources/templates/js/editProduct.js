@@ -514,7 +514,22 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         var othis = $(this), type = othis.data('type');
         active[type] ? active[type].call(this, othis) : '';
     });
+
+    var E = window.wangEditor
+    var contentEditor = new E('#content')
+    var $text = $('#content_text')
+    contentEditor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text.val(html)
+    }
+    // 配置服务器端地址
+    contentEditor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    contentEditor.create()
+
     var initData = function (localdata) {
+
+
+
         console.log(localdata)
         //恢复productinfo
         $("input[name='product_no']").val(localdata.productinfo.product_no)
@@ -529,6 +544,8 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         $("input[name='price']").val(localdata.productinfo.price)
         $("input[name='security']").val(localdata.productinfo.security)
         $("input[name='hotline']").val(localdata.productinfo.hotline)
+        $("#content_text").val(localdata.productinfo.content)
+        contentEditor.txt.html(localdata.productinfo.content)
         if (localdata.productinfo.notmobile == 1)
             $("input[name='notmobile']").attr("checked", "checked");
 
@@ -596,8 +613,8 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                 element.tabChange(str, amid); //切换到：最新添加的套餐
             })
         })
-
-        $.each(localdata.tripInfo,function (index,value) {
+        console.log(JSON.parse(localdata.tripInfo))
+        $.each(JSON.parse(localdata.tripInfo),function (index,value) {
             var mid = new Date().getTime();
             var data = { //数据
                 "day_no": mid,
@@ -705,7 +722,7 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         var product_cate_name = $("#product_cate").find("option:selected").text();
         info['product_cate_name'] = product_cate_name;
         var formtrip = getformtrip();
-        var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:formtrip};
+        var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:JSON.stringify(formtrip)};
         jsonstr = JSON.stringify(obj);
 
         var index = layer.load(2);
@@ -818,4 +835,8 @@ function getAll(begin,end){
 function addDayItem(id) {
     // alert("a")
     active.addDayItem(id,null)
+}
+
+function editPackageName() {
+    alert("A")
 }

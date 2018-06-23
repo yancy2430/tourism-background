@@ -17,7 +17,7 @@ public class ProductData {
     private ProductinfoBean productinfo;
     private List<PackagelistBean> packagelist;
     private List<GroupdateBean> groupdate;
-    private List<TripInfoBean> tripInfo;
+    private String tripInfo;
 
     public ProductinfoBean getProductinfo() {
         return productinfo;
@@ -42,11 +42,11 @@ public class ProductData {
     public void setGroupdate(List<GroupdateBean> groupdate) {
         this.groupdate = groupdate;
     }
-    public List<TripInfoBean> getTripInfo() {
+    public String getTripInfo() {
         return tripInfo;
     }
 
-    public void setTripInfo(List<TripInfoBean> tripInfo) {
+    public void setTripInfo(String tripInfo) {
         this.tripInfo = tripInfo;
     }
 
@@ -71,9 +71,11 @@ public class ProductData {
         private String product_cate;
         private String product_cate_name;
         private String product_tag;
+        private String[] productTags;
         private String principal;
         private String sketch;
         private String origin;
+        private String content;
         private String destination;
         private String hotline;
         private String notmobile;
@@ -83,6 +85,31 @@ public class ProductData {
         private List<String> images;
         private String price;
         private String security;
+        private String[] securityList;
+
+        public String[] getSecurityList() {
+            return securityList;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public void setSecurityList(String[] securityList) {
+            this.securityList = securityList;
+        }
+
+        public String[] getProductTags() {
+            return productTags;
+        }
+
+        public void setProductTags(String[] productTags) {
+            this.productTags = productTags;
+        }
 
         public String getProduct_cate_name() {
             return product_cate_name;
@@ -484,95 +511,4 @@ public class ProductData {
         }
     }
 
-    public static class TripInfoBean {
-        /**
-         * id : 0
-         * name : 第一天
-         * list : [{"time":"3点3分","type":"2","title":"订单","content":"打我发完","img":["/upload/images/bbc8a00b24ef0f0592d6248523de4cfb.jpg","/upload/images/f59d40f0602d0bc0c6fa8f5a75549bfd.jpg"]},{"time":"23点0分","type":"3","title":"阿法外","content":"对对对","img":["/upload/images/79e1a723a1cfcf332c7da78fa9822ee7.jpg","/upload/images/9c768619bde4677e0d91b693b41d9593.png"]}]
-         */
-
-        private int id;
-        private String name;
-        private List<TripInfoBean.ListBeanX> list;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public List<TripInfoBean.ListBeanX> getList() {
-            return list;
-        }
-
-        public void setList(List<TripInfoBean.ListBeanX> list) {
-            this.list = list;
-        }
-
-        public static class ListBeanX {
-            /**
-             * time : 3点3分
-             * type : 2
-             * title : 订单
-             * content : 打我发完
-             * img : ["/upload/images/bbc8a00b24ef0f0592d6248523de4cfb.jpg","/upload/images/f59d40f0602d0bc0c6fa8f5a75549bfd.jpg"]
-             */
-
-            private String time;
-            private String type;
-            private String title;
-            private String content;
-            private List<String> img;
-
-            public String getTime() {
-                return time;
-            }
-
-            public void setTime(String time) {
-                this.time = time;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public List<String> getImg() {
-                return img;
-            }
-
-            public void setImg(List<String> img) {
-                this.img = img;
-            }
-        }
-    }
 }

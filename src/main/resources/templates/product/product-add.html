@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
     <script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
@@ -108,6 +108,7 @@
 <div class="layui-tab layui-tab-card" style="margin: -1px 0;">
     <ul class="layui-tab-title" style="padding-left: 28px;margin-bottom: 10px;">
         <li class="layui-this">基本信息</li>
+        <li>图文详情</li>
         <li>行程内容</li>
         <li>套餐信息</li>
         <li class="site-date-active" data-type="initGroupDateList">团期管理</li>
@@ -116,6 +117,7 @@
         <div class="layui-tab-item layui-show">
 
             <form class="layui-form" id="productinfo">
+                <input id="content_text" type="hidden" />
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">
@@ -260,6 +262,10 @@
             </form>
         </div>
         <div class="layui-tab-item">
+            <div id="content"></div>
+
+        </div>
+        <div class="layui-tab-item">
             <div class="layui-tab triplist layui-tab-brief" lay-filter="trip" lay-allowclose="true">
                 <ul class="layui-tab-title" style="float: left">
                 </ul>
@@ -350,11 +356,33 @@
             </div>
             <div class="layui-card-body">
                 <div class="layui-form-item">
-                    <div class="layui-input-inline">
-                        <input type="text" name="title" placeholder="标题" autocomplete="off" class="layui-input">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="text-align: left;padding: 9px 15px 9px 2px;">景点名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" value="" name="title" placeholder="标题" autocomplete="off"
+                                   class="layui-input">
+                        </div>
                     </div>
-                    <div class="layui-form-mid layui-word-aux"></div>
                 </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="text-align: left;padding: 9px 15px 9px 2px;">活动时间</label>
+
+                        <div class="layui-input-inline">
+                            <input type="number" value="" name="time_h" placeholder="小时"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">小时</div>
+                        <div class="layui-input-inline">
+                            <input type="number" value="" name="time_m" placeholder="分钟"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">分钟</div>
+                    </div>
+                </div>
+
+
                 <textarea placeholder="请输入内容" class="layui-textarea"
                           name="content"></textarea>
             </div>
@@ -382,7 +410,7 @@
                             <span class="x-red">*</span>套餐名称
                         </label>
                         <div class="layui-input-inline">
-                            <input type="text" name="package_name" value="{{ d.name }}"
+                            <input onchange="editPackageName()" type="text" name="package_name" value="{{ d.name }}"
                                    autocomplete="off" class="layui-input">
                             <input type="hidden" name="package_no" value="{{ d.package_no }}" class="layui-input">
 

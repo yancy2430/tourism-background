@@ -49,6 +49,11 @@ public class Product implements Serializable {
     * isNullAble:1
     */
     private String productTag;
+    /**
+     * 保障数组
+     * isNullAble:1
+     */
+    public String[] productTagList;
 
     /**
     * 负责人
@@ -135,10 +140,15 @@ public class Product implements Serializable {
     private String price;
 
     /**
-    * 保障
-    * isNullAble:1
-    */
+     * 保障
+     * isNullAble:1
+     */
     private String security;
+    /**
+     * 保障数组
+     * isNullAble:1
+     */
+    public String[] securityList;
 
     /**
     * 行程内容json
@@ -151,6 +161,11 @@ public class Product implements Serializable {
     * isNullAble:1
     */
     private String origin;
+    /**
+     * 图文详情
+     * isNullAble:1
+     */
+    private String content;
 
     /**
     * 
@@ -158,6 +173,29 @@ public class Product implements Serializable {
     */
     private String destination;
 
+    public String[] getProductTagList() {
+        return productTagList;
+    }
+
+    public void setProductTagList(String[] productTagList) {
+        this.productTagList = productTagList;
+    }
+
+    public String[] getSecurityList() {
+        return securityList;
+    }
+
+    public void setSecurityList(String[] securityList) {
+        this.securityList = securityList;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public void setProductId(Integer productId){
         this.productId = productId;

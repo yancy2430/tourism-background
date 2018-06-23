@@ -51,12 +51,13 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productData.getProductinfo().getProduct_name());
         product.setSketch(productData.getProductinfo().getSketch());
         product.setImages(new Gson().toJson(productData.getProductinfo().getImages()));
-        product.setTrip(new Gson().toJson(productData.getTripInfo()));
+        product.setTrip(productData.getTripInfo());
         product.setOrigin(productData.getProductinfo().getOrigin());
         product.setDestination(productData.getProductinfo().getDestination());
         product.setNotmobile(Integer.parseInt(productData.getProductinfo().getNotmobile()));
         product.setProductNo(productData.getProductinfo().getProduct_no());
         product.setProductCateName(productData.getProductinfo().getProduct_cate_name());
+        product.setContent(productData.getProductinfo().getContent());
         int id = 0;
         try {
             id = productMapper.insertProduct(product);
@@ -117,7 +118,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCate(Integer.parseInt(productData.getProductinfo().getProduct_cate()));
         product.setProductTag(productData.getProductinfo().getProduct_tag());
         product.setProductName(productData.getProductinfo().getProduct_name());
-        product.setTrip(new Gson().toJson(productData.getTripInfo()));
+        product.setTrip(productData.getTripInfo());
         product.setOrigin(productData.getProductinfo().getOrigin());
         product.setDestination(productData.getProductinfo().getDestination());
         product.setSketch(productData.getProductinfo().getSketch());
@@ -127,6 +128,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCateName(productData.getProductinfo().getProduct_cate_name());
         product.setPrice(productData.getProductinfo().getPrice());
         product.setSecurity(productData.getProductinfo().getSecurity());
+        product.setContent(productData.getProductinfo().getContent());
         int id = productMapper.updateProduct(product);
         if (id < 1) {
             throw new RuntimeException("数据库编辑产品失败");
@@ -194,7 +196,8 @@ public class ProductServiceImpl implements ProductService {
         productinfoBean.setDestination(p.getDestination());
         productinfoBean.setSketch(p.getSketch());
         productinfoBean.setPrice(p.getPrice());
-
+        productinfoBean.setContent(p.getContent());
+        System.err.println(p.getContent());
         productinfoBean.setSecurity(p.getSecurity());
         JsonParser parser = new JsonParser();
         //将JSON的String 转成一个JsonArray对象
@@ -244,6 +247,7 @@ public class ProductServiceImpl implements ProductService {
                 listBean.setPackage_name(productDate.getPackageName());
                 listBean.setTeamtime(productDate.getTeamtime());
                 map.get(productDate.getTeamtime()).add(listBean);
+
             }else {
                 List<ProductData.GroupdateBean.ListBean> listBeans = new ArrayList<>();
                 ProductData.GroupdateBean.ListBean listBean = new ProductData.GroupdateBean.ListBean();
@@ -283,7 +287,7 @@ public class ProductServiceImpl implements ProductService {
             }
         });
         productData.setGroupdate(groupdateBeans);
-        productData.setTripInfo(new Gson().fromJson(p.getTrip(), new TypeToken<List<ProductData.TripInfoBean>>() {}.getType()));
+        productData.setTripInfo(p.getTrip());
         return productData;
     }
 

@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
     <script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
@@ -18,15 +18,15 @@
 
 <body>
 <!--<div class="x-nav">-->
-      <!--<span class="layui-breadcrumb">-->
-        <!--<a href="">首页</a>-->
-        <!--<a href="">产品管理</a>-->
-        <!--<a>-->
-          <!--<cite>产品添加</cite></a>-->
-      <!--</span>-->
-    <!--<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"-->
-       <!--href="javascript:location.replace(location.href);" title="刷新">-->
-        <!--<i class="layui-icon" style="line-height:30px">ဂ</i></a>-->
+<!--<span class="layui-breadcrumb">-->
+<!--<a href="">首页</a>-->
+<!--<a href="">产品管理</a>-->
+<!--<a>-->
+<!--<cite>产品添加</cite></a>-->
+<!--</span>-->
+<!--<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"-->
+<!--href="javascript:location.replace(location.href);" title="刷新">-->
+<!--<i class="layui-icon" style="line-height:30px">ဂ</i></a>-->
 <!--</div>-->
 <style>
     .layui-tab-title li {
@@ -54,37 +54,41 @@
         display: none;
     }
 
-
     /*.laydate-day-mark::after {*/
-        /*background-color: transparent;*/
-        /*content: "1000";*/
-        /*color: #f94c4c;*/
-        /*top: 20px;*/
-        /*width: 50px;*/
+    /*background-color: transparent;*/
+    /*content: "1000";*/
+    /*color: #f94c4c;*/
+    /*top: 20px;*/
+    /*width: 50px;*/
     /*}*/
     .laydate-day-mark {
         font-size: inherit;
     }
-    .laydate-day-mark p{
+
+    .laydate-day-mark p {
         color: #ff5741;
         padding: 0px;
         margin: 0px;
         line-height: 10px;
         font-size: 12px;
     }
+
     .layui-laydate-content td.layui-this .laydate-day-mark::after {
         display: none;
     }
+
     .layui-laydate .layui-this {
-        background-color: #fff2ea!important;
-        color: #666!important;
+        background-color: #fff2ea !important;
+        color: #666 !important;
     }
-    .layui-upload-list img{
+
+    .layui-upload-list img {
         width: 92px;
         height: 92px;
         margin: 0 10px 10px 0;
     }
-    .layui-upload-list  p{
+
+    .layui-upload-list p {
         text-align: center;
         color: red;
         font-size: 12px;
@@ -92,6 +96,7 @@
         cursor: pointer;
         padding-right: 10px;
     }
+
     .layui-upload-drag {
         display: inline-block;
         vertical-align: middle;
@@ -110,6 +115,7 @@
 <div class="layui-tab layui-tab-card" style="margin: -1px 0;">
     <ul class="layui-tab-title" style="padding-left: 28px;margin-bottom: 10px;">
         <li class="layui-this">基本信息</li>
+        <li>图文详情</li>
         <li>行程内容</li>
         <li>套餐信息</li>
         <li class="site-date-active" data-type="initGroupDateList">团期管理</li>
@@ -118,6 +124,7 @@
         <div class="layui-tab-item layui-show">
 
             <form class="layui-form" id="productinfo">
+                <input id="content_text" type="hidden" />
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">
@@ -166,7 +173,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
-                    <label  class="layui-form-label">
+                    <label class="layui-form-label">
                         产品简述
                     </label>
                     <div class="layui-input-block">
@@ -221,7 +228,7 @@
                         <input type="text" name="hotline" class="layui-input">
                     </div>
                     <div class="layui-input-block" style="margin-left: 310px;">
-                        <input value="1" type="checkbox" name="notmobile" lay-skin="primary" title="不支持电话咨询" >
+                        <input value="1" type="checkbox" name="notmobile" lay-skin="primary" title="不支持电话咨询">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text" style="display: none">
@@ -242,7 +249,7 @@
                             <button type="button" class="layui-btn" id="upimages">多图片上传</button>
                             <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
                                 预览图：
-                                <div class="layui-upload-list" >
+                                <div class="layui-upload-list">
                                     <ul id="imagelist">
 
                                     </ul>
@@ -256,11 +263,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否上架</label>
                     <div class="layui-input-block">
-                        <input value="1" type="checkbox" name="isshow" lay-skin="switch" >
+                        <input value="1" type="checkbox" name="isshow" lay-skin="switch">
                     </div>
                 </div>
 
             </form>
+        </div>
+        <div class="layui-tab-item">
+            <div id="content"></div>
         </div>
         <div class="layui-tab-item">
             <div class="layui-tab triplist layui-tab-brief" lay-filter="trip" lay-allowclose="true">
@@ -349,28 +359,55 @@
                     {{ d.data.time }}
                 </div>
                 <div class="layui-input-inline" style="float: right;">
-                    <input type="radio" name="type_{{d.item_no}}" value="1" title="景点" {{#  if(d.data.type == 1){ }}checked="checked"{{#  } }}>
-                    <input type="radio" name="type_{{d.item_no}}" value="2" title="酒店住宿" {{#  if(d.data.type == 2){ }}checked="checked"{{#  } }}>
-                    <input type="radio" name="type_{{d.item_no}}" value="3" title="出行" {{#  if(d.data.type == 3){ }}checked="checked"{{#  } }}>
-                    <input type="radio" name="type_{{d.item_no}}" value="4" title="其他" {{#  if(d.data.type == 4){ }}checked="checked"{{#  } }}>
+                    <input type="radio" name="type_{{d.item_no}}" value="1" title="景点" {{# if(d.data.type== 1){
+                           }}checked="checked" {{# } }}>
+                    <input type="radio" name="type_{{d.item_no}}" value="2" title="酒店住宿" {{# if(d.data.type== 2){
+                           }}checked="checked" {{# } }}>
+                    <input type="radio" name="type_{{d.item_no}}" value="3" title="出行" {{# if(d.data.type== 3){
+                           }}checked="checked" {{# } }}>
+                    <input type="radio" name="type_{{d.item_no}}" value="4" title="其他" {{# if(d.data.type== 4){
+                           }}checked="checked" {{# } }}>
                 </div>
             </div>
             <div class="layui-card-body">
                 <div class="layui-form-item">
-                    <div class="layui-input-inline">
-                        <input type="text" value="{{d.data.title}}" name="title" placeholder="标题" autocomplete="off" class="layui-input">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="text-align: left;padding: 9px 15px 9px 2px;">景点名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" value="{{d.data.title}}" name="title" placeholder="标题" autocomplete="off"
+                                   class="layui-input">
+                        </div>
                     </div>
-                    <div class="layui-form-mid layui-word-aux"></div>
                 </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="text-align: left;padding: 9px 15px 9px 2px;">活动时间</label>
+
+                        <div class="layui-input-inline">
+                            <input type="number" value="{{d.data.time_h}}" name="time_h" placeholder="小时"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">小时</div>
+                        <div class="layui-input-inline">
+                            <input type="number" value="{{d.data.time_m}}" name="time_m" placeholder="分钟"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">分钟</div>
+                    </div>
+                </div>
+
                 <textarea placeholder="请输入内容" class="layui-textarea"
                           name="content">{{d.data.content}}</textarea>
             </div>
             <div class="layui-upload" style="padding: 0px 15px 15px 15px;">
                 <div class="layui-upload-list" style="margin: 0px 0;">
                     <ul>
-                        {{#  layui.each(d.data.img, function(index, item){ }}
-                        <li> <img src="{{item}}" class="list"><p class="img_del">删除</p> <input type="hidden" value="{{item}}" name="tripimage_{{index}}"></li>
-                        {{#  }); }}
+                        {{# layui.each(d.data.img, function(index, item){ }}
+                        <li><img src="{{item}}" class="list">
+                            <p class="img_del">删除</p> <input type="hidden" value="{{item}}" name="tripimage_{{index}}">
+                        </li>
+                        {{# }); }}
                     </ul>
                     <div class="layui-upload-drag day-upload-drag-{{d.day_no}}-{{d.item_no}}">
                         <i class="layui-icon"></i>
@@ -392,7 +429,7 @@
                             <span class="x-red">*</span>套餐名称
                         </label>
                         <div class="layui-input-inline">
-                            <input type="text" name="package_name" value="{{ d.name }}"
+                            <input onchange="editPackageName()" type="text" name="package_name" value="{{ d.name }}"
                                    autocomplete="off" class="layui-input">
                             <input type="hidden" name="package_no" value="{{ d.package_no }}" class="layui-input">
 
@@ -414,8 +451,10 @@
                     <label class="layui-form-label">套餐限定</label>
                     <div class="layui-input-block">
 
-                        <input {{#  if(d.notchildren == 1){ }}checked="checked"{{#  } }} type="checkbox" name="notchildren" value="1" title="不收儿童">
-                        <input {{#  if(d.isshow == 1){ }}checked="checked"{{#  } }} type="checkbox" name="isshow" value="1" title="是否可用" >
+                        <input {{# if(d.notchildren== 1){ }}checked="checked" {{# } }} type="checkbox"
+                               name="notchildren" value="1" title="不收儿童">
+                        <input {{# if(d.isshow== 1){ }}checked="checked" {{# } }} type="checkbox" name="isshow"
+                               value="1" title="是否可用">
                     </div>
                 </div>
 
@@ -426,13 +465,13 @@
      background-color: #f2f2f2;"
                          lay-allowclose="true" lay-filter="{{ d.packageName }}">
                         <ul class="layui-tab-title" style="float: left">
-                            {{#  layui.each(d.list, function(index, item){ }}
+                            {{# layui.each(d.list, function(index, item){ }}
                             <li>
                                 <span>{{ item.modname }}</span>
                                 <span>{{ item.alias }}：</span>
                                 <span>{{ item.site || '' }}</span>
                             </li>
-                            {{#  }); }}
+                            {{# }); }}
                         </ul>
                         <button style="margin-bottom: 6px;margin-left: 20px;height: 28px;line-height: 28px;margin-top: 7px;padding: 0 8px;"
                                 type="button" class="layui-btn site-content-active add"
@@ -483,7 +522,8 @@
     </table>
 </script>
 <script type="text/html" id="adddatelistview">
-    <table lay-filter="parse-batchlist" type="button" class="layui-table layui-form-item" id="adddate-div" lay-size="sm">
+    <table lay-filter="parse-batchlist" type="button" class="layui-table layui-form-item" id="iv"
+           lay-size="sm">
 
         <thead>
         <tr>
@@ -516,7 +556,7 @@
 <div style="display: none" class="adddatelist">
     <div class="layui-inline" style="width: 100%;">
         <label class="layui-form-label">日期范围</label>
-        <div class="layui-input-inline" >
+        <div class="layui-input-inline">
             <input style="width: 180px" type="text" class="layui-input" id="test6" placeholder=" - ">
         </div>
     </div>
@@ -528,9 +568,10 @@
     #layui-laydate3 .layui-laydate-main {
         width: 272px;
     }
-    #layui-laydate3  .layui-this {
-        background-color: #009688!important;
-        color: #fff!important;
+
+    #layui-laydate3 .layui-this {
+        background-color: #009688 !important;
+        color: #fff !important;
     }
 </style>
 </html>

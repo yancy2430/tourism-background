@@ -133,6 +133,10 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                         , content: html
                         , id: mid //实际使用一般是规定好的id，这里以时间戳模拟下
                     })
+                    tabContentInit('aa' + mid,"费用说明")
+                    tabContentInit('aa' + mid,"费用包含")
+                    tabContentInit('aa' + mid,"费用")
+                    tabContentInit('aa' + mid,"预定须知")
                     element.tabChange('package', mid); //切换到：最新添加的套餐
                     layer.close(index);
 
@@ -529,7 +533,7 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         var product_cate_name = $("#product_cate").find("option:selected").text();
         info['product_cate_name'] = product_cate_name;
         var formtrip = getformtrip();
-        var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:formtrip};
+        var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:JSON.stringify(formtrip)};
         jsonstr = JSON.stringify(obj);
         var index = layer.load(2);
         reqPost("admin/product/addproduct", {product: jsonstr}, function (res) {
@@ -560,6 +564,20 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         return false;
     });
 
+
+
+    var E = window.wangEditor
+    var contentEditor = new E('#content')
+    var $text = $('#content_text')
+    contentEditor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text.val(html)
+    }
+    // 配置服务器端地址
+    contentEditor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    contentEditor.create()
+
+
     var json = localStorage.getItem("inputData");
     var localdata = JSON.parse(json)
     if (null != json && '' != json && "null" != json) {
@@ -582,6 +600,8 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
 
                 $("textarea[name='operate']").val(localdata.productinfo.operate)
                 $("textarea[name='desc']").val(localdata.productinfo.desc)
+                $("#content_text").val(localdata.productinfo.content)
+                contentEditor.txt.html(localdata.productinfo.content)
 
                 if (localdata.productinfo.isshow == 1)
                     $("input[name='isshow']").attr("checked", "checked");
@@ -666,6 +686,9 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         });
     }
 
+
+
+
     //每十秒钟保存一次临时输入数据
     ref = setInterval(function () {
         try {
@@ -707,27 +730,32 @@ function tabContentAdd(str) {
     layer.prompt({
         title: '请输入区块名称'
     }, function (text, index) {
-        var amid = new Date().getTime();
-        element.tabAdd(str, {
-            title: text //用于演示
-            ,
-            content: '<div id="aa' + str + amid + '"></div><input style="display: none" name="' + str + '|name|' + amid + '" value="' + text + '"><textarea style="display: none" id="text' + str + amid + '" name="' + str + '|html|' + amid + '" style="width:100%; height:200px;"></textarea>'
-            ,
-            id: amid //实际使用一般是规定好的id，这里以时间戳模拟下
-        })
-        var editor = new E('#aa' + str + amid)
-        var $text1 = $('#text' + str + amid)
-        editor.customConfig.onchange = function (html) {
-            // 监控变化，同步更新到 textarea
-            $text1.val(html)
-        }
-        // 配置服务器端地址
-        editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-        // editor.customConfig.uploadImgServer = '/admin/upload'
-        editor.create()
-        element.tabChange(str, amid); //切换到：最新添加的套餐
+        tabContentInit(str,text);
         layer.close(index);
     });
+}
+function tabContentInit(str,text) {
+    var amid = new Date().getTime();
+    element.tabAdd(str, {
+        title: text //用于演示
+        ,
+        content: '<div id="aa' + str + amid + '"></div><input style="display: none" name="' + str + '|name|' + amid + '" value="' + text + '"><textarea style="display: none" id="text' + str + amid + '" name="' + str + '|html|' + amid + '" style="width:100%; height:200px;"></textarea>'
+        ,
+        id: amid //实际使用一般是规定好的id，这里以时间戳模拟下
+    })
+    var editor = new E('#aa' + str + amid)
+    var $text1 = $('#text' + str + amid)
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    // 配置服务器端地址
+    editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    // editor.customConfig.uploadImgServer = '/admin/upload'
+    editor.create()
+    element.tabChange(str, amid); //切换到：最新添加的套餐
+
+
 }
 
 /**
@@ -788,4 +816,8 @@ function getAll(begin, end) {
 function addDayItem(id) {
     // alert("a")
     active.addDayItem(id)
+}
+
+function editPackageName() {
+    alert("A")
 }
