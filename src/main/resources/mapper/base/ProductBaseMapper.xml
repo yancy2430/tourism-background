@@ -80,6 +80,9 @@
                     <if test="destination!=null">
                         `destination`,
                     </if>
+                    <if test="content!=null">
+                        `content`,
+                    </if>
         </trim>
         )
         VALUES
@@ -156,6 +159,9 @@
                 </if>
                 <if test="destination!=null">
                     #{destination},
+                </if>
+                <if test="content!=null">
+                    #{content},
                 </if>
         </trim>
         )
@@ -237,6 +243,9 @@
             <if test="destination != null and destination!=''">
                 `destination` = #{destination},
             </if>
+            <if test="content != null and content!=''">
+                `content` = #{content},
+            </if>
         </trim>
         WHERE
         <trim suffixOverrides="and">
@@ -244,6 +253,506 @@
         </trim>
     </update>
 
+    <update id="update">
+        UPDATE `tb_product`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.productNo != null and set.productNo!=''">
+            `product_no` = #{set.productNo},
+        </if>
+        <if test="set.productCate != null">
+            `product_cate` = #{set.productCate},
+        </if>
+        <if test="set.productName != null and set.productName!=''">
+            `product_name` = #{set.productName},
+        </if>
+        <if test="set.productCateName != null and set.productCateName!=''">
+            `product_cate_name` = #{set.productCateName},
+        </if>
+        <if test="set.productTag != null and set.productTag!=''">
+            `product_tag` = #{set.productTag},
+        </if>
+        <if test="set.principal != null and set.principal!=''">
+            `principal` = #{set.principal},
+        </if>
+        <if test="set.sketch != null and set.sketch!=''">
+            `sketch` = #{set.sketch},
+        </if>
+        <if test="set.hotline != null and set.hotline!=''">
+            `hotline` = #{set.hotline},
+        </if>
+        <if test="set.notmobile != null">
+            `notmobile` = #{set.notmobile},
+        </if>
+        <if test="set.operate != null and set.operate!=''">
+            `operate` = #{set.operate},
+        </if>
+        <if test="set.images != null and set.images!=''">
+            `images` = #{set.images},
+        </if>
+        <if test="set.views != null">
+            `views` = #{set.views},
+        </if>
+        <if test="set.comments != null">
+            `comments` = #{set.comments},
+        </if>
+        <if test="set.buyfew != null">
+            `buyfew` = #{set.buyfew},
+        </if>
+        <if test="set.commissionRatio != null">
+            `commission_ratio` = #{set.commissionRatio},
+        </if>
+        <if test="set.addtime != null">
+            `addtime` = #{set.addtime},
+        </if>
+        <if test="set.isshow != null">
+            `isshow` = #{set.isshow},
+        </if>
+        <if test="set.isdel != null">
+            `isdel` = #{set.isdel},
+        </if>
+        <if test="set.price != null and set.price!=''">
+            `price` = #{set.price},
+        </if>
+        <if test="set.security != null and set.security!=''">
+            `security` = #{set.security},
+        </if>
+        <if test="set.trip != null and set.trip!=''">
+            `trip` = #{set.trip},
+        </if>
+        <if test="set.origin != null and set.origin!=''">
+            `origin` = #{set.origin},
+        </if>
+        <if test="set.destination != null and set.destination!=''">
+            `destination` = #{set.destination},
+        </if>
+        <if test="set.content != null and set.content!=''">
+            `content` = #{set.content},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.productIdList != null">
+                    `product_id` in
+                    <foreach collection="where.productIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.productIdSt !=null">
+                `product_id` >= #{where.productIdSt} and
+            </if>
+            <if test="where.productIdEd!=null">
+                `product_id` &lt;= #{where.productIdEd} and
+            </if>
+                <if test="where.productNoList != null">
+                    `product_no` in
+                    <foreach collection="where.productNoList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProductNo!=null and where.fuzzyProductNo.size()>0">
+                (
+                <foreach collection="where.fuzzyProductNo"  separator="or" item="item">
+                    `Product_no` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProductNo!=null and where.rightFuzzyProductNo.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProductNo"  separator="or" item="item">
+                    `Product_no` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.productCateList != null">
+                    `product_cate` in
+                    <foreach collection="where.productCateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.productCateSt !=null">
+                `product_cate` >= #{where.productCateSt} and
+            </if>
+            <if test="where.productCateEd!=null">
+                `product_cate` &lt;= #{where.productCateEd} and
+            </if>
+                <if test="where.productNameList != null">
+                    `product_name` in
+                    <foreach collection="where.productNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProductName!=null and where.fuzzyProductName.size()>0">
+                (
+                <foreach collection="where.fuzzyProductName"  separator="or" item="item">
+                    `Product_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProductName!=null and where.rightFuzzyProductName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProductName"  separator="or" item="item">
+                    `Product_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.productCateNameList != null">
+                    `product_cate_name` in
+                    <foreach collection="where.productCateNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProductCateName!=null and where.fuzzyProductCateName.size()>0">
+                (
+                <foreach collection="where.fuzzyProductCateName"  separator="or" item="item">
+                    `Product_cate_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProductCateName!=null and where.rightFuzzyProductCateName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProductCateName"  separator="or" item="item">
+                    `Product_cate_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.productTagList != null">
+                    `product_tag` in
+                    <foreach collection="where.productTagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProductTag!=null and where.fuzzyProductTag.size()>0">
+                (
+                <foreach collection="where.fuzzyProductTag"  separator="or" item="item">
+                    `Product_tag` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProductTag!=null and where.rightFuzzyProductTag.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProductTag"  separator="or" item="item">
+                    `Product_tag` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.principalList != null">
+                    `principal` in
+                    <foreach collection="where.principalList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPrincipal!=null and where.fuzzyPrincipal.size()>0">
+                (
+                <foreach collection="where.fuzzyPrincipal"  separator="or" item="item">
+                    `Principal` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPrincipal!=null and where.rightFuzzyPrincipal.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPrincipal"  separator="or" item="item">
+                    `Principal` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.sketchList != null">
+                    `sketch` in
+                    <foreach collection="where.sketchList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySketch!=null and where.fuzzySketch.size()>0">
+                (
+                <foreach collection="where.fuzzySketch"  separator="or" item="item">
+                    `Sketch` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySketch!=null and where.rightFuzzySketch.size()>0">
+                (
+                <foreach collection="where.rightFuzzySketch"  separator="or" item="item">
+                    `Sketch` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.hotlineList != null">
+                    `hotline` in
+                    <foreach collection="where.hotlineList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyHotline!=null and where.fuzzyHotline.size()>0">
+                (
+                <foreach collection="where.fuzzyHotline"  separator="or" item="item">
+                    `Hotline` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyHotline!=null and where.rightFuzzyHotline.size()>0">
+                (
+                <foreach collection="where.rightFuzzyHotline"  separator="or" item="item">
+                    `Hotline` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.notmobileList != null">
+                    `notmobile` in
+                    <foreach collection="where.notmobileList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.notmobileSt !=null">
+                `notmobile` >= #{where.notmobileSt} and
+            </if>
+            <if test="where.notmobileEd!=null">
+                `notmobile` &lt;= #{where.notmobileEd} and
+            </if>
+                <if test="where.operateList != null">
+                    `operate` in
+                    <foreach collection="where.operateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOperate!=null and where.fuzzyOperate.size()>0">
+                (
+                <foreach collection="where.fuzzyOperate"  separator="or" item="item">
+                    `Operate` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOperate!=null and where.rightFuzzyOperate.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOperate"  separator="or" item="item">
+                    `Operate` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.imagesList != null">
+                    `images` in
+                    <foreach collection="where.imagesList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyImages!=null and where.fuzzyImages.size()>0">
+                (
+                <foreach collection="where.fuzzyImages"  separator="or" item="item">
+                    `Images` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyImages!=null and where.rightFuzzyImages.size()>0">
+                (
+                <foreach collection="where.rightFuzzyImages"  separator="or" item="item">
+                    `Images` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.viewsList != null">
+                    `views` in
+                    <foreach collection="where.viewsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.viewsSt !=null">
+                `views` >= #{where.viewsSt} and
+            </if>
+            <if test="where.viewsEd!=null">
+                `views` &lt;= #{where.viewsEd} and
+            </if>
+                <if test="where.commentsList != null">
+                    `comments` in
+                    <foreach collection="where.commentsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.commentsSt !=null">
+                `comments` >= #{where.commentsSt} and
+            </if>
+            <if test="where.commentsEd!=null">
+                `comments` &lt;= #{where.commentsEd} and
+            </if>
+                <if test="where.buyfewList != null">
+                    `buyfew` in
+                    <foreach collection="where.buyfewList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.buyfewSt !=null">
+                `buyfew` >= #{where.buyfewSt} and
+            </if>
+            <if test="where.buyfewEd!=null">
+                `buyfew` &lt;= #{where.buyfewEd} and
+            </if>
+                <if test="where.commissionRatioList != null">
+                    `commission_ratio` in
+                    <foreach collection="where.commissionRatioList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.commissionRatioSt !=null">
+                `commission_ratio` >= #{where.commissionRatioSt} and
+            </if>
+            <if test="where.commissionRatioEd!=null">
+                `commission_ratio` &lt;= #{where.commissionRatioEd} and
+            </if>
+                <if test="where.addtimeList != null">
+                    `addtime` in
+                    <foreach collection="where.addtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.addtimeSt !=null">
+                `addtime` >= #{where.addtimeSt} and
+            </if>
+            <if test="where.addtimeEd!=null">
+                `addtime` &lt;= #{where.addtimeEd} and
+            </if>
+                <if test="where.isshowList != null">
+                    `isshow` in
+                    <foreach collection="where.isshowList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.isshowSt !=null">
+                `isshow` >= #{where.isshowSt} and
+            </if>
+            <if test="where.isshowEd!=null">
+                `isshow` &lt;= #{where.isshowEd} and
+            </if>
+                <if test="where.isdelList != null">
+                    `isdel` in
+                    <foreach collection="where.isdelList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.isdelSt !=null">
+                `isdel` >= #{where.isdelSt} and
+            </if>
+            <if test="where.isdelEd!=null">
+                `isdel` &lt;= #{where.isdelEd} and
+            </if>
+                <if test="where.priceList != null">
+                    `price` in
+                    <foreach collection="where.priceList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPrice!=null and where.fuzzyPrice.size()>0">
+                (
+                <foreach collection="where.fuzzyPrice"  separator="or" item="item">
+                    `Price` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPrice!=null and where.rightFuzzyPrice.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPrice"  separator="or" item="item">
+                    `Price` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.securityList != null">
+                    `security` in
+                    <foreach collection="where.securityList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzySecurity!=null and where.fuzzySecurity.size()>0">
+                (
+                <foreach collection="where.fuzzySecurity"  separator="or" item="item">
+                    `Security` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzySecurity!=null and where.rightFuzzySecurity.size()>0">
+                (
+                <foreach collection="where.rightFuzzySecurity"  separator="or" item="item">
+                    `Security` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.tripList != null">
+                    `trip` in
+                    <foreach collection="where.tripList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTrip!=null and where.fuzzyTrip.size()>0">
+                (
+                <foreach collection="where.fuzzyTrip"  separator="or" item="item">
+                    `Trip` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTrip!=null and where.rightFuzzyTrip.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTrip"  separator="or" item="item">
+                    `Trip` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.originList != null">
+                    `origin` in
+                    <foreach collection="where.originList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyOrigin!=null and where.fuzzyOrigin.size()>0">
+                (
+                <foreach collection="where.fuzzyOrigin"  separator="or" item="item">
+                    `Origin` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyOrigin!=null and where.rightFuzzyOrigin.size()>0">
+                (
+                <foreach collection="where.rightFuzzyOrigin"  separator="or" item="item">
+                    `Origin` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.destinationList != null">
+                    `destination` in
+                    <foreach collection="where.destinationList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDestination!=null and where.fuzzyDestination.size()>0">
+                (
+                <foreach collection="where.fuzzyDestination"  separator="or" item="item">
+                    `Destination` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDestination!=null and where.rightFuzzyDestination.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDestination"  separator="or" item="item">
+                    `Destination` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.contentList != null">
+                    `content` in
+                    <foreach collection="where.contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyContent!=null and where.fuzzyContent.size()>0">
+                (
+                <foreach collection="where.fuzzyContent"  separator="or" item="item">
+                    `Content` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyContent!=null and where.rightFuzzyContent.size()>0">
+                (
+                <foreach collection="where.rightFuzzyContent"  separator="or" item="item">
+                    `Content` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
 
 
     <resultMap type="com.tdeado.tourism.entity.Product" id="ProductMap">
@@ -271,6 +780,7 @@
         <result property="trip" column="trip"/>
         <result property="origin" column="origin"/>
         <result property="destination" column="destination"/>
+        <result property="content" column="content"/>
     </resultMap>
 
 
@@ -350,6 +860,9 @@
             </if>
             <if test="destination != null and destination!=''">
                 `destination` = #{destination} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
             </if>
             <if test = "(_parameter instanceof com.tdeado.tourism.entity.Product$QueryBuilder) == true">
                 <if test="productIdList != null">
@@ -752,6 +1265,26 @@
                     </foreach>
                     ) and
                 </if>
+                <if test="contentList != null">
+                    `content` in
+                    <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
     </select>
@@ -832,6 +1365,9 @@
             </if>
             <if test="destination != null and destination!=''">
                 `destination` = #{destination} and
+            </if>
+            <if test="content != null and content!=''">
+                `content` = #{content} and
             </if>
             <if test = "(_parameter instanceof com.tdeado.tourism.entity.Product$QueryBuilder) == true">
                     <if test="productIdList != null">
@@ -1234,6 +1770,26 @@
                     </foreach>
                     ) and
                 </if>
+                    <if test="contentList != null">
+                        `content` in
+                        <foreach collection="contentList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyContent!=null and fuzzyContent.size()>0">
+                    (
+                    <foreach collection="fuzzyContent"  separator="or" item="item">
+                        `Content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyContent!=null and rightFuzzyContent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyContent"  separator="or" item="item">
+                        `Content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
         limit 1
@@ -1265,6 +1821,7 @@
         `trip`,
         `origin`,
         `destination`,
+        `content`,
         </trim>
     </sql>
 
@@ -1357,6 +1914,9 @@
                     <if test="fetchFields.fetchFields.destination==true">
                         `destination`,
                     </if>
+                    <if test="fetchFields.fetchFields.content==true">
+                        `content`,
+                    </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
                     <if test="fetchFields.excludeFields.productId==null">
@@ -1430,6 +1990,9 @@
                     </if>
                     <if test="fetchFields.excludeFields.destination==null">
                         `destination`,
+                    </if>
+                    <if test="fetchFields.excludeFields.content==null">
+                        `content`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

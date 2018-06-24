@@ -145,6 +145,16 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
 
             });
         },
+        addOpet:function () {
+            var mid = new Date().getTime();
+            var opethtml = opet.innerHTML;
+            laytpl(opethtml).render({"mid":mid}, function (html) {
+                $("#cardlist").append(html)
+                element.init();
+                form.render();
+            });
+        }
+        ,
         addDayItem:function (day_no,v) {
             console.log(day_no)
             if (null!=v){
@@ -549,7 +559,7 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         if (localdata.productinfo.notmobile == 1)
             $("input[name='notmobile']").attr("checked", "checked");
 
-        $("textarea[name='operate']").val(localdata.productinfo.operate)
+
         $("textarea[name='desc']").val(localdata.productinfo.desc)
 
         if (localdata.productinfo.isshow == 1)
@@ -565,6 +575,14 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
             $(this).parent("li").remove()
             images.remove($(this).data("url"))
         });
+        //恢复产品说明
+        if (localdata.productinfo.operate!=""){
+            $.each(JSON.parse(localdata.productinfo.operate), function (k, v) {
+                $("#cardlist").append('<div class="layui-card" style="padding-top: 10px;"> <form class="layui-form formcard" id="card'+new Date().getTime()+'"> <div class="layui-card-header"> <div class="layui-input-inline" style="cursor: pointer;float: left;" lay-key="2"> <input class="layui-input" name="title" type="text" placeholder="标题" value="'+v.title+'"> </div> <button type="button" onclick="$(this).parents(\'.layui-card\').remove()" style="float: right;border: none" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button> </div> <div class="layui-card-body"> <textarea placeholder="请输入内容" class="layui-textarea" name="content">'+v.content+'</textarea> </div> <div class="layui-form-item" style=" padding: 10px 15px;"> <div class="layui-inline"> <div class="layui-input-inline"> <input type="number" value="'+v.sort+'" name="sort" placeholder="排序" autocomplete="off" class="layui-input"></div> </div> </div> </form> </div>')
+            })
+        }
+
+
         //恢复套餐模块
         $.each(localdata.packagelist, function (index, value) {
             console.log(index + "==" + value.package_no)
@@ -705,6 +723,19 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         $("#productinfo input[type='checkbox']:not(:checked)").each(function () {
             info[this.name] = '0';
         });
+
+
+        var operates = []
+        $.each($("#cardlist").find("form"),function (index,value) {
+            var operate = $(this).serializeArray({checkboxUncheckedValue: "false"})
+            var op = {};
+            $.each(operate, function () {
+                op[this.name] = this.value;
+            });
+            operates[index] = op;
+        })
+        info['operate'] =  JSON.stringify(operates)
+
         $.each(productinfo, function () {
             info[this.name] = this.value;
         });
@@ -837,6 +868,10 @@ function addDayItem(id) {
     active.addDayItem(id,null)
 }
 
+function addOpetItem() {
+    // alert("a")
+    active.addOpet()
+}
 function editPackageName() {
     alert("A")
 }

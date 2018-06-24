@@ -128,6 +128,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCateName(productData.getProductinfo().getProduct_cate_name());
         product.setPrice(productData.getProductinfo().getPrice());
         product.setSecurity(productData.getProductinfo().getSecurity());
+        System.err.println(productData.getProductinfo().getContent());
         product.setContent(productData.getProductinfo().getContent());
         int id = productMapper.updateProduct(product);
         if (id < 1) {

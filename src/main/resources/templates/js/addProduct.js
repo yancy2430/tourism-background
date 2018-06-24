@@ -80,25 +80,25 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
 
             var list = new Array();
             $(this).find(".formcard").each(function (i, n) {
-                var formtrip =  $(this).serializeArray({checkboxUncheckedValue: "false"})
-                var d={}
+                var formtrip = $(this).serializeArray({checkboxUncheckedValue: "false"})
+                var d = {}
                 var img = new Array()
                 $.each(formtrip, function () {
-                    if(this.name.search("tripimage_")!=-1){
+                    if (this.name.search("tripimage_") != -1) {
                         img.push(this.value)
-                    }else if (this.name.search("type_")!=-1){
+                    } else if (this.name.search("type_") != -1) {
                         d['type'] = this.value;
-                    }else {
+                    } else {
                         d[this.name] = this.value;
                     }
                 });
                 d['img'] = img
                 list.push(d)
             });
-            var day ={
-                'id':i,
-                'name':$(this).find(".day_title").html(),
-                'list':list
+            var day = {
+                'id': i,
+                'name': $(this).find(".day_title").html(),
+                'list': list
             }
             tripData.push(day)
         });
@@ -106,7 +106,7 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         return tripData;
 
     }
-    $("#geta").on("click",function () {
+    $("#geta").on("click", function () {
         getformtrip()
     })
     //触发事件
@@ -133,10 +133,10 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                         , content: html
                         , id: mid //实际使用一般是规定好的id，这里以时间戳模拟下
                     })
-                    tabContentInit('aa' + mid,"费用说明")
-                    tabContentInit('aa' + mid,"费用包含")
-                    tabContentInit('aa' + mid,"费用")
-                    tabContentInit('aa' + mid,"预定须知")
+                    tabContentInit('aa' + mid, "费用说明")
+                    tabContentInit('aa' + mid, "费用包含")
+                    tabContentInit('aa' + mid, "费用")
+                    tabContentInit('aa' + mid, "预定须知")
                     element.tabChange('package', mid); //切换到：最新添加的套餐
                     layer.close(index);
 
@@ -144,24 +144,34 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
 
             });
         },
-        addDayItem:function (day_no) {
+        addOpet: function () {
+            var mid = new Date().getTime();
+            var opethtml = opet.innerHTML;
+            laytpl(opethtml).render({"mid": mid}, function (html) {
+                $("#cardlist").append(html)
+                element.init();
+                form.render();
+            });
+        }
+        ,
+        addDayItem: function (day_no) {
             console.log(day_no)
 
             var mid = new Date().getTime();
             var tript = tripDay.innerHTML;
-            laytpl(tript).render({"day_no":day_no,"item_no":mid}, function (html) {
-                $("#cardlist-"+day_no).append(html)
+            laytpl(tript).render({"day_no": day_no, "item_no": mid}, function (html) {
+                $("#cardlist-" + day_no).append(html)
             });
             //多图片上传
             upload.render({
-                elem: '.day-upload-drag-'+day_no+'-'+mid
+                elem: '.day-upload-drag-' + day_no + '-' + mid
                 , url: '/uploadfile/image'
                 , field: "file"
                 , multiple: false
                 , done: function (res) {
                     if (res.code == 0) {
                         console.log($(this))
-                        $('.day-upload-drag-'+day_no+'-'+mid).parent(".layui-upload-list").find("ul").append('<li> <img src="'+res.data.src+'" class="list"><p class="img_del">删除</p> <input type="hidden" value="'+res.data.src+'" name="tripimage_'+new Date().getTime()+'"></li>')
+                        $('.day-upload-drag-' + day_no + '-' + mid).parent(".layui-upload-list").find("ul").append('<li> <img src="' + res.data.src + '" class="list"><p class="img_del">删除</p> <input type="hidden" value="' + res.data.src + '" name="tripimage_' + new Date().getTime() + '"></li>')
                     } else {
                         layer.alert("上传失败", {
                             title: '提示'
@@ -174,11 +184,11 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                 }
             });
             laydate.render({
-                elem: '.datatime-'+day_no+'-'+mid
-                ,type: 'time'
-                ,format: 'H点m分'
-                ,done: function(value, date, endDate){
-                    $("#"+'time_'+day_no+'_'+mid).val(value)
+                elem: '.datatime-' + day_no + '-' + mid
+                , type: 'time'
+                , format: 'H点m分'
+                , done: function (value, date, endDate) {
+                    $("#" + 'time_' + day_no + '_' + mid).val(value)
                     console.log(value); //得到日期生成的值，如：2017-08-18
                 }
             });
@@ -512,7 +522,6 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
     //监听提交
     form.on('submit(addproduct)', function (data) {
         var productinfo = $("#productinfo").serializeArray({checkboxUncheckedValue: "false"})
-
         var info = {}
         $("#productinfo input[type='checkbox']:not(:checked)").each(function () {
             info[this.name] = '0';
@@ -520,6 +529,19 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         $.each(productinfo, function () {
             info[this.name] = this.value;
         });
+
+        var operates = []
+        $.each($("#cardlist").find("form"), function (index, value) {
+            var operate = $(this).serializeArray({checkboxUncheckedValue: "false"})
+            var op = {};
+            $.each(operate, function () {
+                op[this.name] = this.value;
+            });
+            operates[index] = op;
+        })
+        info['operate'] = JSON.stringify(operates)
+
+
         info['images'] = images
         var packageList = getPackageList();
 
@@ -533,7 +555,12 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         var product_cate_name = $("#product_cate").find("option:selected").text();
         info['product_cate_name'] = product_cate_name;
         var formtrip = getformtrip();
-        var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:JSON.stringify(formtrip)};
+        var obj = {
+            productinfo: info,
+            packagelist: packageList,
+            groupdate: groupdate,
+            tripInfo: JSON.stringify(formtrip)
+        };
         jsonstr = JSON.stringify(obj);
         var index = layer.load(2);
         reqPost("admin/product/addproduct", {product: jsonstr}, function (res) {
@@ -565,7 +592,6 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
     });
 
 
-
     var E = window.wangEditor
     var contentEditor = new E('#content')
     var $text = $('#content_text')
@@ -577,7 +603,7 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
     contentEditor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
     contentEditor.create()
 
-
+    /**
     var json = localStorage.getItem("inputData");
     var localdata = JSON.parse(json)
     if (null != json && '' != json && "null" != json) {
@@ -598,7 +624,6 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                 if (localdata.productinfo.notmobile == 1)
                     $("input[name='notmobile']").attr("checked", "checked");
 
-                $("textarea[name='operate']").val(localdata.productinfo.operate)
                 $("textarea[name='desc']").val(localdata.productinfo.desc)
                 $("#content_text").val(localdata.productinfo.content)
                 contentEditor.txt.html(localdata.productinfo.content)
@@ -611,7 +636,12 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
                 $.each(images, function (k, v) {
                     $('#imagelist').append('<li style="float: left;"><img src="' + v + '" alt="' + v + '" class="layui-upload-img"><p class="img_del" data-url="' + v + '">删除</p></li>')
                 })
-
+                //恢复产品说明
+                if (localdata.productinfo.operate != "") {
+                    $.each(JSON.parse(localdata.productinfo.operate), function (k, v) {
+                        $("#cardlist").append('<div class="layui-card" style="padding-top: 10px;"> <form class="layui-form formcard" id="card' + new Date().getTime() + '"> <div class="layui-card-header"> <div class="layui-input-inline" style="cursor: pointer;float: left;" lay-key="2"> <input class="layui-input" name="title" type="text" placeholder="标题" value="' + v.title + '"> </div> <button type="button" onclick="$(this).parents(\'.layui-card\').remove()" style="float: right;border: none" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button> </div> <div class="layui-card-body"> <textarea placeholder="请输入内容" class="layui-textarea" name="content">' + v.content + '</textarea> </div> <div class="layui-form-item" style=" padding: 10px 15px;"> <div class="layui-inline"> <div class="layui-input-inline"> <input type="number" value="' + v.sort + '" name="sort" placeholder="排序" autocomplete="off" class="layui-input"></div> </div> </div> </form> </div>')
+                    })
+                }
                 $('.img_del').on('click', function () {
                     $(this).parent("li").remove()
                     images.remove($(this).data("url"))
@@ -686,40 +716,56 @@ layui.use(['form', 'layer', 'element', 'laydate', 'laytpl', 'table', 'upload'], 
         });
     }
 
-
-
-
     //每十秒钟保存一次临时输入数据
-    ref = setInterval(function () {
-        try {
-            var productinfo = $("#productinfo").serializeArray({checkboxUncheckedValue: "false"})
-            var info = {}
-            $("#productinfo input[type='checkbox']:not(:checked)").each(function () {
-                info[this.name] = '0';
-            });
-            $.each(productinfo, function () {
-                info[this.name] = this.value;
-            });
-            info['images'] = images
-            var packageList = getPackageList();
+    setInterval(function () {
+            try {
+                var productinfo = $("#productinfo").serializeArray({checkboxUncheckedValue: "false"})
+                var info = {}
+                $("#productinfo input[type='checkbox']:not(:checked)").each(function () {
+                    info[this.name] = '0';
+                });
+                $.each(productinfo, function () {
+                    info[this.name] = this.value;
+                });
 
-            //转换结构
-            var groupdate = new Array();
-            $.each(groupDateList, function (k, v) {
-                if (null != v && "" != v) {
-                    groupdate.push({'date': k, 'list': v})
+                var operates = []
+                $.each($("#cardlist").find("form"), function (index, value) {
+                    var operate = $(this).serializeArray({checkboxUncheckedValue: "false"})
+                    var op = {};
+                    $.each(operate, function () {
+                        op[this.name] = this.value;
+                    });
+                    operates[index] = op;
+                })
+                info['operate'] = JSON.stringify(operates)?JSON.stringify(operates):"";
+
+
+                info['images'] = images
+                var packageList = getPackageList();
+
+                //转换结构
+                var groupdate = new Array();
+                $.each(groupDateList, function (k, v) {
+                    if (null != v && "" != v) {
+                        groupdate.push({'date': k, 'list': v})
+                    }
+                })
+                var product_cate_name = $("#product_cate").find("option:selected").text();
+                info['product_cate_name'] = product_cate_name;
+                var formtrip = getformtrip();
+
+                var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate, tripInfo: formtrip};
+                jsonstr = JSON.stringify(obj);
+
+                if (obj.productinfo.product_name != "") {
+                    console.log(new Date().getDate())
+                    localStorage.setItem("inputData", jsonstr);
                 }
-            })
-            var product_cate_name = $("#product_cate").find("option:selected").text();
-            info['product_cate_name'] = product_cate_name;
-            var formtrip = getformtrip();
-            var obj = {productinfo: info, packagelist: packageList, groupdate: groupdate,tripInfo:formtrip};
-            jsonstr = JSON.stringify(obj);
-            localStorage.setItem("inputData", jsonstr);
-        } catch (e) {
+            } catch (e) {
 
-        }
+            }
     }, 10000);
+     **/
 });
 
 
@@ -730,11 +776,12 @@ function tabContentAdd(str) {
     layer.prompt({
         title: '请输入区块名称'
     }, function (text, index) {
-        tabContentInit(str,text);
+        tabContentInit(str, text);
         layer.close(index);
     });
 }
-function tabContentInit(str,text) {
+
+function tabContentInit(str, text) {
     var amid = new Date().getTime();
     element.tabAdd(str, {
         title: text //用于演示
@@ -816,6 +863,11 @@ function getAll(begin, end) {
 function addDayItem(id) {
     // alert("a")
     active.addDayItem(id)
+}
+
+function addOpetItem() {
+    // alert("a")
+    active.addOpet()
 }
 
 function editPackageName() {

@@ -73,6 +73,7 @@ public class AppProductController extends BaseController{
     private Map<String ,Object> item(HttpServletRequest request,HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
         String product_id = request.getParameter("product_id");
+        Gson gson = new Gson();
         verifyParam(product_id);
         Product product = new Product();
         product.setProductId(Integer.parseInt(product_id));
@@ -81,8 +82,14 @@ public class AppProductController extends BaseController{
             p.getProductinfo().setSecurityList(p.getProductinfo().getSecurity().split("\\|"));
         if (StringUtils.isEmpty(p.getProductinfo().getProduct_tag()))
             p.getProductinfo().setProductTags(p.getProductinfo().getProduct_tag().split("\\|"));
-
-
+        if (StringUtils.isEmpty(p.getProductinfo().getOperate())){
+            List<ProductData.ProductinfoBean.OperateBean> operateBeans=gson.fromJson(p.getProductinfo().getOperate(),new TypeToken<List<ProductData.ProductinfoBean.OperateBean>>() {}.getType());
+            p.getProductinfo().setOperateList(operateBeans);
+        }
+        if (StringUtils.isEmpty(p.getTripInfo())){
+            List<ProductData.TripBean> tripBeans = gson.fromJson(p.getTripInfo(),new TypeToken<List<ProductData.TripBean>>() {}.getType());
+            p.setTripInfoList(tripBeans);
+        }
         return retData(p);
     }
 

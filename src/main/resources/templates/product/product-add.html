@@ -112,12 +112,13 @@
         <li>行程内容</li>
         <li>套餐信息</li>
         <li class="site-date-active" data-type="initGroupDateList">团期管理</li>
+        <li>产品说明</li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
 
             <form class="layui-form" id="productinfo">
-                <input id="content_text" type="hidden" />
+                <input id="content_text" name="content" type="hidden"/>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">
@@ -224,14 +225,7 @@
                         <input value="1" type="checkbox" name="notmobile" lay-skin="primary" title="不支持电话咨询">
                     </div>
                 </div>
-                <div class="layui-form-item layui-form-text" style="display: none">
-                    <label class="layui-form-label">
-                        操作说明
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea name="operate" placeholder="最多500字，仅内部可见" class="layui-textarea"></textarea>
-                    </div>
-                </div>
+
 
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">
@@ -310,7 +304,21 @@
 
             <div style="clear: both"></div>
         </div>
+        <div class="layui-tab-item">
+
+            <div class="layui-col-md6 " style="padding: 20px;background-color: #F2F2F2;">
+                <div id="cardlist"></div>
+                <div onclick="addOpetItem()"
+                     style="cursor: pointer;margin-top: 10px;width: 100%;text-align: center; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);background: #fff; padding: 10px 0px;">
+                    新增
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+
+
+    </script>
     <div class="layui-form-item">
         <label class="layui-form-label">
         </label>
@@ -322,6 +330,32 @@
     </div>
 
 </div>
+<script type="text/html" id="opet">
+
+    <div class="layui-card" style="padding-top: 10px;">
+        <form class="layui-form formcard" id="card{{d.mid}}">
+            <div class="layui-card-header">
+                <div class="layui-input-inline" style="cursor: pointer;float: left;" lay-key="2">
+                    <input class="layui-input" name="title" type="text" placeholder="标题" />
+                </div>
+                <button type="button" onclick="$(this).parents('.layui-card').remove()" style="float: right;border: none" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+            </div>
+            <div class="layui-card-body">
+
+                <textarea placeholder="请输入内容" class="layui-textarea"
+                          name="content"></textarea>
+            </div>
+            <div class="layui-form-item" style="    padding: 10px 15px;">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="number" value="" name="sort" placeholder="排序" autocomplete="off" class="layui-input"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</script>
 
 <script type="text/html" id="trip">
     <div class="layui-form formtrip">

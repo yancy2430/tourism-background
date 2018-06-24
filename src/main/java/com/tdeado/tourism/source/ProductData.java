@@ -18,6 +18,125 @@ public class ProductData {
     private List<PackagelistBean> packagelist;
     private List<GroupdateBean> groupdate;
     private String tripInfo;
+    private List<TripBean> tripInfoList;
+
+    public static class TripBean{
+
+        /**
+         * id : 0
+         * name : 第一天
+         * list : [{"time":"8点0分","type":"3","title":"集合前往\u201c中国园林之城\u201d\u2014苏州","time_h":"1","time_m":"40","content":"集合时间：08：00-08：30，具体已导游通知为准！ \r\n集合地点：上海宏泉丽笙酒店或上海南青华美达酒店（以具体通知为主）； \r\n特殊备注：如您时间来不及也可以自行前往苏州留园汇合；敬请谅解！ \r\n温馨提示：导游会提前1天与您确认集合时间及地点，请务必准时抵达，否则避免耽误其他客人行程，我们将准时准点出发，拒绝等候，如因客人原因没有按时抵达将承担全额损失。","img":[]},{"time":"10点30分","type":"1","title":"七里山塘","time_h":"3","time_m":"20","content":"山塘街位于古城苏州的西北部，东连\u201c红尘中一二等富贵风流之地\u201d阊门，西接\u201c吴中名胜\u201d虎丘。全长3600米。因此被称作\u201c七里山塘\u201d。唐宝历二年（825年），大诗人白居易从杭州调任苏州刺史，为了便利苏州水陆交通，开凿了一条西起虎丘东至阊门的山塘河，山塘河河北修建道路，称为\u201c山塘街\u201d，山塘河和山塘街长约七里，叫\u201c七里山塘\u201d。\r\n\r\n温馨提示：此景点无导游，请自行游览后，乘坐我们的接驳车前往【留园】与导游汇合！如遇用车紧张，则您可自行打车抵达【留园】与导游汇合，导游凭票报销车费，敬请谅解!","img":["/upload/images/2cd883079c4c102049cbde4e6e2d53b8.jpeg"]},{"time":"14点0分","type":"1","title":"留园","time_h":"1","time_m":"0","content":"游中国四大名园之一【留园】，原是明嘉靖年间太仆寺卿徐泰时的东园，清嘉庆年间，刘恕以故园改筑，名寒碧山庄，又称刘园。在一个园林中能领略到山水、田园、山林、庭园四种不同景色，表现淡泊处世之坦然的\u201c小蓬莱\u201d。\r\n\r\n集合方式：我们会安排车将您接到景点留园团队汇合，如遇用车紧张，则您可自行打车抵达【留园】与导游汇合，导游凭票报销车费，敬请谅解!","img":["/upload/images/b3154003c74fdd33ba62a649d2360b95.jpg"]},{"time":"15点30分","type":"1","title":"集合前往 \u201c中国极美村镇\u201d\u2014\u2014乌镇","time_h":"3","time_m":"0","content":"统一游览【乌镇西栅景区】注：此景区为自由活动，品味江南原生态的枕水人家。【夜游西栅】您可与自己的爱人或亲友选一家河边小店或在当地居民家中，点上几个可口的小菜，品乌镇美食，欣赏着满眼华丽的灯光水色。","img":["/upload/images/9db38174812c5bf621224c1ad27e90e4.jpeg"]},{"time":"12点30分","type":"4","title":"早餐自理|午餐自理|晚餐自理","time_h":"1","time_m":"0","content":"12:30 午餐敬请自理\r\n17:00 晚餐敬请自理\r\n为方便游览，敬请自理！ 小吃推荐：三珍斋酱品、红烧羊肉、熏豆茶、三白酒、姑嫂饼、白水鱼、定胜糕\u2026\u2026","img":[]},{"time":"18点0分","type":"2","title":"乌镇客栈或桐乡酒店","time_h":"12","time_m":"0","content":"除乌镇重大会议外，我们均100%保证入住西栅景区内特色客栈，360°体验枕水江南水乡古镇之休闲惬意！\r\n如节假日或重大会议乌镇西栅客栈满房，统一安排入住桐乡\u2014振石大酒店、黄金水岸大酒店或梵璞文化主题酒店等或同级，敬请知晓！\r\n\r\n重要提示：2018年5月14日、16日、17日，6月28日、29日、30日当晚入住乌镇西栅的团期，因景区内有重大会议，我们将安排您入住西栅外酒店，敬请谅解！","img":[]}]
+         */
+
+        private int id;
+        private String name;
+        private List<TripListBean> list;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public List<TripListBean> getList() {
+            return list;
+        }
+
+        public void setList(List<TripListBean> list) {
+            this.list = list;
+        }
+
+        public static class TripListBean {
+            /**
+             * time : 8点0分
+             * type : 3
+             * title : 集合前往“中国园林之城”—苏州
+             * time_h : 1
+             * time_m : 40
+             * content : 集合时间：08：00-08：30，具体已导游通知为准！
+             集合地点：上海宏泉丽笙酒店或上海南青华美达酒店（以具体通知为主）；
+             特殊备注：如您时间来不及也可以自行前往苏州留园汇合；敬请谅解！
+             温馨提示：导游会提前1天与您确认集合时间及地点，请务必准时抵达，否则避免耽误其他客人行程，我们将准时准点出发，拒绝等候，如因客人原因没有按时抵达将承担全额损失。
+             * img : []
+             */
+
+            private String time;
+            private String type;
+            private String title;
+            private String time_h;
+            private String time_m;
+            private String content;
+            private List<String> img;
+
+            public String getTime() {
+                return time;
+            }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getTime_h() {
+                return time_h;
+            }
+
+            public void setTime_h(String time_h) {
+                this.time_h = time_h;
+            }
+
+            public String getTime_m() {
+                return time_m;
+            }
+
+            public void setTime_m(String time_m) {
+                this.time_m = time_m;
+            }
+
+            public String getContent() {
+                return content;
+            }
+
+            public void setContent(String content) {
+                this.content = content;
+            }
+
+            public List<String> getImg() {
+                return img;
+            }
+
+            public void setImg(List<String> img) {
+                this.img = img;
+            }
+        }
+    }
+
+
 
     public ProductinfoBean getProductinfo() {
         return productinfo;
@@ -48,6 +167,14 @@ public class ProductData {
 
     public void setTripInfo(String tripInfo) {
         this.tripInfo = tripInfo;
+    }
+
+    public List<TripBean> getTripInfoList() {
+        return tripInfoList;
+    }
+
+    public void setTripInfoList(List<TripBean> tripInfoList) {
+        this.tripInfoList = tripInfoList;
     }
 
     public static class ProductinfoBean {
@@ -86,6 +213,53 @@ public class ProductData {
         private String price;
         private String security;
         private String[] securityList;
+
+        public List<OperateBean>  operateList;
+        public class OperateBean{
+
+
+            /**
+             * title : 费用说明
+             * content : 费用包括XXXXXX
+             * sort : 1
+             */
+
+            private String title;
+            private String content;
+            private String sort;
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getContent() {
+                return content;
+            }
+
+            public void setContent(String content) {
+                this.content = content;
+            }
+
+            public String getSort() {
+                return sort;
+            }
+
+            public void setSort(String sort) {
+                this.sort = sort;
+            }
+        }
+
+        public List<OperateBean> getOperateList() {
+            return operateList;
+        }
+
+        public void setOperateList(List<OperateBean> operateList) {
+            this.operateList = operateList;
+        }
 
         public String[] getSecurityList() {
             return securityList;
